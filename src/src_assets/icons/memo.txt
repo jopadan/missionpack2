@@ -1,0 +1,13 @@
+export PNG as is WITH ARTBOARD (otherwise illustrator crops to very edges of vector stuff)
+illustrator will give out something like nailgun128-01.png
+
+ICONW:
+Scale PNG to 120x120px, then from the center resize the CANVAS back to 128x128 -- that is iconw
+
+ICONA:
+Scale PNG to 88x88px, then from the center resize the CANVAS back to 128x128
+draw a 4px non-antialiased square border around it same exact color as icon -- that is its respective icona (at least according to what bfg had from missionpackplus assets)
+some icona's (with exception of railgun being an edge-to-edge type deal) still need this done since they are too big or the same size as their iconw
+
+
+~DIMMSKII
