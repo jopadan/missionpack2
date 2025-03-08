@@ -1,1 +1,7 @@
 *.pk3
+src/code/cgame/vm
+src/code/cgame/vm/*.*
+src/code/game/vm
+src/code/game/vm/*.*
+src/code/ui/vm
+src/code/ui/vm/*.*
