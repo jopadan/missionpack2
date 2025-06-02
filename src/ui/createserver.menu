@@ -26,7 +26,15 @@
 	show back ;
 	hide grpmessage }
 	
-
+itemDef {
+      	name menuback_d
+      	style WINDOW_STYLE_SHADER
+      	rect 0 0 640 480
+     	background "menuback_d"
+      	visible 1
+	decoration
+    }
+	
 itemDef {
 	name window
       	rect 2 50 200 370	
