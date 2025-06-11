@@ -131,10 +131,10 @@ itemDef {
       border 4
       bordercolor 0.5 0.5 0.5 0.5
       bordersize 2
-      backcolor 0 0 .75 0.5
+      backcolor .25 .25 .25 .5
       visible 1 
-      mouseEnter { setcolor backcolor .75 0 0 .5 }
-      mouseExit { setcolor backcolor 0 0 .75 .5 }
+      mouseEnter { setcolor backcolor .75 .75 .75 .5 }
+      mouseExit { setcolor backcolor .25 .25 .25 .5 }
       decoration 
     	}
 
@@ -175,7 +175,7 @@ itemDef {
       	backcolor 0 0 0 0
       	forecolor 1 1 1 1
       	visible 1 
-	mouseEnter { show lightning ; hide accept ; show accept_alt ; show message_accept ; playlooped "sound/misc/loop_electricity_05.wav" }
+	mouseEnter { show lightning ; hide accept ; show accept_alt ; show message_accept }
       	action { close mod ; uiScript RunMod }
   	}
 
@@ -189,7 +189,7 @@ itemDef {
       	visible 0
 	type ITEM_TYPE_BUTTON   
       	action { close mod ; uiScript RunMod }
-      	mouseExit { hide lightning ; hide accept_alt ; show accept ; hide message_accept ; playlooped "music/fla_mp03.wav" }	 
+      	mouseExit { hide lightning ; hide accept_alt ; show accept ; hide message_accept }	 
   }
 
 

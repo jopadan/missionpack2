@@ -42,7 +42,7 @@ itemDef {
 
 itemDef {
 	name confirm
-	text "Quit Team Arena?"
+	text "Quit Ultimate Arena?"
 	style 0
 	textscale .3 
 	textstyle 3
@@ -73,7 +73,7 @@ itemDef {
 	action { play "sound/misc/nomenu.wav"; 
 	close main ;
 	close quit_popmenu ; 
-	open quitCredit  }
+	uiScript "quit"  }
 	mouseEnter { setitemcolor yes backcolor .1 .37 .1 1 } 
 	mouseExit { setitemcolor yes backcolor .37 .1 .1 1 } 	
 	}

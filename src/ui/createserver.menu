@@ -6,9 +6,9 @@
   menuDef {
     	name "createserver"
     	visible 0
-    	fullscreen 1
+    	fullscreen MENU_TRUE
     	rect 0 0 640 480
-	background "menuback_a"
+	background "menuback_b"
 	outOfBoundsClick	
 	focusColor 1 .75 0 1
     	style 1
@@ -26,10 +26,10 @@
 	hide grpmessage }
 	
 itemDef {
-      	name menuback_d
-      	style WINDOW_STYLE_SHADER
+      	name asdasd
+      	style WINDOW_STYLE_FILLED
       	rect 0 0 640 480
-     	background "menuback_d"
+     	background "menuback_a"
       	visible 1
 	decoration
     }
@@ -121,13 +121,13 @@ itemDef {
       	rect 0 5 640 40 
       	style 2
       	border 4
-      	bordercolor 0.5 0.5 0.5 0.5
+      	bordercolor 0.5 0.5 0.5 0.75
       	bordersize 2
-	backcolor 0 0 .75 .5
+	backcolor .25 .25 .25 .75
       	visible 1 
       	decoration 
-	mouseEnter { setcolor backcolor .75 0 0 .5 }
-      	mouseExit { setcolor backcolor 0 0 .75 .5 }
+	mouseEnter { setcolor backcolor .75 .75 .75 .75 }
+      	mouseExit { setcolor backcolor .25 .25 .25 .75 }
     }
 
 
@@ -1094,10 +1094,10 @@ itemDef {
       	border 4
       	bordercolor 0.5 0.5 0.5 0.75
       	bordersize 2
-      	backcolor 0 0 .75 0.5
+      	backcolor .25 .25 .25 .75
       	visible 1 
-      	mouseEnter { setcolor backcolor .75 0 0 .5 }
-      	mouseExit { setcolor backcolor 0 0 .75 .5 }
+      	mouseEnter { setcolor backcolor .75 .75 .75 .75 }
+      	mouseExit { setcolor backcolor .25 .25 .25 .75 }
       	decoration 
     	}
 
@@ -1134,7 +1134,7 @@ itemDef {
       	backcolor 0 0 0 0
       	forecolor 1 1 1 1
       	visible 1 
-	mouseEnter { playlooped "sound/misc/loop_electricity_05.wav" ; show lightning ; hide accept ; show accept_alt ; fadein message_accept }
+	mouseEnter { show lightning ; hide accept ; show accept_alt ; fadein message_accept }
       	action { close fight ; uiScript StartServer }
 /*	
 	//	demo_only
@@ -1153,7 +1153,7 @@ itemDef {
       	visible 0   
 		type ITEM_TYPE_BUTTON
       	action { close fight ; uiScript StartServer }
-      	mouseExit { hide lightning ; hide accept_alt ; show accept ; fadeout message_accept ; playlooped "music/fla_mp03.wav" }	
+      	mouseExit { hide lightning ; hide accept_alt ; show accept ; fadeout message_accept }	
 /*	
 	//	demo_only
 	cvarTest "ui_actualNetGameType"
