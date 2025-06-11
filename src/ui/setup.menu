@@ -13,7 +13,6 @@ menuDef {
     	style 1
     	border 1
 	onOpen { setitemcolor fadebox backcolor 0 0 0 1 ; 
-		playlooped "music/fla_mp03.wav" ;
 		fadeout fadebox ;
 		hide back_alt ;
 		show back ;
@@ -249,12 +248,12 @@ itemDef {
       	textaligny 21        
       	style 2
       	border 4
-      	bordercolor 0.5 0.5 0.5 0.5
+      	bordercolor 0.5 0.5 0.5 0.75
       	bordersize 2
-      	backcolor 0 0 .75 0.5
+      	backcolor 0 0 0 0.75
       	visible 1 
-      	mouseEnter { setcolor backcolor .75 0 0 .5 }
-      	mouseExit { setcolor backcolor 0 0 .75 .5 }
+      	mouseEnter { setcolor backcolor .25 .25 .25 .75 }
+      	mouseExit { setcolor backcolor 0 0 0 .75 }
       	decoration 
     	}
 

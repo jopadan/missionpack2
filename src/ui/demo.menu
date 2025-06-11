@@ -13,7 +13,6 @@
     	style 1
     	border 1
 	onOpen { setitemcolor fadebox backcolor 0 0 0 1 ; 
-	playlooped "music/fla_mp03.wav" ;
 	fadeout fadebox ; uiScript LoadDemos ;
 	hide lightning ; 
 	hide accept_alt ; 
@@ -35,7 +34,7 @@
   itemDef {
       name levelbar
       style 2
-	text "TEAM ARENA DEMOS"
+	text "DEMOS"
       rect 0 16 640 40 
 	textstyle 6
       textscale 0.416
@@ -47,20 +46,12 @@
 	forecolor 1 1 1 1       
       style 2
       border 4
-      bordercolor 0.5 0.5 0.5 0.5
+      bordercolor 0.5 0.5 0.5 0.75
       bordersize 2
-      backcolor 0 0 .75 0.5
+      backcolor 0.25 0.25 0.25 0.75
       visible 1 
       decoration 
     }
-
-    itemDef {
-      	name teamarenaimage
-	style 3
-	background "ui/assets/teamarenaimage.tga"
-	rect 0 80 220 115 
-      	visible 1 
-    	}
 
 
 itemDef {
@@ -117,12 +108,12 @@ itemDef {
       textaligny 21        
       style 2
       border 4
-      bordercolor 0.5 0.5 0.5 0.5
+      bordercolor 0.5 0.5 0.5 0.75
       bordersize 2
-      backcolor 0 0 .75 0.5
+      backcolor 0 0 0 0.75
       visible 1 
-      mouseEnter { setcolor backcolor .75 0 0 .5 }
-      mouseExit { setcolor backcolor 0 0 .75 .5 }
+      mouseEnter { setcolor backcolor .25 .25 .25 .75 }
+      mouseExit { setcolor backcolor 0 0 0 .75 }
       decoration 
     }
 
@@ -160,7 +151,7 @@ itemDef {
       	backcolor 0 0 0 0
       	forecolor 1 1 1 1
       	visible 1 
-	mouseEnter { show lightning ; hide accept ; show accept_alt ; show message_accept ; playlooped "sound/misc/loop_electricity_05.wav" }
+	mouseEnter { show lightning ; hide accept ; show accept_alt ; show message_accept }
       	action { close demo  }
   	}
 
@@ -174,7 +165,7 @@ itemDef {
       	visible 0
 	type ITEM_TYPE_BUTTON   
       	action { close demo ; uiScript RunDemo }
-	mouseExit { hide lightning ; hide accept_alt ; show accept ; hide message_accept ; playlooped "music/fla_mp03.wav" }	 
+	mouseExit { hide lightning ; hide accept_alt ; show accept ; hide message_accept }	 
   	}
 
  itemDef {
