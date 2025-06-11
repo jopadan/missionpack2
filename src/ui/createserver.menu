@@ -15,7 +15,7 @@
     	border 1
 	onEsc { close createserver ; open main }
 	onOpen { setitemcolor fadebox backcolor 0 0 0 1 ; 
-	playlooped "music/fla_mp03.wav" ;
+	soundLoop "music/fla22k_04_loop.wav" 
 	fadeout fadebox ; 
 	transition mappreview 7 127 190 1 7 57 190 141 20 10 ; 
 	uiScript loadArenas ;
