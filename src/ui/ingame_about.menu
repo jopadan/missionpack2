@@ -8,7 +8,7 @@ menuDef {
     	visible 0
     	fullscreen 0
 	outOfBoundsClick			// this closes the window if it gets a click out of the rectangle
-    	rect 0 30 256 295
+    	rect 0 31 256 295
     	focusColor 1 .75 0 1
     	style 1
     	border 1
@@ -17,7 +17,7 @@ itemDef {
 	name window
 	rect 10 15 256 280
 	style 1
-	backcolor 0 .1 0 1
+	backcolor 0 0 0 .5
 	visible 1
 	decoration
 	}
@@ -39,7 +39,7 @@ itemDef {
 
 itemDef {
 	name window
-	rect 3 0 65 16
+	rect 0 0 65 16
 	style 3
 	background "ui/assets/ingameconnection.tga"
 	visible 1

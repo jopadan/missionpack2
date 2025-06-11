@@ -17,7 +17,7 @@ menuDef {
 		name window
 		rect 10 15 108 110 
 		style 1
-		backcolor 0 .1 0 1
+		backcolor 0 0 0 .5
 		visible 1
 		decoration
 	}

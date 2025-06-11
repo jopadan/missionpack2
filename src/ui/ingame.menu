@@ -44,7 +44,7 @@ itemdef
 	{
 	name about
 	text "About"	
-	rect 5 0 53 30
+	rect 0 0 58 30
 	type 1
 	style WINDOW_STYLE_FILLED
 	background "ui/assets/button_back.tga"
@@ -53,18 +53,18 @@ itemdef
 	textaligny 22
 	textscale .25
 	forecolor 1 1 1 1
-	backcolor .0 .17 .0 1 
+	backcolor 0 0 0 0.5
 	visible 1
 	action { open ingame_about }
 	mouseEnter { setitemcolor about backcolor 0.25 0.25 0.25 0.25 0.5 }
-      	mouseExit { setitemcolor about backcolor .0 .17 .0 1 }
+      	mouseExit { setitemcolor about backcolor 0 0 0 0.5 }
 	}
 itemdef
 	{
 	name aboutframe
 	style 3
 	rect 0 0 58 32
-	background "ui/assets/ingameframea.tga"	
+	background "ui/assets/ingameframe.tga"	
 	visible 1
 	decoration
 	}

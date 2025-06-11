@@ -19,7 +19,7 @@ itemDef {
 	name window
 	rect 10 15 180 225
 	style 1
-	backcolor 0 .1 0 1
+	backcolor 0 0 0 .5
 	visible 1
 	decoration
 	}

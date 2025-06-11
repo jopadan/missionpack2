@@ -9,7 +9,7 @@
     	visible 1
     	fullScreen 0
 			outOfBoundsClick			// this closes the window if it gets a click out of the rectangle
-    	rect 23 30 128 128
+    	rect 23 32 128 128
 	focusColor 1 .75 0 1
 
 
@@ -19,7 +19,7 @@ itemDef {
      	rect 10 15 108 113   
 	
 	forecolor 1 1 1 1
-	backcolor 0 .1 0 1
+	backcolor 0 0 0 .5
       	visible 1 
      	decoration
     	}
