@@ -1,0 +1,77 @@
+TITLE                   : Aerowalk
+FILENAME                : hub3aeroq3.zip
+AUTHOR                  : The Preacher (this conversion by the Hubster)
+DATE                    : April 5 2001
+TYPE                    : Tourney
+EMAIL ADDRESS           : hburji@hotmail.com
+WEBSITE URL	            : http://hubster.challenge-au.com/
+ZIPFILE CONTENTS		: hub3aeroq3.pk3, hub3aeroq3.txt
+--------------------------------------------------------------------------------
+* LEVEL DESCRIPTION *
+--------------------------------------------------------------------------------
+Aerowalk was originally made by the Preacher, for Quake. A Quake II version was
+released, by which time, Aerowalk had become a very popular duel level. Full
+credits for design and ownership go to Preacher. Well done for making one of the
+best custom levels of all time!
+
+I have seen some versions of Aerowalk for Quake III Arena by others, however, I
+didn't find that they did the map justice. Scaling is the biggest problem I
+found with other versions, and so I set about setting my own solution to this.
+
+--------------------------------------------------------------------------------
+* VERY IMPORTANT NOTES *
+--------------------------------------------------------------------------------
+This version by myself is probably a "tighter" version than other Q3 ones. I did
+this deliberately to speed up gameplay. Some items have been replaced with
+stronger ones to aid in balancing out the weight of the railgun and red armour.
+
+I have made this version with the features of the LATEST Challenge Promode Arena
+mod in mind. Obtain the LATEST version from http://www.challenge-tv.com/
+
+I HIGHLY suggest using \callvote armorsystem 3!!!
+
+Please note that this map takes advantage of the new Jacket Armour present in
+the LATEST VERSION of Challenge Promode Arena.
+
+--------------------------------------------------------------------------------
+DEATHMATCH              : 6 Player Respawn Points
+TEAM DEATHMATCH         : I think so, tell me what it's like?
+SUGGESTED PLAYER LOAD   : 2
+DIFFICULTY SETTINGS     :  -
+NEW TEXTURES            : Yes
+NEW SOUNDS              : No
+NEW MODELS	            : Yes... sort of anyway:-)
+
+--------------------------------------------------------------------------------
+* CONSTRUCTION *
+--------------------------------------------------------------------------------
+MAP BASE                : Conversion of the original Aerowalk.
+						: Rebuilt from scratch.
+PREFABS USED            : My own (for the Square Cylinder Arches)
+EDITOR(S) USED          : Q3radiant 202B3, GTK Radiant 1.1 TA Beta
+OTHER UTILITIES USED    : Photoshop, Editpad, Qase
+KNOWN BUGS              : None
+COMPILE MACHINE         : P3 600eMhz, 256MB RAM, GeForce DDR
+BSP TIME                : Approx 20 seconds
+VIS TIME				: Approx 4 minutes
+LIGHT TIME				: Approx 10 minutes
+
+--------------------------------------------------------------------------------
+* CREDITS *
+--------------------------------------------------------------------------------
+PREACHER: for building a map like this. It's a true piece of genious.
+
+BANJO	: for all his help. Item placements. Once again we have forged our
+		: strengths to deliver what we feel is another solid release.
+
+CHWD	: for making the BEST mod on the planet! Go CPMA!!!!!!!
+
+--------------------------------------------------------------------------------
+* COPYRIGHT / PERMISSIONS *
+--------------------------------------------------------------------------------
+This LEVEL may be distributed ONLY over the Internet and/or BBS systems.
+You are NOT authorized to put this LEVEL on any CD or distribute it in
+any way without my written permission.
+
+Quake III Arena (C) 1999 id Software. All rights reserved.
+The Preacher (C). All rights reserved.

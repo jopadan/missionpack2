@@ -1,0 +1,7 @@
+{
+map	"mp2tourney1"
+longname "Aerowalk"
+bots "major"
+fraglimit "10"
+type "tourney"
+}
