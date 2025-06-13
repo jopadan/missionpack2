@@ -1,0 +1,78 @@
+date: 10 - 05 - 02
+Quake3Arena CTF/TDM/TA/CCTF level.
+
+====================================================
+title:            Frozen Colors
+file:             frozencolors.pk3
+author:           Kevin "79DieselRabbit" Worrel 
+email address:    79dieselrabbit@planetquake.com
+URL:              http://www.planetquake.com/darkside
+description:      A TA/3Wave compatable CTF map set on and ice
+		  berg in the Arctic.
+	                   
+====================================================
+play information
+
+tourney:          no
+deathmatch:       If you want
+CTF:              yes
+other:            TDM, all TA gametypes, 3Wave ClassicCTF and CaptureStrike
+Bot File (aas):   YES
+new sounds:       yes
+new graphics:     yes
+new music:        no
+
+how to run        unzip to your /baseq3/ folder
+                  start quake3arena      
+                  goto SinglePlayer               
+                  goto Skirmish
+		  change Gametype to "Capture the Flag"
+		  select FROZENCOLORS
+		  Fight!
+
+====================================================
+info
+
+My third Q3A map, first CTF map, first terrain map,
+first TA map, first 3Wave map. This map was designed with 
+gameplay in mind.
+
+
+====================================================
+construction
+
+base:           none
+editor:         GTKRadiant 1.1.1
+other progs:    Terragen for skybox, Photoshop5 for textures
+know bugs:      -some may notice slight sparkles due to polygonOffset 
+		on terrain but it's better than the way-bad z-fighting
+build time:     Too long
+
+====================================================
+thanx to ...
+
+my gf for putting up w/ me on the computer all the time
+
+phooka, for the great snow/ice texture - only minor editing done
+webmaster@phooka.net
+
+Everyone at ..::LvL and the Quake3World Forums for their
+comments on the betas.
+
+====================================================
+Distribution / Copyright / Permissions 
+
+Copyright (c)2001 Kevin Worrel
+All rights reserved.
+
+Quake III Arena is a registered trademark of 
+id Software, Inc.
+
+This level may be electronically distributed only at 
+NO CHARGE to the recipient in its current state, MUST 
+include this .txt file, and may NOT be modified IN 
+ANY WAY. UNDER NO CIRCUMSTANCES IS THIS LEVEL TO BE 
+DISTRIBUTED ON CD-ROM WITHOUT PRIOR WRITTEN PERMISSION.
+
+====================================================
+

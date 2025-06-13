@@ -1,0 +1,8 @@
+{
+map             "mp2team1"
+bots            "Anarki Bones Crash Daemia Doom Hunter Klesk"
+longname        "Frozen Colors"
+fraglimit       "0"
+capturelimit    "10"
+type            "ctf oneflag overload harvester"
+}
