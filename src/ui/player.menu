@@ -8,12 +8,10 @@ menuDef {
     	visible 0
     	fullscreen 1
     	rect 0 0 640 480
-    	background "menuback_a"
-    	style 1
+    	background "menuback_b"
 	focusColor 1 .75 0 1
 	
 		onOpen { play "sound/misc/kcswish.wav" ;
-		playlooped "music/fla_mp03.wav" ;
 		setitemcolor fadebox backcolor 0 0 0 1 ; 
 		fadeout fadebox ; 
 		uiScript update "ui_GetName" ; 
@@ -31,52 +29,30 @@ menuDef {
 
 
 itemDef {
-      	name gametypebar
-      	style 2
-      	rect 0 5 640 40 
-      	textscale 0.4
-      	textalign 0		        // center
-      	textalignx 60       		// x alignment point for text
-                            		// use it to offset left/right text from the edge 
-                            		// or to center the text on a different point
-      	textaligny 21        
-      	style 2
-      	border 4
-      	bordercolor 0.5 0.5 0.5 0.5
-      	bordersize 2
-      	backcolor 0 0 .75 .5
-      	visible 1 
-	decoration
-	mouseEnter { setcolor backcolor .75 0 0 .5 }
-      	mouseExit { setcolor backcolor 0 0 .75 .5 }
-}
-
-
-itemDef {
-      	name arenatype
-	type ITEM_TYPE_MULTI	
-	cvar "ui_q3model"
-	cvarFloatList { "Team Arena" 0 "Quake III" 1 }
-	text "Model Type:"
+	name gametypebar
+	text "PLAYER SETUP"
 	textstyle 6
-      	rect 0 10 320 31 
-      	textalign ITEM_ALIGN_LEFT
-      	textalignx 20     
-      	textaligny 26    
-	textscale .35     
-      	forecolor 1 1 1 1
-      	visible 1
-	mouseEnter { show message_type } 
-	mouseExit { hide message_type } 
-	action { play "sound/misc/kcaction.wav" } 
-    	}
+	style 2
+	rect 0 16 640 40 
+	textscale 0.416
+	textalign 1		        // center
+	textalignx 320        // x alignment point for text
+						// use it to offset left/right text from the edge 
+						// or to center the text on a different point
+	textaligny 27        
+	style 2
+	border 4
+	bordercolor 0.5 0.5 0.5 0.75
+	bordersize 2
+	backcolor .25 .25 .25 0.75
+	visible 1 
+	decoration 
+}
 
 itemDef {
       	name quakeimage
       	style WINDOW_STYLE_SHADER
 	group grpquaketype
-	cvarTest "ui_q3model"
-	showCVar { "1" }	
  	background "ui/assets/playerpatriot.tga"
  	rect 60 24 128 256
       	forecolor .25 .25 .25 1
@@ -86,8 +62,6 @@ itemDef {
 itemDef {
       	name quakeimage
 	group grpquaketype
-	cvarTest "ui_q3model"
-	showCVar { "1" }	
       	style WINDOW_STYLE_SHADER	
  	background "ui/assets/playerpi.tga"
  	rect 100 24 128 256
@@ -96,9 +70,7 @@ itemDef {
     	}
 itemDef {
       	name quakeimage
-	group grpquaketype
-	cvarTest "ui_q3model"
-	showCVar { "1" }		
+	group grpquaketype		
       	style WINDOW_STYLE_SHADER	
  	background "ui/assets/playerklesk.tga"
  	rect 440 24 128 256
@@ -111,8 +83,6 @@ itemDef {
 itemDef {
       	name quakeimage
 	group grpquaketype	
-	cvarTest "ui_q3model"
-	showCVar { "1" }	
       	style WINDOW_STYLE_SHADER	
  	background "ui/assets/playerbiker.tga"
  	rect 384 24 128 256
@@ -121,60 +91,6 @@ itemDef {
     	}
 
 
-
-itemDef {
-      	name clanlogo1
-      	style WINDOW_STYLE_SHADER
-	group grparenatype
-	cvarTest "ui_q3model"
-	showCVar { "0" }		
- 	background "ui/assets/pagans.tga"
- 	rect 0 150 128 128
-      	forecolor .5 .5 .5 .25
-      	visible 1 
-	decoration
-    	}
-
-itemDef {
-      	name clanlogo1
-	group grparenatype
-	cvarTest "ui_q3model"
-	showCVar { "0" }		
-      	style WINDOW_STYLE_SHADER	
- 	background "ui/assets/crusaders.tga"
- 	rect 128 150 128 128
-      	forecolor .5 .5 .5 .25
-      	visible 1 
-	decoration
-    	}
-
-
-itemDef {
-      	name clanlogo1
-	group grparenatype	
-	cvarTest "ui_q3model"
-	showCVar { "0" }	
-      	style WINDOW_STYLE_SHADER	
- 	background "ui/assets/stroggs.tga"
- 	rect 384 150 128 128
-      	forecolor .5 .5 .5 .25
-      	visible 1 
-	decoration
-    	}
-
-
-itemDef {
-      	name clanlogo1
-	group grparenatype	
-	cvarTest "ui_q3model"
-	showCVar { "0" }	
-      	style WINDOW_STYLE_SHADER	
- 	background "ui/assets/intruders.tga"
- 	rect 512 150 128 128
-      	forecolor .5 .5 .5 .25
-      	visible 1 
-	decoration
-    	}
 
 itemDef {
       	name window
@@ -325,57 +241,13 @@ itemDef {
 	mouseExit { hide message_effect }   
     	}
 
-itemDef {
-      	name clanfield
-	group grparenatype		
-	ownerdraw UI_CLANNAME
-	text "Clan:"
-	textstyle 6
-      	rect 20 235 215 31 
-	textalign ITEM_ALIGN_LEFT		
-      	textalignx 0
-      	textaligny 21 
-	textscale .333        
-      	forecolor 1 1 1 1
-	cvarTest "ui_q3model"
-	showCVar { "0" }	
-      	visible 1 
-	action { play "sound/misc/nomenu.wav" }
-	mouseEnter { show message_clan } 
-	mouseExit { hide message_clan } 
-    	}
-
 
 
 
 itemDef {
 	name headlist
       	rect 10 330 620 80
-	group grparenatype	
-	cvarTest "ui_q3model"
-	hideCvar { "1" }
-	type ITEM_TYPE_LISTBOX
-	style WINDOW_STYLE_FILLED
-	elementwidth 61.75
-	elementheight 61.75
-	elementtype LISTBOX_IMAGE
-	feeder FEEDER_HEADS
-	horizontalscroll
-	border 1
-	bordersize 1
-	backcolor 0 0 0 .25
-	bordercolor .5 .5 .5 .5
-	forecolor 1 1 1 1
-	visible 1
-	mouseenter { setitemcolor headlist bordercolor .7 0 0 1 ; show message_model }
-	mouseexit { setitemcolor headlist bordercolor .5 .5 .5 .5 ; hide message_model }
-	}
-itemDef {
-	name headlist
-      	rect 10 330 620 80
-	group grpquaketype	
-	cvarTest "ui_q3model"
-	showCVar { "1" }	
+	group grpquaketype		
 	type ITEM_TYPE_LISTBOX
 	style WINDOW_STYLE_FILLED
 	elementwidth 61.75
@@ -409,12 +281,12 @@ itemDef {
       	textaligny 21        
       	style 2
       	border 4
-      	bordercolor 0.5 0.5 0.5 0.5
+      	bordercolor 0.5 0.5 0.5 .75
       	bordersize 2
-      	backcolor 0 0 .75 0.5
+      	backcolor 0 0 0 .75
       	visible 1 
-      	mouseEnter { setcolor backcolor .75 0 0 .5 }
-      	mouseExit { setcolor backcolor 0 0 .75 .5 }
+      	mouseEnter { setcolor backcolor .25 .25 .25 .75 }
+      	mouseExit { setcolor backcolor 0 0 0 .75 }
       	decoration 
     	}
 
@@ -555,19 +427,7 @@ itemDef {
 
 itemDef {
       	name clancinematic
-      	rect 238 157 170 133
-	group grparenatype
-	cvarTest "ui_q3model"
-	showCVar { "0" }	
-	ownerdraw UI_CLANCINEMATIC 
-      	visible 1
-	decoration
-    	}
-itemDef {
-      	name clancinematic
 	group grpquaketype
-	cvarTest "ui_q3model"
-	showCVar { "1" }	
       	style 3	
  	background "ui/assets/q3imagepage.tga"
 	rect 238 157 170 133

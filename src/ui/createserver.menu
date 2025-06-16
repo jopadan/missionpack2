@@ -593,7 +593,7 @@ itemDef {
       name gametypefield
       style 0	
  	  ownerdraw UI_BLUETEAMNAME
-      rect 450 70 128 28 
+      rect 450 46 128 28 
       textalign ITEM_ALIGN_LEFT		
       textalignx 0     
       textaligny 26    
@@ -604,9 +604,6 @@ itemDef {
       visible 1  
 	  cvarTest "ui_actualNetGameType"
 	  hideCvar { "0" ; "1" ; "2" }
-	action { play "sound/misc/nomenu.wav" }
-	mouseEnter { fadein message_clan } 
-	mouseExit { fadeout message_clan } 
     }
 
 
@@ -615,7 +612,7 @@ itemDef {
       name gametypefield
       style 0	
  	  ownerdraw UI_BLUETEAM1
-      rect 450 100 128 20 
+      rect 450 76 128 20 
 	text "1."
      textalign ITEM_ALIGN_LEFT	
       textalignx 0     
@@ -636,7 +633,7 @@ itemDef {
       name gametypefield
       style 0	
  	  ownerdraw UI_BLUETEAM2
-      rect 450 122 128 20 
+      rect 450 98 128 20 
       textalign ITEM_ALIGN_LEFT		
       textalignx 0     
       textaligny 18 
@@ -658,7 +655,7 @@ itemDef {
       style 0	
 	text "3."
  	  ownerdraw UI_BLUETEAM3
-      rect 450 144 128 20 
+      rect 450 120 128 20 
       textalign ITEM_ALIGN_LEFT		
       textalignx 0     
       textaligny 18    
@@ -679,7 +676,7 @@ itemDef {
       style 0	
 	text "4."
  	  ownerdraw UI_BLUETEAM4
-      rect 450 166 128 20 
+      rect 450 142 128 20 
       textalign ITEM_ALIGN_LEFT		
       textalignx 0     
       textaligny 18    
@@ -700,7 +697,49 @@ itemDef {
       style 0	
 	text "5."
  	  ownerdraw UI_BLUETEAM5
-      rect 450 188 128 20 
+      rect 450 164 128 20 
+      textalign ITEM_ALIGN_LEFT		
+      textalignx 0     
+      textaligny 18    
+	  textscale .333
+      forecolor 1 1 1 1
+      border 0
+      bordercolor 0 0 0 0
+      visible 1 
+	  cvarTest "ui_actualNetGameType"
+	  hideCvar { "0" ; "1" ; "2" }
+	action { play "sound/misc/nomenu.wav" }
+	mouseEnter { fadein message_slot } 
+	mouseExit { fadeout message_slot } 
+    }
+
+itemDef {
+      name gametypefield
+      style 0	
+	text "6."
+ 	  ownerdraw UI_BLUETEAM6
+      rect 450 186 128 20 
+      textalign ITEM_ALIGN_LEFT		
+      textalignx 0     
+      textaligny 18    
+	  textscale .333
+      forecolor 1 1 1 1
+      border 0
+      bordercolor 0 0 0 0
+      visible 1 
+	  cvarTest "ui_actualNetGameType"
+	  hideCvar { "0" ; "1" ; "2" }
+	action { play "sound/misc/nomenu.wav" }
+	mouseEnter { fadein message_slot } 
+	mouseExit { fadeout message_slot } 
+    }
+
+itemDef {
+      name gametypefield
+      style 0	
+	text "7."
+ 	  ownerdraw UI_BLUETEAM7
+      rect 450 208 128 20 
       textalign ITEM_ALIGN_LEFT		
       textalignx 0     
       textaligny 18    
@@ -723,7 +762,7 @@ itemDef {
       name gametypefield
       style 0	
  	  ownerdraw UI_REDTEAMNAME
-      rect 450 250 128 28 
+      rect 450 230 128 28 
       textalign ITEM_ALIGN_LEFT		
       textalignx 0     
       textaligny 26    
@@ -734,9 +773,6 @@ itemDef {
        visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  hideCvar { "0" ; "1" ; "2" }
-	action { play "sound/misc/nomenu.wav" }
-	mouseEnter { fadein message_clan } 
-	mouseExit { fadeout message_clan } 
     }
 
 
@@ -745,7 +781,7 @@ itemDef {
       style 0	
  	  ownerdraw UI_REDTEAM1
 	text "1."
-      rect 450 280 128 20 
+      rect 450 260 128 20 
       textalign ITEM_ALIGN_LEFT		
       textalignx 0     
       textaligny 18    
@@ -766,7 +802,7 @@ itemDef {
       style 0	
 	text "2."
  	  ownerdraw UI_REDTEAM2
-      rect 450 302 128 20 
+      rect 450 282 128 20 
       textalign ITEM_ALIGN_LEFT		
       textalignx 0     
       textaligny 18    
@@ -787,7 +823,7 @@ itemDef {
       style 0	
 	text "3."
  	  ownerdraw UI_REDTEAM3
-      rect 450 324 128 20 
+      rect 450 304 128 20 
       textalign ITEM_ALIGN_LEFT		
       textalignx 0     
       textaligny 18    
@@ -808,7 +844,7 @@ itemDef {
       style 0	
 	text "4."
  	  ownerdraw UI_REDTEAM4
-      rect 450 346 128 20 
+      rect 450 326 128 20 
       textalign ITEM_ALIGN_LEFT		
       textalignx 0     
       textaligny 18    
@@ -829,7 +865,49 @@ itemDef {
       	style 0	
 	text "5."
 	ownerdraw UI_REDTEAM5
-      	rect 450 368 128 20 
+      	rect 450 348 128 20 
+     	textalign ITEM_ALIGN_LEFT		
+      	textalignx 0     
+      	textaligny 18    
+	textscale .333
+      	forecolor 1 1 1 1
+      	border 0
+      	bordercolor 0 0 0 0
+      	 visible 1 
+	  cvarTest "ui_actualNetGameType"
+	  hideCvar { "0" ; "1" ; "2" }
+	action { play "sound/misc/nomenu.wav" } 
+	mouseEnter { fadein message_slot } 
+	mouseExit { fadeout message_slot } 
+    	}
+
+itemDef {
+      	name gametypefield
+      	style 0	
+	text "6."
+	ownerdraw UI_REDTEAM6
+      	rect 450 370 128 20 
+     	textalign ITEM_ALIGN_LEFT		
+      	textalignx 0     
+      	textaligny 18    
+	textscale .333
+      	forecolor 1 1 1 1
+      	border 0
+      	bordercolor 0 0 0 0
+      	 visible 1 
+	  cvarTest "ui_actualNetGameType"
+	  hideCvar { "0" ; "1" ; "2" }
+	action { play "sound/misc/nomenu.wav" } 
+	mouseEnter { fadein message_slot } 
+	mouseExit { fadeout message_slot } 
+    	}
+
+itemDef {
+      	name gametypefield
+      	style 0	
+	text "7."
+	ownerdraw UI_REDTEAM7
+      	rect 450 392 128 20 
      	textalign ITEM_ALIGN_LEFT		
       	textalignx 0     
       	textaligny 18    

@@ -46,6 +46,7 @@ static const serverFilter_t serverFilters[] = {
 	{"All", "" },
 	{"Quake 3 Arena", "" },
 	{"Team Arena", "missionpack" },
+	{"Ultimate Arena", "missionpack2" },
 	{"Rocket Arena", "arena" },
 	{"Alliance", "alliance20" },
 	{"Weapons Factory Arena", "wfa" },
@@ -1130,13 +1131,38 @@ static void UI_DrawSkill(rectDef_t *rect, float scale, vec4_t color, int textSty
 
 
 static void UI_DrawTeamName(rectDef_t *rect, float scale, vec4_t color, qboolean blue, int textStyle) {
+#ifdef MISSIONPACK2
+	Text_Paint(rect->x, rect->y, scale, color, va("%s", (blue) ? "Blue" : "Red"),0, 0, textStyle);
+#else
   int i;
   i = UI_TeamIndexFromName(UI_Cvar_VariableString((blue) ? "ui_blueTeam" : "ui_redTeam"));
   if (i >= 0 && i < uiInfo.teamCount) {
     Text_Paint(rect->x, rect->y, scale, color, va("%s: %s", (blue) ? "Blue" : "Red", uiInfo.teamList[i].teamName),0, 0, textStyle);
   }
+#endif
 }
 
+#ifdef MISSIONPACK2
+static void UI_DrawTeamMember(rectDef_t *rect, float scale, vec4_t color, qboolean blue, int num, int textStyle) {
+	// 0 - None
+	// 1 - Human
+	// 2..NumCharacters - Bot
+	int value = trap_Cvar_VariableValue(va(blue ? "ui_blueteam%i" : "ui_redteam%i", num));
+	const char *text;
+	if (value <= 0) {
+		text = "Closed";
+	} else if (value == 1) {
+		text = "Human";
+	} else {
+		value -= 2;
+		if (value >= UI_GetNumBots()) {
+			value = 0;
+		}
+		text = UI_GetBotNameByNumber(value);
+	}
+  Text_Paint(rect->x, rect->y, scale, color, text, 0, 0, textStyle);
+}
+#else
 static void UI_DrawTeamMember(rectDef_t *rect, float scale, vec4_t color, qboolean blue, int num, int textStyle) {
 	// 0 - None
 	// 1 - Human
@@ -1164,6 +1190,7 @@ static void UI_DrawTeamMember(rectDef_t *rect, float scale, vec4_t color, qboole
 	}
   Text_Paint(rect->x, rect->y, scale, color, text, 0, 0, textStyle);
 }
+#endif
 
 static void UI_DrawEffects(rectDef_t *rect, float scale, vec4_t color) {
 	vec4_t colors;
@@ -1255,7 +1282,9 @@ static void UI_DrawMapCinematic(rectDef_t *rect, float scale, vec4_t color, qboo
 
 
 static qboolean updateModel = qtrue;
-static qboolean q3Model = qfalse;
+#ifndef MISSIONPACK2
+static qboolean q3Model = qtrue;
+#endif
 
 static void UI_DrawPlayerModel(rectDef_t *rect) {
   static playerInfo_t info;
@@ -1264,7 +1293,7 @@ static void UI_DrawPlayerModel(rectDef_t *rect) {
 	char head[256];
 	vec3_t	viewangles;
 	vec3_t	moveangles;
-
+#ifndef MISSIONPACK2
 	  if (trap_Cvar_VariableValue("ui_Q3Model")) {
 	  strcpy(model, UI_Cvar_VariableString("model"));
 		strcpy(head, UI_Cvar_VariableString("headmodel"));
@@ -1283,6 +1312,12 @@ static void UI_DrawPlayerModel(rectDef_t *rect) {
 			updateModel = qtrue;
 		}
 	}
+#else
+	strcpy(model, UI_Cvar_VariableString("model"));
+	strcpy(head, UI_Cvar_VariableString("headmodel"));
+	team[0] = '\0';
+	updateModel = qtrue;
+#endif
   if (updateModel) {
   	memset( &info, 0, sizeof(playerInfo_t) );
   	viewangles[YAW]   = 180 - 10;
@@ -1642,6 +1677,7 @@ static int UI_OwnerDrawWidth(int ownerDraw, float scale) {
 				}
 			  s = skillLevels[i-1];
       break;
+#ifndef MISSIONPACK2
     case UI_BLUETEAMNAME:
 			  i = UI_TeamIndexFromName(UI_Cvar_VariableString("ui_blueTeam"));
 			  if (i >= 0 && i < uiInfo.teamCount) {
@@ -1654,11 +1690,16 @@ static int UI_OwnerDrawWidth(int ownerDraw, float scale) {
 			    s = va("%s: %s", "Red", uiInfo.teamList[i].teamName);
 			  }
       break;
+#endif
     case UI_BLUETEAM1:
 		case UI_BLUETEAM2:
 		case UI_BLUETEAM3:
 		case UI_BLUETEAM4:
 		case UI_BLUETEAM5:
+#ifdef MISSIONPACK2
+		case UI_BLUETEAM6:
+		case UI_BLUETEAM7:
+#endif
 			value = trap_Cvar_VariableValue(va("ui_blueteam%i", ownerDraw-UI_BLUETEAM1 + 1));
 			if (value <= 0) {
 				text = "Closed";
@@ -1678,6 +1719,10 @@ static int UI_OwnerDrawWidth(int ownerDraw, float scale) {
 		case UI_REDTEAM3:
 		case UI_REDTEAM4:
 		case UI_REDTEAM5:
+#ifdef MISSIONPACK2
+		case UI_REDTEAM6:
+		case UI_REDTEAM7:
+#endif
 			value = trap_Cvar_VariableValue(va("ui_redteam%i", ownerDraw-UI_REDTEAM1 + 1));
 			if (value <= 0) {
 				text = "Closed";
@@ -2031,6 +2076,10 @@ static void UI_OwnerDraw(float x, float y, float w, float h, float text_x, float
 		case UI_BLUETEAM3:
 		case UI_BLUETEAM4:
 		case UI_BLUETEAM5:
+#ifdef MISSIONPACK2
+		case UI_BLUETEAM6:
+		case UI_BLUETEAM7:
+#endif
       UI_DrawTeamMember(&rect, scale, color, qtrue, ownerDraw - UI_BLUETEAM1 + 1, textStyle);
       break;
     case UI_REDTEAM1:
@@ -2038,6 +2087,10 @@ static void UI_OwnerDraw(float x, float y, float w, float h, float text_x, float
 		case UI_REDTEAM3:
 		case UI_REDTEAM4:
 		case UI_REDTEAM5:
+#ifdef MISSIONPACK2
+		case UI_REDTEAM6:
+		case UI_REDTEAM7:
+#endif
       UI_DrawTeamMember(&rect, scale, color, qfalse, ownerDraw - UI_REDTEAM1 + 1, textStyle);
       break;
 		case UI_NETSOURCE:
@@ -2674,17 +2727,23 @@ static qboolean UI_OwnerDrawHandleKey(int ownerDraw, int flags, float *special, 
     case UI_SKILL:
       return UI_Skill_HandleKey(flags, special, key);
       break;
+#ifndef MISSIONPACK2
     case UI_BLUETEAMNAME:
       return UI_TeamName_HandleKey(flags, special, key, qtrue);
       break;
     case UI_REDTEAMNAME:
       return UI_TeamName_HandleKey(flags, special, key, qfalse);
       break;
+#endif
     case UI_BLUETEAM1:
 		case UI_BLUETEAM2:
 		case UI_BLUETEAM3:
 		case UI_BLUETEAM4:
 		case UI_BLUETEAM5:
+#ifdef MISSIONPACK2
+		case UI_BLUETEAM6:
+		case UI_BLUETEAM7:
+#endif
       UI_TeamMember_HandleKey(flags, special, key, qtrue, ownerDraw - UI_BLUETEAM1 + 1);
       break;
     case UI_REDTEAM1:
@@ -2692,6 +2751,10 @@ static qboolean UI_OwnerDrawHandleKey(int ownerDraw, int flags, float *special, 
 		case UI_REDTEAM3:
 		case UI_REDTEAM4:
 		case UI_REDTEAM5:
+#ifdef MISSIONPACK2
+		case UI_REDTEAM6:
+		case UI_REDTEAM7:
+#endif
       UI_TeamMember_HandleKey(flags, special, key, qfalse, ownerDraw - UI_REDTEAM1 + 1);
       break;
 		case UI_NETSOURCE:
@@ -3739,7 +3802,7 @@ static void UI_BuildServerDisplayList(qboolean force) {
 	trap_Cvar_VariableStringBuffer( "cl_motdString", uiInfo.serverStatus.motd, sizeof(uiInfo.serverStatus.motd) );
 	len = strlen(uiInfo.serverStatus.motd);
 	if (len == 0) {
-		strcpy(uiInfo.serverStatus.motd, "Welcome to Team Arena!");
+		strcpy(uiInfo.serverStatus.motd, "Welcome to Ultimate Arena!");
 		len = strlen(uiInfo.serverStatus.motd);
 	} 
 	if (len != uiInfo.serverStatus.motdLen) {
@@ -4414,6 +4477,7 @@ static qhandle_t UI_FeederItemImage(float feederID, int index) {
 static void UI_FeederSelection(float feederID, int index) {
 	static char info[MAX_STRING_CHARS];
   if (feederID == FEEDER_HEADS) {
+#ifndef MISSIONPACK2
 	int actual;
 	UI_SelectedHead(index, &actual);
 	index = actual;
@@ -4422,6 +4486,13 @@ static void UI_FeederSelection(float feederID, int index) {
 		trap_Cvar_Set( "team_headmodel", va("*%s", uiInfo.characterList[index].name)); 
 		updateModel = qtrue;
     }
+#else
+	if (index >= 0 && index < uiInfo.q3HeadCount) {
+      trap_Cvar_Set( "model", uiInfo.q3HeadNames[index]);
+      trap_Cvar_Set( "headmodel", uiInfo.q3HeadNames[index]);
+			updateModel = qtrue;
+	}
+#endif
   } else if (feederID == FEEDER_Q3HEADS) {
     if (index >= 0 && index < uiInfo.q3HeadCount) {
       trap_Cvar_Set( "model", uiInfo.q3HeadNames[index]);
