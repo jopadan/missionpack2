@@ -8,13 +8,10 @@
     	visible 0
     	fullscreen 1
     	rect 0 0 640 480
-	background "menuback_a"
+	background "menuback_b"
 	focusColor 1 .75 0 1
 	outOfBoundsClick	
-    	style 1
-    	border 1
 	onOpen { setitemcolor fadebox backcolor 0 0 0 1 ; 
-	playlooped "music/fla_mp03.wav" ;
 	fadeout fadebox ; 
 	uiScript UpdateFilter ;
 	hide lightning ; 
@@ -35,12 +32,12 @@
       	rect 0 20 640 40 
       	style 2
       	border 4
-      	bordercolor 0.5 0.5 0.5 0.5
+      	bordercolor 0.5 0.5 0.5 0.75
       	bordersize 2
-				backcolor 0 0 .75 0.5
+				backcolor 0 0 0 0.75
 				visible 1 
-				mouseEnter { setcolor backcolor .75 0 0 .5 }
-      	mouseExit { setcolor backcolor 0 0 .75 .5 }
+				mouseEnter { setcolor backcolor .25 .25 .25 .75 }
+      	mouseExit { setcolor backcolor 0 0 0 .75 }
       	decoration 
     }
 
@@ -1010,12 +1007,12 @@ itemDef {
       textaligny 21        
       style 2
       border 4
-      bordercolor 0.5 0.5 0.5 0.5
+      bordercolor 0.5 0.5 0.5 0.75
       bordersize 2
-      backcolor 0 0 .75 0.5
+      backcolor 0 0 0 0.75
       visible 1 
-      mouseEnter { setcolor backcolor .75 0 0 .5 }
-      mouseExit { setcolor backcolor 0 0 .75 .5 }
+      mouseEnter { setcolor backcolor .25 .25 .25 .75 }
+      mouseExit { setcolor backcolor 0 0 0 .75 }
       decoration 
     }
 
@@ -1053,7 +1050,7 @@ itemDef {
       	backcolor 0 0 0 0
       	forecolor 1 1 1 1
       	visible 1 
-		mouseEnter { show lightning ; hide accept ; show accept_alt ; show message_accept ; playlooped "sound/misc/loop_electricity_05.wav" }
+		mouseEnter { show lightning ; hide accept ; show accept_alt ; show message_accept }
       	action { uiScript JoinServer }
   }
 
@@ -1067,7 +1064,7 @@ itemDef {
       	forecolor 1 1 1 1
       	visible 0  
 	type ITEM_TYPE_BUTTON 
-      	mouseExit { hide lightning ; hide accept_alt ; show accept ; hide message_accept ; playlooped "music/fla_mp03.wav" }	
+      	mouseExit { hide lightning ; hide accept_alt ; show accept ; hide message_accept }	
       	action { uiScript JoinServer }
  
   }

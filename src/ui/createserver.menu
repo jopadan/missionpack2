@@ -11,8 +11,6 @@
 	background "menuback_b"
 	outOfBoundsClick	
 	focusColor 1 .75 0 1
-    	style 1
-    	border 1
 	onEsc { close createserver ; open main }
 	onOpen { setitemcolor fadebox backcolor 0 0 0 1 ; 
 	fadeout fadebox ; 
@@ -24,15 +22,6 @@
 	hide back_alt ;
 	show back ;
 	hide grpmessage }
-	
-itemDef {
-      	name asdasd
-      	style WINDOW_STYLE_FILLED
-      	rect 0 0 640 480
-     	background "menuback_a"
-      	visible 1
-	decoration
-    }
 	
 itemDef {
 	name window

@@ -88,7 +88,7 @@ itemDef {
 itemDef {
       	name menuback_c
       	style WINDOW_STYLE_SHADER
-      	rect 205 123 235 235
+      	rect 80 0 480 480
      	background "menuback_c"
       	visible 1
 	decoration

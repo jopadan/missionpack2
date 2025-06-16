@@ -8,10 +8,8 @@ menuDef {
     	visible 0
     	fullscreen 1
     	rect 186 0 454 480
-	background "menuback_a"
+	background "menuback_b"
     	focusColor 1 .75 0 1
-    	style 1
-    	border 1
 	onOpen { setitemcolor fadebox backcolor 0 0 0 1 ; 
 		fadeout fadebox ;
 		hide back_alt ;
