@@ -1691,15 +1691,55 @@ static int UI_OwnerDrawWidth(int ownerDraw, float scale) {
 			  }
       break;
 #endif
+#ifdef MISSIONPACK2
     case UI_BLUETEAM1:
 		case UI_BLUETEAM2:
 		case UI_BLUETEAM3:
 		case UI_BLUETEAM4:
 		case UI_BLUETEAM5:
-#ifdef MISSIONPACK2
 		case UI_BLUETEAM6:
 		case UI_BLUETEAM7:
-#endif
+			value = trap_Cvar_VariableValue(va("ui_blueteam%i", ownerDraw-UI_BLUETEAM1 + 1));
+			if (value <= 0) {
+				text = "Closed";
+			} else if (value == 1) {
+				text = "Human";
+			} else {
+				value -= 2;
+				if (value >= UI_GetNumBots()) {
+					value = 0;
+				}
+				text = UI_GetBotNameByNumber(value);
+			}
+			s = va("%i. %s", ownerDraw-UI_BLUETEAM1 + 1, text);
+      break;
+    case UI_REDTEAM1:
+		case UI_REDTEAM2:
+		case UI_REDTEAM3:
+		case UI_REDTEAM4:
+		case UI_REDTEAM5:
+		case UI_REDTEAM6:
+		case UI_REDTEAM7:
+			value = trap_Cvar_VariableValue(va("ui_redteam%i", ownerDraw-UI_REDTEAM1 + 1));
+			if (value <= 0) {
+				text = "Closed";
+			} else if (value == 1) {
+				text = "Human";
+			} else {
+				value -= 2;
+				if (value >= UI_GetNumBots()) {
+					value = 0;
+				}
+				text = UI_GetBotNameByNumber(value);
+			}
+			s = va("%i. %s", ownerDraw-UI_REDTEAM1 + 1, text);
+      break;
+#else
+    case UI_BLUETEAM1:
+		case UI_BLUETEAM2:
+		case UI_BLUETEAM3:
+		case UI_BLUETEAM4:
+		case UI_BLUETEAM5:
 			value = trap_Cvar_VariableValue(va("ui_blueteam%i", ownerDraw-UI_BLUETEAM1 + 1));
 			if (value <= 0) {
 				text = "Closed";
@@ -1719,10 +1759,6 @@ static int UI_OwnerDrawWidth(int ownerDraw, float scale) {
 		case UI_REDTEAM3:
 		case UI_REDTEAM4:
 		case UI_REDTEAM5:
-#ifdef MISSIONPACK2
-		case UI_REDTEAM6:
-		case UI_REDTEAM7:
-#endif
 			value = trap_Cvar_VariableValue(va("ui_redteam%i", ownerDraw-UI_REDTEAM1 + 1));
 			if (value <= 0) {
 				text = "Closed";
@@ -1737,6 +1773,7 @@ static int UI_OwnerDrawWidth(int ownerDraw, float scale) {
 			}
 			s = va("%i. %s", ownerDraw-UI_REDTEAM1 + 1, text);
       break;
+#endif
 		case UI_NETSOURCE:
 			if (ui_netSource.integer < 0 || ui_netSource.integer > uiInfo.numJoinGameTypes) {
 				ui_netSource.integer = 0;
@@ -1783,6 +1820,12 @@ static void UI_DrawBotName(rectDef_t *rect, float scale, vec4_t color, int textS
 	int value = uiInfo.botIndex;
 	int game = trap_Cvar_VariableValue("g_gametype");
 	const char *text = "";
+#ifdef MISSIONPACK2
+	if (value >= UI_GetNumBots()) {
+		value = 0;
+	}
+	text = UI_GetBotNameByNumber(value);
+#else
 	if (game >= GT_TEAM) {
 		if (value >= uiInfo.characterCount) {
 			value = 0;
@@ -1794,6 +1837,7 @@ static void UI_DrawBotName(rectDef_t *rect, float scale, vec4_t color, int textS
 		}
 		text = UI_GetBotNameByNumber(value);
 	}
+#endif
   Text_Paint(rect->x, rect->y, scale, color, text, 0, 0, textStyle);
 }
 
@@ -2514,6 +2558,13 @@ static qboolean UI_TeamMember_HandleKey(int flags, float *special, int key, qboo
 			value++;
 		}
 
+#ifdef MISSIONPACK2
+		if (value >= UI_GetNumBots() + 2) {
+			value = 0;
+		} else if (value < 0) {
+			value = UI_GetNumBots() + 2 - 1;
+		}
+#else
 		if (ui_actualNetGameType.integer >= GT_TEAM) {
 			if (value >= uiInfo.characterCount + 2) {
 				value = 0;
@@ -2527,6 +2578,7 @@ static qboolean UI_TeamMember_HandleKey(int flags, float *special, int key, qboo
 				value = UI_GetNumBots() + 2 - 1;
 			}
 		}
+#endif
 
 		trap_Cvar_Set(cvar, va("%i", value));
     return qtrue;
@@ -2606,6 +2658,13 @@ static qboolean UI_BotName_HandleKey(int flags, float *special, int key) {
 			value++;
 		}
 
+#ifdef MISSIONPACK2
+		if (value >= UI_GetNumBots() + 2) {
+			value = 0;
+		} else if (value < 0) {
+			value = UI_GetNumBots() + 2 - 1;
+		}
+#else
 		if (game >= GT_TEAM) {
 			if (value >= uiInfo.characterCount + 2) {
 				value = 0;
@@ -2619,6 +2678,7 @@ static qboolean UI_BotName_HandleKey(int flags, float *special, int key) {
 				value = UI_GetNumBots() + 2 - 1;
 			}
 		}
+#endif
 		uiInfo.botIndex = value;
     return qtrue;
   }
@@ -3223,8 +3283,10 @@ static void UI_RunMenuScript(char **args) {
 			trap_Cvar_Set("ui_singlePlayerActive", "0");
 			trap_Cvar_SetValue( "dedicated", Com_Clamp( 0, 2, ui_dedicated.integer ) );
 			trap_Cvar_SetValue( "g_gametype", Com_Clamp( 0, 8, uiInfo.gameTypes[ui_netGameType.integer].gtEnum ) );
+#ifndef MISSIONPACK2
 			trap_Cvar_Set("g_redTeam", UI_Cvar_VariableString("ui_teamName"));
 			trap_Cvar_Set("g_blueTeam", UI_Cvar_VariableString("ui_opponentName"));
+#endif
 			trap_Cmd_ExecuteText( EXEC_APPEND, va( "wait ; wait ; map %s\n", uiInfo.mapList[ui_currentNetMap.integer].mapLoadName ) );
 			skill = trap_Cvar_VariableValue( "g_spSkill" );
 			// set max clients based on spots
@@ -3249,7 +3311,20 @@ static void UI_RunMenuScript(char **args) {
 			}
 
 			trap_Cvar_Set("sv_maxClients", va("%d",clients));
-
+#ifdef MISSIONPACK2
+			for (i = 0; i < PLAYERS_PER_TEAM; i++) {
+				int bot = trap_Cvar_VariableValue( va("ui_blueteam%i", i+1));
+				if (bot > 1) {
+					Com_sprintf( buff, sizeof(buff), "addbot %s %f %s\n", UI_GetBotNameByNumber(bot-2), skill, "Blue");
+					trap_Cmd_ExecuteText( EXEC_APPEND, buff );
+				}
+				bot = trap_Cvar_VariableValue( va("ui_redteam%i", i+1));
+				if (bot > 1) {
+					Com_sprintf( buff, sizeof(buff), "addbot %s %f %s\n", UI_GetBotNameByNumber(bot-2), skill, "Red");
+					trap_Cmd_ExecuteText( EXEC_APPEND, buff );
+				}
+			}
+#else
 			for (i = 0; i < PLAYERS_PER_TEAM; i++) {
 				int bot = trap_Cvar_VariableValue( va("ui_blueteam%i", i+1));
 				if (bot > 1) {
@@ -3270,6 +3345,7 @@ static void UI_RunMenuScript(char **args) {
 					trap_Cmd_ExecuteText( EXEC_APPEND, buff );
 				}
 			}
+#endif
 		} else if (Q_stricmp(name, "updateSPMenu") == 0) {
 			UI_SetCapFragLimits(qtrue);
 			UI_MapCountByGameType(qtrue);

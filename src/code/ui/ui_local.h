@@ -495,7 +495,11 @@ typedef struct {
 #define MAX_GAMETYPES 16
 #define MAX_MAPS 128
 #define MAX_SPMAPS 16
-#define PLAYERS_PER_TEAM 5
+#ifdef MISSIONPACK2
+	#define PLAYERS_PER_TEAM 7
+#else
+	#define PLAYERS_PER_TEAM 5
+#endif
 #define MAX_PINGREQUESTS		32
 #define MAX_ADDRESSLENGTH		64
 #define MAX_HOSTNAMELENGTH		22
@@ -507,7 +511,12 @@ typedef struct {
 #define MAX_SERVERSTATUS_LINES	128
 #define MAX_SERVERSTATUS_TEXT	1024
 #define MAX_FOUNDPLAYER_SERVERS	16
-#define TEAM_MEMBERS 5
+
+#ifdef MISSIONPACK2
+	#define TEAM_MEMBERS 7
+#else
+	#define TEAM_MEMBERS 5
+#endif
 #define GAMES_ALL			0
 #define GAMES_FFA			1
 #define GAMES_TEAMPLAY		2
