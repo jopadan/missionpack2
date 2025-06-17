@@ -1,0 +1,8 @@
+
+{
+map             "mp2tourney2"
+bots		    "gorre"
+timelimit 	    "15"
+longname        "Almost Lost"
+type            "tourney ffa team"
+}
