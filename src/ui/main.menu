@@ -31,7 +31,7 @@ menuDef {
     	fullScreen MENU_TRUE
 	rect 0 0 640 480
     	visible MENU_TRUE
-	focusColor 1 .75 0 1
+	focusColor .25 .25 1 1
 	soundLoop "music/fla22k_04_loop.wav" 
 	onESC { open quit_popmenu }
 
@@ -430,12 +430,13 @@ itemDef {
       	name copyright
       	text "Quake III Copyright 2000 id software, inc. All rights reserved"
       	style 0
+		textstyle 6
       	textscale .25
       	rect 0 440 640 40
       	textalign 1	
       	textaligny 32
       	textalignx 320 
-      	forecolor 0 0 0 1
+      	forecolor 1 0 0 1
       	visible 1 
       	decoration 
 	}
@@ -455,7 +456,7 @@ itemDef {
 	textscale .333
 	text "Play the Original \r"
 	"Quake III Game."
-	forecolor 1 1 1 1
+	forecolor 1 0 0 1
 	decoration 
 	visible 0
 	}
@@ -474,7 +475,7 @@ itemDef {
 	"New Gametytpes,\r"
 	"  Powerups, and\r"
 	"    Team Orders."
-	forecolor 1 1 1 1
+	forecolor 1 0 0 1
 	decoration 
 	visible 0
 	}
@@ -490,7 +491,7 @@ itemDef {
 	wrapped
 	textscale .333
 	text "    About Us."
-	forecolor 1 1 1 1
+	forecolor 1 0 0 1
 	decoration 
 	visible 0
 	}
@@ -509,7 +510,7 @@ itemDef {
 	text "  Modifications of\r"
 	"Quake III by other \r"
 	"      Developers."
-	forecolor 1 1 1 1
+	forecolor 1 0 0 1
 	decoration 
 	visible 0
 	}
@@ -527,7 +528,7 @@ itemDef {
 	textscale .333
 	text "  Watch\r"
 	"      cinematics."
-	forecolor 1 1 1 1
+	forecolor 1 0 0 1
 	decoration 
 	visible 0
 	}
@@ -545,7 +546,7 @@ itemDef {
 	text "  Challenge Your\r"
 	"Skills Against the\r"
 	"       Computer."
-	forecolor 1 1 1 1
+	forecolor 1 0 0 1
 	decoration 
 	visible 0
 	}
@@ -563,7 +564,7 @@ itemDef {
 	text "Join other Team \r"
 	"Arena Games on\r"
 	" LAN or Internet."
-	forecolor 1 1 1 1
+	forecolor 1 0 0 1
 	decoration 
 	visible 0
 	}
@@ -581,7 +582,7 @@ itemDef {
 	text " Start a Game\r"
 	"  Server for\r"
 	"Others to Join."
-	forecolor 1 1 1 1
+	forecolor 1 0 0 1
 	decoration 
 	visible 0
 	}
@@ -599,7 +600,7 @@ itemDef {
 	text "  Select Your\r"
 	"Player Model\r"
 	"    and Clan."
-	forecolor 1 1 1 1
+	forecolor 1 0 0 1
 	decoration 
 	visible 0
 	}
@@ -617,7 +618,7 @@ itemDef {
 	text "     Set Controls,\r"
 	"Game Options, and \r"
 	"  System Settings."
-	forecolor 1 1 1 1
+	forecolor 1 0 0 1
 	decoration 
 	visible 0
 	}
@@ -634,7 +635,7 @@ itemDef {
 	textscale .333
 	text "   View Recorded\r"
 	"Team Arena Game."
-	forecolor 1 1 1 1
+	forecolor 1 0 0 1
 	decoration 
 	visible 0
 	}
@@ -650,7 +651,7 @@ itemDef {
 	wrapped
 	textscale .333
 	text "     Get to Work!"
-	forecolor 1 1 1 1
+	forecolor 1 0 0 1
 	decoration 
 	visible 0
 	}
