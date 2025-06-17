@@ -45,16 +45,6 @@ itemDef {
 	decoration
     }
 
-	
-itemDef {
-      	name menuback_e
-      	style WINDOW_STYLE_SHADER
-      	rect 0 0 640 480
-     	background "menuback_e"
-      	visible 1
-	decoration
-    	}
-
 itemDef {
       	name menuback_b
      	style WINDOW_STYLE_SHADER
@@ -68,7 +58,7 @@ itemDef {
 itemDef {
 	name cinematic
       	style 5
-	cinematic "intro.roq"
+	cinematic "menubg.roq"
 	rect 0 0 640 480
 	backcolor 1 1 1 .25
 	decoration
@@ -85,35 +75,6 @@ itemDef {
     }
 
 
-itemDef {
-      	name menuback_c
-      	style WINDOW_STYLE_SHADER
-      	rect 80 0 480 480
-     	background "menuback_c"
-      	visible 1
-	decoration
-    }
-
-itemDef {
-      	name selection
-      	style WINDOW_STYLE_SHADER
-      	rect 205 123 235 235
-     	background "ui/assets/mainpop.tga"
-	forecolor 1 1 1 .75
-      	visible 0
-	decoration
-    }
-
-itemDef {
-	name selection
-	rect 252 170 144 144 
-	style 3
-	background "centerconsole2"
-	visible 0
-	decoration
-	}
-
-
 
 
 
@@ -124,13 +85,13 @@ itemDef {
       	name singlebar
       	style 2
       	rect 0 272 640 30 
-      	backcolor .95 .95 .95 .3
+      	backcolor 0 0 0 .75
       	border 4
-      	bordercolor 0.5 0.5 0.5 1
+      	bordercolor 0.5 0.5 0.5 0.75
       	bordersize 1
       	visible 1 
-      	mouseEnter { setcolor backcolor .15 .15 .15 .25 ; hide play ; show playselection ; show selection  }
-      	mouseExit { setcolor backcolor .95 .95 .95 .3 ; show play ; hide playselection ; hide selection ; hide grpMessage  }
+      	mouseEnter { setcolor backcolor .15 .15 .15 .25 ; hide play ; show playselection  }
+      	mouseExit { setcolor backcolor 0 0 0 .75 ; show play ; hide playselection ; hide grpMessage  }
 	decoration 	
     	}
 
@@ -215,13 +176,13 @@ itemDef {
       	name gametypebar
       	style 2
       	rect 80 316 520 30 
-      	backcolor .95 .95 .95 .3
+      	backcolor 0 0 0 .75
       	border 4
-      	bordercolor 0.5 0.5 0.5 1
+      	bordercolor 0.5 0.5 0.5 0.75
       	bordersize 1
       	visible 1 
-      	mouseEnter { hide gametype ; show teamarena ; setcolor backcolor .15 .15 .15 .25 ; show selection }
-      	mouseExit { show gametype ; hide teamarena ; setcolor backcolor .95 .95 .95 .3 ; hide selection ; hide grpMessage }	
+      	mouseEnter { hide gametype ; show teamarena ; setcolor backcolor .15 .15 .15 .25  }
+      	mouseExit { show gametype ; hide teamarena ; setcolor backcolor 0 0 0 .75  ; hide grpMessage }	
 	decoration 	
     	}
 
@@ -346,13 +307,13 @@ itemDef {
       	name optionbar
       	style 2
       	rect 0 360 640 30 
-      	backcolor .95 .95 .95 .3
+      	backcolor 0 0 0 .75
       	border 4
-      	bordercolor 0.5 0.5 0.5 1
+      	bordercolor 0.5 0.5 0.5 0.75
       	bordersize 1
       	visible 1 
-      	mouseEnter { setcolor backcolor .15 .15 .15 .25 ; hide options ; show optionselection ; show selection }
-      	mouseExit { setcolor backcolor .95 .95 .95 .3 ; show options ; hide optionselection ; hide selection ; hide grpMessage }
+      	mouseEnter { setcolor backcolor .15 .15 .15 .25 ; hide options ; show optionselection  }
+      	mouseExit { setcolor backcolor 0 0 0 .75 ; show options ; hide optionselection  ; hide grpMessage }
       	decoration 
     	}
 
@@ -435,9 +396,9 @@ itemDef {
       	name quitbar
       	style 2
       	rect 0 404 640 30 
-      	backcolor .95 .95 .95 .3
+      	backcolor 0 0 0 .75
       	border 4
-      	bordercolor 0.5 0.5 0.5 1
+      	bordercolor 0.5 0.5 0.5 0.75
       	bordersize 1
       	visible 1 
       	decoration 
@@ -459,8 +420,8 @@ itemDef {
    	forecolor 1 1 1 1
       	visible 1 
   	action { open quit_popmenu }
-	mouseEnter { setitemcolor quitbar backcolor .15 .15 .15 .25 ; show selection ; show message_quit }
-      	mouseExit { setitemcolor quitbar backcolor .95 .95 .95 .3 ; hide selection ; fadeout message_quit ; hide grpMessage  }
+	mouseEnter { setitemcolor quitbar backcolor .15 .15 .15 .25  ; show message_quit }
+      	mouseExit { setitemcolor quitbar backcolor 0 0 0 .75  ; fadeout message_quit ; hide grpMessage  }
    	}
 
 
@@ -474,7 +435,7 @@ itemDef {
       	textalign 1	
       	textaligny 32
       	textalignx 320 
-      	forecolor .75 0 0 .75
+      	forecolor 0 0 0 1
       	visible 1 
       	decoration 
 	}
@@ -487,7 +448,7 @@ itemDef {
 	style 0 
 	rect 265 210 235 20
 	textalign 0
-	textstyle 1
+	textstyle 6
 	textalignx 0
 	textaligny 25
 	wrapped
@@ -504,7 +465,7 @@ itemDef {
 	style 0 
 	rect 261 195 235 20
 	textalign 0
-	textstyle 1
+	textstyle 6
 	textalignx 0
 	textaligny 25
 	wrapped
@@ -523,7 +484,7 @@ itemDef {
 	style 0 
 	rect 272 220 235 20
 	textalign 0
-	textstyle 1
+	textstyle 6
 	textalignx 0
 	textaligny 25
 	wrapped
@@ -540,7 +501,7 @@ itemDef {
 	style 0 
 	rect 256 210 235 20
 	textalign 0
-	textstyle 1
+	textstyle 6
 	textalignx 0
 	textaligny 25
 	wrapped
@@ -559,7 +520,7 @@ itemDef {
 	style 0 
 	rect 256 210 235 20
 	textalign 0
-	textstyle 1
+	textstyle 6
 	textalignx 0
 	textaligny 25
 	wrapped
@@ -576,7 +537,7 @@ itemDef {
 	style 0 
 	rect 260 205 235 20
 	textalign 0
-	textstyle 1
+	textstyle 6
 	textalignx 0
 	textaligny 25
 	wrapped
@@ -594,7 +555,7 @@ itemDef {
 	style 0 
 	rect 265 205 235 20
 	textalign 0
-	textstyle 1
+	textstyle 6
 	textalignx 0
 	textaligny 25
 	wrapped
@@ -612,7 +573,7 @@ itemDef {
 	style 0 
 	rect 272 205 235 20
 	textalign 0
-	textstyle 1
+	textstyle 6
 	textalignx 0
 	textaligny 25
 	wrapped
@@ -630,7 +591,7 @@ itemDef {
 	style 0 
 	rect 275 205 235 20
 	textalign 0
-	textstyle 1
+	textstyle 6
 	textalignx 0
 	textaligny 25
 	wrapped
@@ -648,7 +609,7 @@ itemDef {
 	style 0 
 	rect 257 205 235 20
 	textalign 0
-	textstyle 1
+	textstyle 6
 	textalignx 0
 	textaligny 25
 	wrapped
@@ -666,7 +627,7 @@ itemDef {
 	style 0 
 	rect 258 210 235 20
 	textalign 0
-	textstyle 1
+	textstyle 6
 	textalignx 0
 	textaligny 25
 	wrapped
@@ -683,7 +644,7 @@ itemDef {
 	style 0 
 	rect 258 225 235 20
 	textalign 0
-	textstyle 1
+	textstyle 6
 	textalignx 0
 	textaligny 25
 	wrapped

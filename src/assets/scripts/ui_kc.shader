@@ -218,11 +218,6 @@ menuback_d
 		map ui/assets/teamarena.tga
 		blendfunc filter
 	}
-	{
-		map ui/assets/teamarena.tga
-		blendfunc add
-		rgbgen wave sin .25 .25 0 5
-	}
 	
 }
 menuback_f
