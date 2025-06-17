@@ -2509,6 +2509,10 @@ static void CG_DrawWarmup( void ) {
 		} else if ( cgs.gametype == GT_HARVESTER ) {
 			s = "Harvester";
 #endif
+#ifdef MISSIONPACK2
+		} else if ( cgs.gametype == GT_TEAMARENA ) {
+			s = "Team Arena";
+#endif
 		} else {
 			s = "";
 		}

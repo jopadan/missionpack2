@@ -10,7 +10,7 @@
 // 5 - GT_1FCTF,			// one flag ctf
 // 6 - GT_OBELISK,			// obelisk
 // 7 - GT_HARVESTER,		// harvester
-// 8 - GT_TEAMTOURNAMENT	// team tournament
+// 8 - GT_TEAMARENA	// team arena AKA clan arena
 
 gametypes {
   { "Free For All" 0 }
@@ -20,6 +20,7 @@ gametypes {
   { "One Flag CTF" 5 }
   { "Overload" 6 }
   { "Harvester" 7 }
+  { "Team Arena" 8 }
 }
 
 
@@ -54,6 +55,7 @@ joingametypes {
   { "One Flag CTF" 5 }
   { "Overload" 6 }
   { "Harvester" 7 }
+  { "Team Arena" 8 }
 }
 
 

@@ -252,6 +252,11 @@ void CG_DrawInformation( void ) {
 	case GT_TOURNAMENT:
 		s = "Tournament";
 		break;
+// #ifdef MISSIONPACK2
+	// case GT_ARENA:
+		// s = "Arena";
+		// break;
+// #endif
 	case GT_TEAM:
 		s = "Team Deathmatch";
 		break;
@@ -267,6 +272,11 @@ void CG_DrawInformation( void ) {
 		break;
 	case GT_HARVESTER:
 		s = "Harvester";
+		break;
+#endif
+#ifdef MISSIONPACK2
+	case GT_TEAMARENA:
+		s = "Team Arena";
 		break;
 #endif
 	default:

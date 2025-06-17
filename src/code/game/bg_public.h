@@ -85,15 +85,21 @@ typedef enum {
 	GT_FFA,				// free for all
 	GT_TOURNAMENT,		// one on one tournament
 	GT_SINGLE_PLAYER,	// single player ffa
+// #ifdef MISSIONPACK2
+	// GT_ARENA,			// free for all arena AKA clanless arena
+// #endif
 
-	//-- team games go after this --
+	//-- team games go after this BUT NOT BEFORE GT_TEAM --
 
 	GT_TEAM,			// team deathmatch
 	GT_CTF,				// capture the flag
 #ifdef MISSIONPACK
-	GT_1FCTF,
-	GT_OBELISK,
-	GT_HARVESTER,
+	GT_1FCTF,			// one flag ctf
+	GT_OBELISK,			// overload
+	GT_HARVESTER,		// harvester weinstein
+#endif
+#ifdef MISSIONPACK2
+	GT_TEAMARENA,		// team arena AKA clan arena
 #endif
 	GT_MAX_GAME_TYPE
 } gametype_t;
