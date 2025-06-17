@@ -931,7 +931,7 @@ itemDef {
       style 0	
 	text "1."
  	  ownerdraw UI_BLUETEAM1
-      rect 450 100 128 20 
+      rect 450 65 128 20 
       textalign ITEM_ALIGN_LEFT		
       textalignx 0     
       textaligny 18    
@@ -952,7 +952,7 @@ itemDef {
       style 0	
 	text "2."
  	  ownerdraw UI_REDTEAM1
-      rect 450 125 128 20 
+      rect 450 90 128 20 
       textalign ITEM_ALIGN_LEFT		
       textalignx 0     
       textaligny 18    
@@ -973,7 +973,7 @@ itemDef {
       style 0
 	text "3."	
  	  ownerdraw UI_BLUETEAM2
-      rect 450 150 128 20 
+      rect 450 115 128 20 
       textalign ITEM_ALIGN_LEFT		
       textalignx 0     
       textaligny 18    
@@ -994,7 +994,7 @@ itemDef {
       style 0
 	text "4."	
  	  ownerdraw UI_REDTEAM2
-      rect 450 175 128 20 
+      rect 450 140 128 20 
       textalign ITEM_ALIGN_LEFT		
       textalignx 0     
       textaligny 18    
@@ -1015,7 +1015,7 @@ itemDef {
       style 0	
 	text "5."
  	  ownerdraw UI_BLUETEAM3
-      rect 450 200 128 20 
+      rect 450 165 128 20 
       textalign ITEM_ALIGN_LEFT		
       textalignx 0     
       textaligny 18    
@@ -1042,7 +1042,7 @@ itemDef {
       	style 0	
 	text "6."
 	ownerdraw UI_REDTEAM3
-      	rect 450 225 128 20 
+      	rect 450 190 128 20 
       	textalign ITEM_ALIGN_LEFT		
       	textalignx 0     
       	textaligny 18    
@@ -1063,7 +1063,7 @@ itemDef {
       	style 0	
 	text "7."
  	ownerdraw UI_BLUETEAM4
-      	rect 450 250 128 20 
+      	rect 453 215 128 20 
       	textalign ITEM_ALIGN_LEFT		
       	textalignx 0     
       	textaligny 18    
@@ -1084,7 +1084,7 @@ itemDef {
       	style 0	
 	text "8."
  	ownerdraw UI_REDTEAM4
-      	rect 450 275 128 20 
+      	rect 450 240 128 20 
       	textalign ITEM_ALIGN_LEFT		
       	textalignx 0     
       	textaligny 18    
@@ -1105,7 +1105,7 @@ itemDef {
       style 0
 	text "9."	
  	  ownerdraw UI_BLUETEAM5
-      rect 450 300 128 20 
+      rect 450 265 128 20 
       textalign ITEM_ALIGN_LEFT		
       textalignx 0     
       textaligny 18    
@@ -1126,7 +1126,91 @@ itemDef {
       	style 0	
 	text "10."
 	ownerdraw UI_REDTEAM5
-      	rect 443 325 128 20 
+      	rect 443 290 128 20 
+     	textalign ITEM_ALIGN_LEFT		
+      	textalignx 0     
+      	textaligny 18    
+	textscale .333
+      	forecolor 1 1 1 1
+      	border 0
+      	bordercolor 0 0 0 0
+       visible 1 
+	  cvarTest "ui_actualNetGameType"
+	  showCvar { "0" ; "1" ; "2" }
+	action { play "sound/misc/nomenu.wav" } 
+	mouseEnter { fadein message_slot } 
+	mouseExit { fadeout message_slot } 
+    	}
+
+itemDef {
+      name gametypefield
+      style 0
+	text "11."	
+ 	  ownerdraw UI_BLUETEAM6
+      rect 446 315 128 20 
+      textalign ITEM_ALIGN_LEFT		
+      textalignx 0     
+      textaligny 18    
+	  textscale .333
+      forecolor 1 1 1 1
+      border 0
+      bordercolor 0 0 0 0
+      visible 1 
+	  cvarTest "ui_actualNetGameType"
+	showCvar { "0" ; "1" ; "2" }
+	action { play "sound/misc/nomenu.wav" }
+	mouseEnter { fadein message_slot } 
+	mouseExit { fadeout message_slot } 
+    	}
+
+itemDef {
+      	name gametypefield
+      	style 0	
+	text "12."
+	ownerdraw UI_REDTEAM6
+      	rect 443 340 128 20 
+     	textalign ITEM_ALIGN_LEFT		
+      	textalignx 0     
+      	textaligny 18    
+	textscale .333
+      	forecolor 1 1 1 1
+      	border 0
+      	bordercolor 0 0 0 0
+       visible 1 
+	  cvarTest "ui_actualNetGameType"
+	  showCvar { "0" ; "1" ; "2" }
+	action { play "sound/misc/nomenu.wav" } 
+	mouseEnter { fadein message_slot } 
+	mouseExit { fadeout message_slot } 
+    	}
+
+itemDef {
+      name gametypefield
+      style 0
+	text "13."	
+ 	  ownerdraw UI_BLUETEAM7
+      rect 443 365 128 20 
+      textalign ITEM_ALIGN_LEFT		
+      textalignx 0     
+      textaligny 18    
+	  textscale .333
+      forecolor 1 1 1 1
+      border 0
+      bordercolor 0 0 0 0
+      visible 1 
+	  cvarTest "ui_actualNetGameType"
+	showCvar { "0" ; "1" ; "2" }
+	action { play "sound/misc/nomenu.wav" }
+	mouseEnter { fadein message_slot } 
+	mouseExit { fadeout message_slot } 
+    	}
+
+itemDef {
+      	name gametypefield
+      	style 0	
+	text "14."
+	ownerdraw UI_REDTEAM7
+      	rect 443 390 128 20 
      	textalign ITEM_ALIGN_LEFT		
       	textalignx 0     
       	textaligny 18    
