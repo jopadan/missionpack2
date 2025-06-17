@@ -145,7 +145,7 @@ itemDef {
 	forecolor 1 1 1 1
 	backcolor .37 .1 .1 1 
 	visible 1
-	action { uiScript addBot ; uiScript closeingame }
+	action { uiScript addBot }
 	mouseEnter { setitemcolor ok backcolor .1 .37 .1 1 }
       	mouseExit { setitemcolor ok backcolor .37 .1 .1 1 }
 	}
