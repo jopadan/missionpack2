@@ -526,8 +526,8 @@ itemDef {
 	textaligny 25
 	wrapped
 	textscale .333
-	text "  Watch\r"
-	"      cinematics."
+	text "\r"
+	"      HOLLYWOOD"
 	forecolor 1 0 0 1
 	decoration 
 	visible 0
