@@ -215,7 +215,7 @@ menuback_d
 	nopicmip
 	nomipmaps
 	{
-		map ui/assets/teamarena.tga
+		map ui/assets/ultimatearena.tga
 		blendfunc filter
 	}
 	
@@ -591,29 +591,6 @@ clanlogo
 
 
 }		
-
-
-playerheads
-{
-	nopicmip
-	nomipmaps
-    
-	{
-			animMap 5 ui/assets/head1.tga ui/assets/head2.tga ui/assets/head3.tga ui/assets/head4.tga ui/assets/head5.tga ui/assets/head6.tga ui/assets/head7.tga ui/assets/head8.tga
-			blendfunc add
-			rgbGen wave inverseSawtooth 0 .5 0 5
-			
-	}
-	{
-			animMap 5 ui/assets/head2.tga ui/assets/head3.tga ui/assets/head4.tga ui/assets/head5.tga ui/assets/head6.tga ui/assets/head7.tga ui/assets/head8.tga ui/assets/head1.tga
-
-			blendfunc add
-			rgbGen wave Sawtooth 0 .5 0 5
-			
-	}
-
-
-}
 
 
 ui/assets/pagans_shader1

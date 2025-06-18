@@ -11,7 +11,7 @@ menuDef {
     	background "menuback_b"
 	focusColor 1 .75 0 1
 	
-		onOpen { play "sound/misc/kcswish.wav" ;
+		onOpen { play "sound/misc/menu3.wav" ;
 		setitemcolor fadebox backcolor 0 0 0 1 ; 
 		fadeout fadebox ; 
 		uiScript update "ui_GetName" ; 

@@ -209,7 +209,7 @@ itemDef {
       	visible 1
 	forecolor 1 1 1 1
 	backcolor .37 .1 .1 1
-	action { hide grphelptext ; show helptext ; play "sound/misc/kcaction.wav" }
+	action { hide grphelptext ; show helptext ; play "sound/misc/menu1.wav" }
 	mouseEnter { setitemcolor help backcolor .1 .37 .1 1 ; hide helpIcon ; show helpIconAlt ; hide grpVoiceHead } 
 	mouseExit { setitemcolor help backcolor .37 .1 .1 1 ; hide helpIconAlt ; show helpIcon } 
 	}

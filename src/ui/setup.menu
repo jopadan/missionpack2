@@ -57,7 +57,7 @@ itemDef {
 	backcolor 0 0 0 0
 	forecolor 1 1 1 1
 	visible 1 
-	action { play "sound/misc/kcaction.wav" ; 
+	action { play "sound/misc/menu1.wav" ; 
 	close control_menu ; 
 	close system_menu ;
 	close options_menu ; 
@@ -92,7 +92,7 @@ itemDef {
       	backcolor 0 0 0 0
       	forecolor 1 1 1 1
 	visible 1
-	action { play "sound/misc/kcaction.wav" ; 
+	action { play "sound/misc/menu1.wav" ; 
 	close control_menu ; 
 	close system_menu ;
 	close options_menu ; 
@@ -124,7 +124,7 @@ itemDef {
       	backcolor 0 0 0 0
       	forecolor 1 1 1 1
 	visible 1 
-	action { play "sound/misc/kcaction.wav" ; 
+	action { play "sound/misc/menu1.wav" ; 
 	close control_menu ; 
 	close system_menu ;
 	close options_menu ; 
@@ -158,7 +158,7 @@ itemDef {
 	visible 1 
 	mouseenter { show message_cdkey }
 	mouseexit { hide message_cdkey }
-	action { play "sound/misc/kcaction.wav" ; 
+	action { play "sound/misc/menu1.wav" ; 
 	close control_menu ; 
 	close system_menu ;
 	close options_menu ; 
@@ -189,7 +189,7 @@ itemDef {
 	visible 1 
 	mouseenter { show message_default }
 	mouseexit { hide message_default }
-	action { play "sound/misc/kcaction.wav" ; 
+	action { play "sound/misc/menu1.wav" ; 
 	close control_menu ; 
 	close system_menu ;
 	close options_menu ; 
@@ -219,7 +219,7 @@ itemDef {
 	visible 1 
 	mouseenter { show message_scores }
 	mouseexit { hide message_scores }
-	action { play "sound/misc/kcaction.wav" ; 
+	action { play "sound/misc/menu1.wav" ; 
 	close control_menu ; 
 	close system_menu ;
 	close options_menu ; 

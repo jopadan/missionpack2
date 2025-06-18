@@ -82,7 +82,7 @@ itemDef {
       	border 0
       	bordercolor 0 0 0 0
       	visible 1
-	action { play "sound/misc/kcaction.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_type } 
 	mouseExit { fadeout message_type } 
     	}
@@ -101,7 +101,7 @@ itemDef {
 	visible 1 
 	cvarTest "ui_gametype"
 	hideCvar { "1" }
-	action { play "sound/misc/kcaction.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseenter { show message_opponent }
 	mouseexit { hide message_opponent }
     	}
@@ -122,7 +122,7 @@ itemDef {
       	border 0
       	bordercolor 0 0 0 0
       	visible 1
-	action { play "sound/misc/kcaction.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_skill } 
 	mouseExit { fadeout message_skill }  
     	}
@@ -1088,7 +1088,7 @@ itemDef {
 	forecolor 1 1 1 1
       	forecolor 1 1 1 1
       	visible 1 
-	action { play "sound/misc/nomenu.wav" }
+	action { play "sound/misc/menu3.wav" }
 	mouseEnter { show message_recordDemo }
       	mouseExit { hide message_recordDemo}	  	  
     }
@@ -1230,7 +1230,7 @@ itemDef {
 	backcolor .37 .1 .1 1
       	visible 1
 	ownerdrawflag UI_SHOW_DEMOAVAILABLE 
-	action { play "sound/misc/kcaction.wav" ; 
+	action { play "sound/misc/menu1.wav" ; 
 	hide grphelptext ; uiScript RunSPDemo } 
 	mouseEnter { setitemcolor playDemobttn backcolor .1 .37 .1 1 ; show demo_message } 
 	mouseExit { setitemcolor playDemobttn backcolor .37 .1 .1 1 ; hide demo_message } 
