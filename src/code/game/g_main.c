@@ -378,6 +378,12 @@ void G_SpawnWeapon ( gclient_t *client ) {
 			client->ps.ammo[ WP_CHAINGUN ] = getAmmoValue ( "g_startAmmoCG" );
 		}
 #endif
+#ifdef MISSIONPACK2
+		if ( g_wpflags.integer & 2048 ) {
+			client->ps.stats[ STAT_WEAPONS ] |= 1 << WP_HMG;
+			client->ps.ammo[ WP_HMG ] = getAmmoValue ( "g_startAmmoHMG" );
+		}
+#endif
 	}
 }
 
