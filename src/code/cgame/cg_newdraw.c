@@ -1150,7 +1150,7 @@ const char *CG_GetMapName() {
 	const char	*info;
 
 	info = CG_ConfigString( CS_SERVERINFO );
-	return = Info_ValueForKey( info, "mapname" );
+	return Info_ValueForKey( info, "mapname" );
 }
 
 static void CG_DrawMapName(rectDef_t *rect, float scale, vec4_t color, qhandle_t shader, int textStyle) {
