@@ -167,6 +167,11 @@ G_CVAR( g_splashRadiusPL, "g_splashRadiusPL", "150", 0, 0, qfalse, qfalse )
 G_CVAR( g_damageCG, "g_damageCG", "7", 0, 0, qfalse, qfalse )
 #endif
 
+#ifdef MISSIONPACK2
+G_CVAR( g_startAmmoHMG, "g_startAmmoHMG", "50", 0, 0, qfalse, qfalse ) // TODO: what is QL HMG starting ammo? ~Dimmskii
+G_CVAR( g_damageHMG, "g_damageHMG", "8", 0, 0, qfalse, qfalse )
+#endif
+
 G_CVAR( g_tossWeapon, "g_tossWeapon", "1", CVAR_ARCHIVE, 0, qtrue, qtrue )
 G_CVAR( g_startingWeapon, "g_startingWeapon", "", 0, 0, qfalse, qfalse )
 

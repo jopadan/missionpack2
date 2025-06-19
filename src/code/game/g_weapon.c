@@ -157,6 +157,9 @@ void SnapVectorTowards( vec3_t v, vec3_t to ) {
 #ifdef MISSIONPACK
 #define CHAINGUN_SPREAD		600
 #endif
+#ifdef MISSIONPACK2
+#define HMG_SPREAD		350
+#endif
 #define MACHINEGUN_SPREAD	200
 #define	MACHINEGUN_DAMAGE	7
 #define	MACHINEGUN_TEAM_DAMAGE	5		// wimpier MG in teamplay
@@ -988,6 +991,11 @@ void FireWeapon( gentity_t *ent ) {
 	case WP_CHAINGUN:
 		//Bullet_Fire( ent, CHAINGUN_SPREAD, MACHINEGUN_DAMAGE, MOD_CHAINGUN );
 		Bullet_Fire( ent, CHAINGUN_SPREAD, g_damageCG.integer, MOD_CHAINGUN );
+		break;
+#endif
+#ifdef MISSIONPACK2
+	case WP_HMG:
+		Bullet_Fire( ent, HMG_SPREAD, g_damageHMG.integer, MOD_HMG );
 		break;
 #endif
 	default:

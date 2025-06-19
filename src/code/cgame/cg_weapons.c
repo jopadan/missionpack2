@@ -715,6 +715,18 @@ void CG_RegisterWeapon( int weaponNum ) {
 		break;
 #endif
 
+#ifdef MISSIONPACK2
+	case WP_HMG:
+		MAKERGB( weaponInfo->flashDlightColor, 1, 1, 0 );
+		weaponInfo->flashSound[0] = trap_S_RegisterSound( "sound/weapons/hmg/machgf1b.wav", qfalse );
+		weaponInfo->flashSound[1] = trap_S_RegisterSound( "sound/weapons/hmg/machgf2b.wav", qfalse );
+		weaponInfo->flashSound[2] = trap_S_RegisterSound( "sound/weapons/hmg/machgf3b.wav", qfalse );
+		weaponInfo->flashSound[3] = trap_S_RegisterSound( "sound/weapons/hmg/machgf4b.wav", qfalse );
+		weaponInfo->ejectBrassFunc = CG_MachineGunEjectBrass;
+		cgs.media.bulletExplosionShader = trap_R_RegisterShader( "bulletExplosion" );
+		break;
+#endif
+
 	case WP_MACHINEGUN:
 		MAKERGB( weaponInfo->flashDlightColor, 1, 1, 0 );
 		weaponInfo->flashSound[0] = trap_S_RegisterSound( "sound/weapons/machinegun/machgf1b.wav", qfalse );
