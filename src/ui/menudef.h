@@ -188,6 +188,7 @@
 #define CG_1STPLACE 67
 #define CG_2NDPLACE 68
 #define CG_CAPTURES 69
+#define CG_MAP_NAME 70
 
 
 

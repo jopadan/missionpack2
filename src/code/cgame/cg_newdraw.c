@@ -1146,6 +1146,17 @@ static void CG_Draw2ndPlace(rectDef_t *rect, float scale, vec4_t color, qhandle_
 	}
 }
 
+const char *CG_GetMapName() {
+	const char	*info;
+
+	info = CG_ConfigString( CS_SERVERINFO );
+	return = Info_ValueForKey( info, "mapname" );
+}
+
+static void CG_DrawMapName(rectDef_t *rect, float scale, vec4_t color, qhandle_t shader, int textStyle) {
+	CG_Text_Paint(rect->x, rect->y + rect->h, scale, color, CG_GetMapName(), 0, 0, textStyle);
+}
+
 const char *CG_GetGameStatusText() {
 	const char *s = "";
 	if ( cgs.gametype < GT_TEAM) {
@@ -1182,6 +1193,11 @@ const char *CG_GameTypeString() {
 	} else if ( cgs.gametype == GT_HARVESTER ) {
 		return "Harvester";
 	}
+#ifdef MISSIONPACK2
+	else if ( cgs.gametype == GT_TEAMARENA ) { // Clan arener
+		return "Team Arena";
+	}
+#endif
 	return "";
 }
 static void CG_DrawGameType(rectDef_t *rect, float scale, vec4_t color, qhandle_t shader, int textStyle ) {
@@ -1674,6 +1690,9 @@ void CG_OwnerDraw(float x, float y, float w, float h, float text_x, float text_y
 		break;
   case CG_2NDPLACE:
     CG_Draw2ndPlace(&rect, scale, color, shader, textStyle);
+		break;
+  case CG_MAP_NAME:
+	CG_DrawMapName(&rect, scale, color, shader, textStyle);
 		break;
   default:
     break;

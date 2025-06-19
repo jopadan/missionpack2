@@ -481,42 +481,43 @@ itemDef {
 
 itemDef {
 	name gametype
+	text "Game Type: "
     ownerdraw CG_GAME_TYPE
 	textalign 0
-	textscale .3
+	textscale .2
 	rect 24 440 50 20		 
 	forecolor 1 0.75 0 1
-	textaligny 19
-	textalignx 8
+//	textalignx 8
+	textaligny 19.6
 	decoration
 	visible 1
 	}
 
 itemdef {
-	name playername
-	text "TA+ by Kr3m"
-	rect 225 440 256 20
+	name gamestatus
+	rect 229 440 256 20
 	forecolor 1 0.75 0 1
-	textalignx 97
-	textaligny 21
+//	textalignx 97
+	textaligny 19.6
 	visible 1 
 	textalign 1
 	decoration
-	textscale 0.3
+	textscale .2
+	ownerdraw CG_GAME_STATUS
 	}
 
 
 itemdef {
-	name playerscore
-	text "Score:"
-   	rect 430 440 40 21
-	textalignx 0
-	textaligny 21
+	name mapname
+	text "Map: "
+   	rect 430 440 40 20
+//	textalignx 0
+	textaligny 19.6
    	visible 1 
 	textalign 0
 	forecolor 1 0.75 0 1
-	textscale .3
-	ownerdraw CG_PLAYER_SCORE
+	textscale .2
+	ownerdraw CG_MAP_NAME
 	decoration
 	}
 
