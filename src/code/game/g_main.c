@@ -402,6 +402,10 @@ qboolean G_RemoveWeapon ( gitem_t *item ) {
 		|| ( ( g_removeweapon.integer & 1024 ) && ( !Q_stricmp( item->classname, "weapon_chaingun" ) ) ) )
 			return qtrue;
 #endif
+#ifdef MISSIONPACK2
+	if ( ( ( g_removeweapon.integer & 2048 ) && ( !Q_stricmp( item->classname, "weapon_hmg" ) ) ) )
+			return qtrue;
+#endif
 	return qfalse;
 }
 
@@ -424,6 +428,10 @@ qboolean G_RemoveAmmo ( gitem_t *item ) {
 	if ( ( ( g_removeammo.integer & 256 ) && ( !Q_stricmp( item->classname, "ammo_nails" ) ) )
 		|| ( ( g_removeammo.integer & 512 ) && ( !Q_stricmp( item->classname, "ammo_mines" ) ) )
 		|| ( ( g_removeammo.integer & 1024 ) && ( !Q_stricmp( item->classname, "ammo_belt" ) ) ) )
+			return qtrue;
+#endif
+#ifdef MISSIONPACK2
+	if ( ( ( g_removeammo.integer & 2048 ) && ( !Q_stricmp( item->classname, "ammo_hmg" ) ) ) )
 			return qtrue;
 #endif
 	return qfalse;
