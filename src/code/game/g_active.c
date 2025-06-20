@@ -560,6 +560,10 @@ void ClientEvents( gentity_t *ent, int oldEventSequence ) {
 			if ( g_dmflags.integer & DF_NO_FALLING ) {
 				break;
 			}
+			if ( g_gametype.integer == GT_TEAMARENA ) { // || g_gametype.integer == GT_ARENA ) {
+				// no fall damage in arena gamemodes
+				break;
+			}
 			if ( event == EV_FALL_FAR ) {
 				damage = 10;
 			} else {

@@ -63,6 +63,11 @@ void TossClientItems( gentity_t *self ) {
 
 	// drop the weapon if not a gauntlet or machinegun
 	weapon = self->s.weapon;
+	
+	//Never drop in arena gamemodes
+	if (g_gametype.integer == GT_TEAMARENA) { // || g_gametype.integer == GT_ARENA) {
+		return;
+	}
 
 	// make a special check to see if they are changing to a new
 	// weapon that isn't the mg or gauntlet.  Without this, a client

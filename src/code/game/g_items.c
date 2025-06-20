@@ -1000,6 +1000,18 @@ void G_SpawnItem( gentity_t *ent, gitem_t *item ) {
 		ent->tag = TAG_DONTSPAWN;
 		return;
 	}
+	
+	// don't spawn items in arena gamemodes
+	if ( g_gametype.integer == GT_TEAMARENA ) { // || g_gametype.integer == GT_ARENA ) {
+		ent->tag = TAG_DONTSPAWN;
+		return;
+	}
+	
+	// Make Kr3m's remover flags remove
+	if ( G_RemoveAmmo(item) || G_RemoveItem(item) || G_RemovePowerup(item) || G_RemoveWeapon(item) ) {
+		ent->tag = TAG_DONTSPAWN;
+		return;
+	}
 
 	ent->item = item;
 	// some movers spawn on the second frame, so delay item
