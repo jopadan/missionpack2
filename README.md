@@ -1,5 +1,5 @@
 # missionpack2 - Quake III Ultimate Arena
- Merged code from Kr3m's missionpack plus features together with my additional things like Arena/Team Arena gamemodes, green armor and HMG from QL. Unlike missionpackplus, this is a standalone gamemode.
+ Merged code from Kr3m's missionpack plus features together with my additional things like Arena/Clan Arena gametypes, green armor and HMG from QL. Unlike missionpackplus, this is a standalone mod which doesn't require Team Arena to be installed.
  
 **This is not a replacement for Team Arena! TA maps and virtually all their textures aren't included, meaning you'd still have to legally purchase Team Arena in order to enjoy all of its maps, along with most custom ones designed for TA!**
 
