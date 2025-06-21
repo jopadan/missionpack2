@@ -775,7 +775,9 @@ gentity_t *fire_nail( gentity_t *self, vec3_t start, vec3_t forward, vec3_t righ
 	bolt->r.svFlags = SVF_USE_CURRENT_ORIGIN;
 	bolt->s.weapon = WP_NAILGUN;
 	// ~DIMMSKII
-	bolt->s.eFlags = EF_BOUNCE;
+	if (g_nailBounce.integer) {
+		bolt->s.eFlags = EF_BOUNCE;
+	}
 	// END ~DIMMSKII
 	bolt->r.ownerNum = self->s.number;
 	bolt->parent = self;
