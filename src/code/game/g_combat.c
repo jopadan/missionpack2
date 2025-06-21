@@ -953,6 +953,15 @@ void G_Damage( gentity_t *targ, gentity_t *inflictor, gentity_t *attacker,
 			targ->client->ps.pm_flags |= PMF_TIME_KNOCKBACK;
 		}
 	}
+	
+#ifdef MISSIONPACK2
+	// check for arena/team arena and prevent self-damage
+	if (g_gametype.integer == GT_TEAMARENA) { // || g_gametype.integer == GT_ARENA) {
+		if (targ == attacker) {
+			return;
+		}
+	}
+#endif
 
 	// check for completely getting out of the damage
 	if ( !(dflags & DAMAGE_NO_PROTECTION) ) {
