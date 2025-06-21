@@ -5,12 +5,13 @@
 // 0 - GT_FFA,				// free for all
 // 1 - GT_TOURNAMENT,		// one on one tournament
 // 2 - GT_SINGLE_PLAYER,	// single player ffa
-// 3 - GT_TEAM,				// team deathmatch
-// 4 - GT_CTF,				// capture the flag
-// 5 - GT_1FCTF,			// one flag ctf
-// 6 - GT_OBELISK,			// obelisk
-// 7 - GT_HARVESTER,		// harvester
-// 8 - GT_TEAMARENA	// team arena AKA clan arena
+// 3 - GT_ARENA,			// arena AKA last man standing
+// 4 - GT_TEAM,				// team deathmatch
+// 5 - GT_TEAMARENA			// team arena AKA clan arena
+// 6 - GT_CTF,				// capture the flag
+// 7 - GT_1FCTF,			// one flag ctf
+// 8 - GT_OBELISK,			// obelisk
+// 9 - GT_HARVESTER,		// harvester
 
 gametypes {
   { "Free For All" 0 }
@@ -51,12 +52,13 @@ joingametypes {
   { "All" -1 }
   { "Free For All" 0 }
   { "Tournament" 1 }
-  { "Team Deathmatch" 3 } 
-  { "Capture the Flag" 4 }
-  { "One Flag CTF" 5 }
-  { "Overload" 6 }
-  { "Harvester" 7 }
-  { "Team Arena" 8 }
+  { "Arena" 3 }
+  { "Team Deathmatch" 4 } 
+  { "Team Arena" 5 }
+  { "Capture the Flag" 6 }
+  { "One Flag CTF" 7 }
+  { "Overload" 8 }
+  { "Harvester" 9 }
 }
 
 
