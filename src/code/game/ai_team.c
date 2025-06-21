@@ -2045,6 +2045,9 @@ void BotTeamAI(bot_state_t *bs) {
 	//give orders
 	switch(gametype) {
 		case GT_TEAM:
+#ifdef MISSIONPACK2
+		case GT_TEAMARENA:
+#endif
 		{
 			if (bs->numteammates != numteammates || bs->forceorders) {
 				bs->teamgiveorders_time = FloatTime();
