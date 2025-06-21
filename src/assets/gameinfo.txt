@@ -15,12 +15,13 @@
 gametypes {
   { "Free For All" 0 }
   { "Tournament" 1 }
-  { "Team Deathmatch" 3 } 
-  { "Capture the Flag" 4 }
-  { "One Flag CTF" 5 }
-  { "Overload" 6 }
-  { "Harvester" 7 }
-  { "Team Arena" 8 }
+  { "Arena" 3 }
+  { "Team Deathmatch" 4 }
+  { "Team Arena" 5 }
+  { "Capture the Flag" 6 }
+  { "One Flag CTF" 7 }
+  { "Overload" 8 }
+  { "Harvester" 9 }
 }
 
 

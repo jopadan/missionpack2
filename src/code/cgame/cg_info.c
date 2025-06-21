@@ -275,6 +275,9 @@ void CG_DrawInformation( void ) {
 		break;
 #endif
 #ifdef MISSIONPACK2
+	case GT_ARENA:
+		s = "Arena";
+		break;
 	case GT_TEAMARENA:
 		s = "Team Arena";
 		break;

@@ -1194,6 +1194,9 @@ const char *CG_GameTypeString() {
 		return "Harvester";
 	}
 #ifdef MISSIONPACK2
+	else if ( cgs.gametype == GT_ARENA ) { // Arener
+		return "Arena";
+	}
 	else if ( cgs.gametype == GT_TEAMARENA ) { // Clan arener
 		return "Team Arena";
 	}

@@ -65,7 +65,7 @@ void TossClientItems( gentity_t *self ) {
 	weapon = self->s.weapon;
 	
 	//Never drop in arena gamemodes
-	if (g_gametype.integer == GT_TEAMARENA) { // || g_gametype.integer == GT_ARENA) {
+	if (g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA) {
 		return;
 	}
 
@@ -956,7 +956,7 @@ void G_Damage( gentity_t *targ, gentity_t *inflictor, gentity_t *attacker,
 	
 #ifdef MISSIONPACK2
 	// check for arena/team arena and prevent self-damage
-	if (g_gametype.integer == GT_TEAMARENA) { // || g_gametype.integer == GT_ARENA) {
+	if (g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA) {
 		if (targ == attacker) {
 			return;
 		}

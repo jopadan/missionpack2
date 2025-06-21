@@ -1001,11 +1001,13 @@ void G_SpawnItem( gentity_t *ent, gitem_t *item ) {
 		return;
 	}
 	
+#ifdef MISSIONPACK2
 	// don't spawn items in arena gamemodes
-	if ( g_gametype.integer == GT_TEAMARENA ) { // || g_gametype.integer == GT_ARENA ) {
+	if ( g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA ) {
 		ent->tag = TAG_DONTSPAWN;
 		return;
 	}
+#endif
 	
 	// Make Kr3m's remover flags remove
 	if ( G_RemoveAmmo(item) || G_RemoveItem(item) || G_RemovePowerup(item) || G_RemoveWeapon(item) ) {
