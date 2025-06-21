@@ -1,5 +1,7 @@
-# missionpack2 - Quake 3 Ultimate Arena
- Merged code from Kr3m's missionpack plus features together with my additional things like Arena/Team Arena gamemodes, green armor and HMG from QL
+# missionpack2 - Quake III Ultimate Arena
+ Merged code from Kr3m's missionpack plus features together with my additional things like Arena/Team Arena gamemodes, green armor and HMG from QL. Unlike missionpackplus, this is a standalone gamemode.
+ 
+**This is not a replacement for Team Arena! TA maps and virtually all their textures aren't included, meaning you'd still have to legally purchase Team Arena in order to enjoy all of its maps, along with most custom ones designed for TA!**
 
 ## Instructions
 Currently, there are no release packages available, however, the build system included should be completely portable provided that you are on Windows (with Powershell for final pk3 zipping command).
@@ -7,7 +9,7 @@ Currently, there are no release packages available, however, the build system in
 - Make a gamedir folder in the root of your Quake 3/ioquake3 install called `missionpack2`
 - Extract the *contents* of the repository folder into `missionpack2`
 - Navigate to `missionpack2\src`
-- Run `make.bat` -- this will compile all 3 QVM modules with DMISSIONPACK and DMISSIONPACK2, copy assets and package it all into one pretty pk3 file ready to go
+- Run `make.bat` -- this will compile all 3 QVM modules with `-DMISSIONPACK` and `-DMISSIONPACK2`, copy assets and package it all into one pretty pk3 file ready to go
 - Use the `missionpack2.bat` file in its place to run **for ioquake3 x86_64 only**. `start quake3.exe +set fs_game missionpack2` or `start ioquake3.x86_64.exe +set fs_game missionpack2` or `start ioquake3.x86.exe +set fs_game missionpack2` will work depending on which client you use. You get the idea.
 
 ## To do
@@ -24,4 +26,4 @@ Currently, there are no release packages available, however, the build system in
  - **Kevin "79DieselRabbit" Worrel** for Frozen Colors map (named as mp2team1 -- we needed at least one amazing custom map supporting 1FCTF, etc)
  - **Hubster** for his famous Aerowalk conversion (named as mp2tourney1 -- green armor!)
  - **Dmitri "Dimmskii" Poterianski** (myself) for UI work and upscales, QL model conversions, coding, anything else I forgot to mention
- - **Id Software** for making this all possible!
+ - **Id Software** for Almost Lost map, Beyond Reality II map, and everything else making all of this possible!
