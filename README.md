@@ -28,6 +28,7 @@ Currently, there are no release packages available, however, the build system in
 
  ## Credits
  - **Kevin "Kr3m" Remisoski** for missionpackplus code (see <https://github.com/Kr3m/missionpackplus> for additional credits for unlagged code, etc)
+ - **RemyTek** for their foundation mod code which also ended up merged as it was used as the basis for missionpackplus (see <https://github.com/RemyTek/foundation>)
  - **Kevin "79DieselRabbit" Worrel** for Frozen Colors map (named as mp2team1 -- we needed at least one amazing custom map supporting 1FCTF, etc)
  - **Hubster** for his famous Aerowalk conversion (named as mp2tourney1 -- green armor!)
  - **Dmitri "Dimmskii" Poterianski** (myself) for UI work and upscales, QL model conversions, coding, anything else I forgot to mention
