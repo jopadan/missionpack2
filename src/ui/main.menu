@@ -79,7 +79,7 @@ itemDef {
 
 
 
-//	SINGLEPLAYER	// 
+//	PLAY	// 
 
 itemDef {
       	name singlebar
@@ -91,7 +91,7 @@ itemDef {
       	bordersize 1
       	visible 1 
       	mouseEnter { setcolor backcolor .15 .15 .15 .25 ; hide play ; show playselection  }
-      	mouseExit { setcolor backcolor 0 0 0 .75 ; show play ; hide playselection ; hide grpMessage  }
+      	mouseExit { setcolor backcolor 0 0 0 .75 ; show play ; hide playselection  }
 	decoration 	
     	}
 
@@ -114,25 +114,26 @@ itemDef {
 
 itemDef {
       	name playselection
-      	text "SinglePlayer"
+      	text "Skirmish"
 	type 1
       	textstyle 6	
-      	rect 170 272 100 30
+      	rect 165 272 100 30
 	textalignx 50
 	textaligny 22
 	textscale .333
       	textalign 1		
-   	forecolor 1 1 1 1
+   	forecolor .5 .5 .5 1
       	visible 0 
-	mouseenter { fadein message_singleplayer }
+	mouseenter { hide grpMessage; fadein message_singleplayer }
 	mouseexit { fadeout message_singleplayer }
-      	action { close main ; open Skirmish }
+      	//action { close main ; open skirmish }
+		action { play "sound/misc/menu4.wav" }
     	}
 
 
 itemDef {
       	name playselection
-      	text "MultiPlayer"
+      	text "Multiplayer"
 	type 1
       	style 0
 	textstyle 6	
@@ -143,46 +144,46 @@ itemDef {
 	textscale .333
    	forecolor 1 1 1 1 
 	visible 0 
-	mouseenter { fadein message_multiplayer }
+	mouseenter { hide grpMessage; fadein message_multiplayer }
 	mouseexit { fadeout message_multiplayer }
-	action { close main ; open joinserver }
+	action { play "sound/misc/menu1.wav" ; close main ; open joinserver }
     	}
 
 	
 
 itemDef {
       	name playselection
-      	text "StartServer"
+      	text "Start Server"
 	type 1
       	style 0	
 	textstyle 6
-      	rect 370 272 100 30 
+      	rect 380 272 100 30 
       	textalign 1		// center
 	textalignx 50
 	textaligny 22
 	textscale .333
    	forecolor 1 1 1 1  
 	visible 0 
-	mouseenter { fadein message_startserver }
+	mouseenter { hide grpMessage; fadein message_startserver }
 	mouseexit { fadeout message_startserver }
-      	action { close main ; open createserver }
+      	action { play "sound/misc/menu1.wav" ; close main ; open createserver }
     	}
 
 
 
-//	GAMETYPE	// 
+//	EXTRAS	// 
  
 itemDef {
       	name gametypebar
       	style 2
-      	rect 80 316 520 30 
+      	rect 0 316 640 30 
       	backcolor 0 0 0 .75
       	border 4
       	bordercolor 0.5 0.5 0.5 0.75
       	bordersize 1
       	visible 1 
       	mouseEnter { hide gametype ; show teamarena ; setcolor backcolor .15 .15 .15 .25  }
-      	mouseExit { show gametype ; hide teamarena ; setcolor backcolor 0 0 0 .75  ; hide grpMessage }	
+      	mouseExit { show gametype ; hide teamarena ; setcolor backcolor 0 0 0 .75 }	
 	decoration 	
     	}
 
@@ -205,59 +206,21 @@ itemDef {
 
 itemDef {
       	name teamarena
-	type 1
-      	text "Quake3"
-      	style 0	
-	textstyle 6
-      	rect 120 316 80 30 
-	textscale .333
-     	textalign 1
-	textalignx 40
-	textaligny 22	
-      	backcolor 0 0 0 0
-      	forecolor 1 1 1 1
-	visible 0 
-	mouseenter { fadein message_quake }
-	mouseexit { fadeout message_quake }
-	action { open quake3_popmenu }
-}
-
-itemDef {
-      	name teamarena
-      	text "Rules"
-	type 1
-      	style 0	
-	textstyle 6
-     	rect 200 316 80 30
-	textscale .333
-	textalignx 40
-	textaligny 22	  
-      	textalign 1		
-      	backcolor 0 0 0 0
-      	forecolor 1 1 1 1 
-	visible 0
-	mouseenter { fadein message_help }
-	mouseexit { fadeout message_help }
-	action { close main ; open help_menu } 
-	}
-
-itemDef {
-      	name teamarena
       	text "Credits"
 	type 1
 	textstyle 6
 	textscale .333
       	style 0	
-     	rect 280 316 80 30
+		rect 175 316 80 30
 	textalignx 40
 	textaligny 22	 
       	textalign 1		
       	backcolor 0 0 0 0
       	forecolor 1 1 1 1
 	visible 0
-	mouseenter { fadein message_credits }
+	mouseenter { hide grpMessage; fadein message_credits }
 	mouseexit { fadeout message_credits }
-	action { close main ; open credit } 
+	action { play "sound/misc/menu1.wav" ; close main ; open credit } 
 	}
 
 	
@@ -268,16 +231,16 @@ itemDef {
       	style 0	
 	textstyle 6
 	textscale .333
-      	rect 360 316 80 30 
+		rect 280 316 80 30
 	textalignx 40
 	textaligny 22
      	textalign 1		
       	backcolor 0 0 0 0
       	forecolor 1 1 1 1
 	visible 0 
-	mouseenter { fadein message_mods }
+	mouseenter { hide grpMessage; fadein message_mods }
 	mouseexit { fadeout message_mods }
-	action { close main ; open mod }
+	action { play "sound/misc/menu1.wav" ; close main ; open mod }
      	}
 
 itemDef {
@@ -287,16 +250,16 @@ itemDef {
       	style 0	
 	textstyle 6
 	textscale .333
-      	rect 440 316 80 30 
+		rect 390 316 80 30 
 	textalignx 40
 	textaligny 22
      	textalign 1		
       	backcolor 0 0 0 0
       	forecolor 1 1 1 1
 	visible 0 
-	mouseenter { fadein message_cine }
+	mouseenter { hide grpMessage; fadein message_cine }
 	mouseexit { fadeout message_cine }
-	action { close main ; open cinematicMenu }
+	action { play "sound/misc/menu1.wav" ; close main ; open cinematicMenu }
      	}
 
 
@@ -313,7 +276,7 @@ itemDef {
       	bordersize 1
       	visible 1 
       	mouseEnter { setcolor backcolor .15 .15 .15 .25 ; hide options ; show optionselection  }
-      	mouseExit { setcolor backcolor 0 0 0 .75 ; show options ; hide optionselection  ; hide grpMessage }
+      	mouseExit { setcolor backcolor 0 0 0 .75 ; show options ; hide optionselection }
       	decoration 
     	}
 
@@ -331,7 +294,7 @@ itemDef {
       	textalign 1	   
    	forecolor 1 1 1 1
       	visible 1 
-	mouseenter { fadein message_options }
+	mouseenter { hide grpMessage; fadein message_options }
 	mouseexit { fadeout message_options }
     	}
 
@@ -341,16 +304,16 @@ itemDef {
       	style 0	
 	type 1
 	textstyle 6
-      	rect 170 360 100 30 
+      	rect 165 360 100 30 
 	textalignx 50
 	textaligny 22
 	textscale .333
       	textalign 1		
    	forecolor 1 1 1 1
       	visible 0 
-	mouseenter { fadein message_player }
+	mouseenter { hide grpMessage; fadein message_player }
 	mouseexit { fadeout message_player }
-      	action { close main ; open player_menu }
+      	action { play "sound/misc/menu1.wav" ; close main ; open player_menu }
     	}
 
 
@@ -367,9 +330,9 @@ itemDef {
       	textalign 1		
    	forecolor 1 1 1 1
       	visible 0 
-	mouseenter { fadein message_setup }
+	mouseenter { hide grpMessage; fadein message_setup }
 	mouseexit { fadeout message_setup }
-      	action { close main ; open setup_menu ; open control_menu }
+      	action { play "sound/misc/menu1.wav" ; close main ; open setup_menu ; open control_menu }
     	}
 
 itemDef {
@@ -378,16 +341,16 @@ itemDef {
 	type 1
       	style 0
 	textstyle 6	
-      	rect 370 360 100 30 
+      	rect 380 360 100 30 
 	textalignx 50 
 	textaligny 22
 	textscale .333
      	textalign 1	
    	forecolor 1 1 1 1
       	visible 0 
-	mouseenter { fadein message_demos }
+	mouseenter { hide grpMessage; fadein message_demos }
 	mouseexit { fadeout message_demos }
-      	action { close main ; open demo }
+      	action { play "sound/misc/menu1.wav" ; close main ; open demo }
     	}
 
 //	QUIT	//
@@ -419,9 +382,9 @@ itemDef {
       	textalign 1	   
    	forecolor 1 1 1 1
       	visible 1 
-  	action { open quit_popmenu }
-	mouseEnter { setitemcolor quitbar backcolor .15 .15 .15 .25  ; show message_quit }
-      	mouseExit { setitemcolor quitbar backcolor 0 0 0 .75  ; fadeout message_quit ; hide grpMessage  }
+  	action { play "sound/misc/menu1.wav" ; open quit_popmenu }
+	mouseEnter { hide grpMessage; setitemcolor quitbar backcolor .15 .15 .15 .25  ; show message_quit }
+      	mouseExit { setitemcolor quitbar backcolor 0 0 0 .75  ; fadeout message_quit }
    	}
 
 
@@ -444,53 +407,18 @@ itemDef {
 //	MESSAGES	//
 
 itemDef {
-	name message_quake
-	group grpMessage
-	style 0 
-	rect 265 210 235 20
-	textalign 0
-	textstyle 6
-	textalignx 0
-	textaligny 25
-	wrapped
-	textscale .333
-	text "Play the Original \r"
-	"Quake III Game."
-	forecolor 1 0 0 1
-	decoration 
-	visible 0
-	}
-itemDef {
-	name message_help
-	group grpMessage
-	style 0 
-	rect 261 195 235 20
-	textalign 0
-	textstyle 6
-	textalignx 0
-	textaligny 25
-	wrapped
-	textscale .333
-	text "       Rules for \r"
-	"New Gametytpes,\r"
-	"  Powerups, and\r"
-	"    Team Orders."
-	forecolor 1 0 0 1
-	decoration 
-	visible 0
-	}
-itemDef {
 	name message_credits
 	group grpMessage
 	style 0 
-	rect 272 220 235 20
+	rect 272 205 235 20
 	textalign 0
 	textstyle 6
 	textalignx 0
 	textaligny 25
 	wrapped
 	textscale .333
-	text "    About Us."
+	text "\r"
+	"    About Us."
 	forecolor 1 0 0 1
 	decoration 
 	visible 0
@@ -500,7 +428,7 @@ itemDef {
 	name message_mods
 	group grpMessage
 	style 0 
-	rect 256 210 235 20
+	rect 256 205 235 20
 	textalign 0
 	textstyle 6
 	textalignx 0
@@ -519,7 +447,7 @@ itemDef {
 	name message_cine
 	group grpMessage
 	style 0 
-	rect 256 210 235 20
+	rect 256 205 235 20
 	textalign 0
 	textstyle 6
 	textalignx 0
@@ -554,16 +482,16 @@ itemDef {
 	name message_multiplayer
 	group grpMessage
 	style 0 
-	rect 265 205 235 20
+	rect 260 205 235 20
 	textalign 0
 	textstyle 6
 	textalignx 0
 	textaligny 25
 	wrapped
 	textscale .333
-	text "Join other Team \r"
-	"Arena Games on\r"
-	" LAN or Internet."
+	text "\r"
+	"Join other games\r"
+	" "
 	forecolor 1 0 0 1
 	decoration 
 	visible 0
@@ -579,9 +507,9 @@ itemDef {
 	textaligny 25
 	wrapped
 	textscale .333
-	text " Start a Game\r"
-	"  Server for\r"
-	"Others to Join."
+	text " Start a game\r"
+	"   server for\r"
+	"others to join."
 	forecolor 1 0 0 1
 	decoration 
 	visible 0
