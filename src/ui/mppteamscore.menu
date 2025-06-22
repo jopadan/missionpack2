@@ -218,24 +218,7 @@ itemDef {
 	visible 1
 	decoration
 	}
-itemDef {
-	name redlogo
-	style WINDOW_STYLE_SHADER
-	background "textures/ctf2/redteam01.tga"
-	rect 110 189 128 128 
-	forecolor .75 0 0 0.5
-	visible 1 
-	decoration
-	}
-itemDef {
-	name bluelogo
-	style WINDOW_STYLE_SHADER
-	background "textures/ctf2/blueteam01"
-	rect 416 189 128 128 
-	forecolor 0 0 .75 0.5
-	visible 1 
-	decoration
-	}
+
 
 itemDef {
 	name leftgrad
