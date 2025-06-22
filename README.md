@@ -10,7 +10,9 @@ Currently, there are no release packages available, however, the build system in
 - Extract the *contents* of the repository folder into `missionpack2`
 - Navigate to `missionpack2\src`
 - Run `make.bat` -- this will compile all 3 QVM modules with `-DMISSIONPACK` and `-DMISSIONPACK2`, copy assets and package it all into one pretty pk3 file ready to go
-- Use the `missionpack2.bat` file in its place to run **for ioquake3 x86_64 only**. `start quake3.exe +set fs_game missionpack2` or `start ioquake3.x86_64.exe +set fs_game missionpack2` or `start ioquake3.x86.exe +set fs_game missionpack2` will work depending on which client you use. You get the idea.
+- Use the `missionpack2.bat` file in its place to run. Alternatively, as always, you can start the mod with any engine of your choice:
+  `<ENGINE_BINARY>.exe +set fs_game missionpack2`
+- FIGHT!
 
 ## To do
 - Finish coding Arena/Team Arena gametype logic
