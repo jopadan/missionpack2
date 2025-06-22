@@ -305,6 +305,10 @@ void G_RegisterWeapon(void) {
 	if ( g_wpflags.integer & 1024 )
 		RegisterItem( BG_FindItemForWeapon( WP_CHAINGUN ) );
 #endif
+#ifdef MISSIONPACK2
+	if ( g_wpflags.integer & 2048 )
+		RegisterItem( BG_FindItemForWeapon( WP_HMG ) );
+#endif
 	if ( g_grapple.integer > 0 )
 		RegisterItem( BG_FindItemForWeapon( WP_GRAPPLING_HOOK ) );
 }
@@ -384,6 +388,9 @@ void G_SpawnWeapon ( gclient_t *client ) {
 			client->ps.ammo[ WP_HMG ] = getAmmoValue ( "g_startAmmoHMG" );
 		}
 #endif
+		if ( g_grapple.integer > 0 ) {
+			client->ps.stats[ STAT_WEAPONS ] |= 1 << WP_GRAPPLING_HOOK;
+		}
 	}
 }
 
