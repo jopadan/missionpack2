@@ -300,6 +300,13 @@ int BotGetItemLongTermGoal(bot_state_t *bs, int tfl, bot_goal_t *goal) {
 			//reset the avoid goals and the avoid reach
 			trap_BotResetAvoidGoals(bs->gs);
 			trap_BotResetAvoidReach(bs->ms);
+#ifdef MISSIONPACK2
+			if (gametype == GT_TEAMARENA || gametype == GT_ARENA) {
+				// Hackish Dimmskii fix for bots not moving in Arena gametypes where all pickups are absent
+				// TODO: Move GT_ARENA case to else if, pick a client and set long term goal to LTG_KILL
+				bs->ltgtype = LTG_TEAMHELP;
+			}
+#endif
 		}
 		//get the goal at the top of the stack
 		return trap_BotGetTopGoal(bs->gs, goal);
