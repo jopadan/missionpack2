@@ -1683,6 +1683,11 @@ static void PM_Weapon( void ) {
 		addTime = 30;
 		break;
 #endif
+#ifdef MISSIONPACK2
+	case WP_HMG:
+		addTime = 75;
+		break;
+#endif
 	}
 
 #ifdef MISSIONPACK
