@@ -17,7 +17,7 @@ Currently, there are no release packages available, however, the build system in
 ## To do
 - Finish coding Arena/Team Arena gametype logic
 - Update bot code to have an objective in games like Arena/Team Arena where there are no pickups
-- Proper HMG fire rate (I can't easily find the nextFire code like in Q2)
+- ~~Proper HMG fire rate (I can't easily find the nextFire code like in Q2)~~
 - ~~Cvar to disable nailgun bounce~~
 - Finish getting rid of clans system from TA -- g_redTeam and g_blueTeam, ui logos, etc
 - Update credits screen with ones found in this README.md along with removing some things like single player, baseq3 button, and possibly rules (we will make a c. 1990s HTML game manual?)
