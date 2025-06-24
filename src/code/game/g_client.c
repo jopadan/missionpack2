@@ -460,6 +460,27 @@ void respawn( gentity_t *ent ) {
 	}
 }
 
+/*
+================
+respawnAll
+
+Iterates through every (in-use) client entity and respawns them unless on TEAM_SPECTATOR
+Added mainly for GT_ARENA and GT_TEAMARENA
+================
+*/
+void respawnAll( void ) {
+	int			i;
+	gentity_t	*clientEnt;
+	int count = 0;
+	
+	// Loop through all clients
+	for ( i = 0 ; i < level.maxclients ; i++ ) {
+		clientEnt = g_entities + i;
+		if ( clientEnt->inuse && clientEnt->client->sess.sessionTeam != TEAM_SPECTATOR )
+			respawn( clientEnt ); // Spawn
+	}
+}
+
 
 /*
 ================

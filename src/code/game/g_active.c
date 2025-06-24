@@ -1021,6 +1021,12 @@ void ClientThink_real( gentity_t *ent ) {
 
 	// check for respawning
 	if ( client->ps.stats[STAT_HEALTH] <= 0 ) {
+#ifdef MISSIONPACK2
+		// Prevent click or forced respawn in arena gamemodes
+		if ( g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA ) {
+			return;
+		}
+#endif
 		// wait for the attack button to be pressed
 		if ( level.time > client->respawnTime ) {
 			// forcerespawn is to prevent users from waiting out powerups

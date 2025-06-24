@@ -1721,6 +1721,13 @@ static void G_WarmupEnd( void )
 	gclient_t *client;
 	gentity_t *ent;
 	int i, t;
+	qboolean isArena = qfalse;
+	
+#ifdef MISSIONPACK2
+	if ( g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA ) {
+		isArena = qtrue;
+	}
+#endif
 
 	// remove corpses
 	ClearBodyQue();
@@ -1738,38 +1745,40 @@ static void G_WarmupEnd( void )
 	trap_SetConfigstring( CS_WARMUP, "" );
 	trap_SetConfigstring( CS_LEVEL_START_TIME, va( "%i", level.startTime ) );
 	
-	client = level.clients;
-	for ( i = 0; i < level.maxclients; i++, client++ ) {
-		
-		if ( client->pers.connected != CON_CONNECTED )
-			continue;
+	if (!isArena) {
+		client = level.clients;
+		for ( i = 0; i < level.maxclients; i++, client++ ) {
+			
+			if ( client->pers.connected != CON_CONNECTED )
+				continue;
 
-		// reset player awards
-		client->ps.persistant[PERS_IMPRESSIVE_COUNT] = 0;
-		client->ps.persistant[PERS_EXCELLENT_COUNT] = 0;
-		client->ps.persistant[PERS_DEFEND_COUNT] = 0;
-		client->ps.persistant[PERS_ASSIST_COUNT] = 0;
-		client->ps.persistant[PERS_GAUNTLET_FRAG_COUNT] = 0;
+			// reset player awards
+			client->ps.persistant[PERS_IMPRESSIVE_COUNT] = 0;
+			client->ps.persistant[PERS_EXCELLENT_COUNT] = 0;
+			client->ps.persistant[PERS_DEFEND_COUNT] = 0;
+			client->ps.persistant[PERS_ASSIST_COUNT] = 0;
+			client->ps.persistant[PERS_GAUNTLET_FRAG_COUNT] = 0;
 
-		client->ps.persistant[PERS_SCORE] = 0;
-		client->ps.persistant[PERS_CAPTURES] = 0;
+			client->ps.persistant[PERS_SCORE] = 0;
+			client->ps.persistant[PERS_CAPTURES] = 0;
 
-		client->ps.persistant[PERS_ATTACKER] = ENTITYNUM_NONE;
-		client->ps.persistant[PERS_ATTACKEE_ARMOR] = 0;
-		client->damage.enemy = client->damage.team = 0;
+			client->ps.persistant[PERS_ATTACKER] = ENTITYNUM_NONE;
+			client->ps.persistant[PERS_ATTACKEE_ARMOR] = 0;
+			client->damage.enemy = client->damage.team = 0;
 
-		client->ps.stats[STAT_CLIENTS_READY] = 0;
-		client->ps.stats[STAT_HOLDABLE_ITEM] = 0;
+			client->ps.stats[STAT_CLIENTS_READY] = 0;
+			client->ps.stats[STAT_HOLDABLE_ITEM] = 0;
 
-		memset( &client->ps.powerups, 0, sizeof( client->ps.powerups ) );
+			memset( &client->ps.powerups, 0, sizeof( client->ps.powerups ) );
 
-		ClientUserinfoChanged( i ); // set max.health etc.
+			ClientUserinfoChanged( i ); // set max.health etc.
 
-		if ( client->sess.sessionTeam != TEAM_SPECTATOR ) {
-			ClientSpawn( level.gentities + i );
+			if ( client->sess.sessionTeam != TEAM_SPECTATOR ) {
+				ClientSpawn( level.gentities + i );
+			}
+
+			trap_SendServerCommand( i, "map_restart" );
 		}
-
-		trap_SendServerCommand( i, "map_restart" );
 	}
 
 	// respawn items, remove projectiles, etc.
@@ -2303,6 +2312,16 @@ static void G_RunFrame( int levelTime ) {
 			ClientEndFrame( ent );
 		}
 	}
+	
+#ifdef MISSIONPACK2
+	if ( g_gametype.integer == GT_TEAMARENA ) {
+		// see if Clan arena is
+		CheckTeamArenaRules();
+	} else if ( g_gametype.integer == GT_ARENA ) {
+		// check arena
+		//TODO
+	}
+#endif
 
 	// see if it is time to do a tournement restart
 	CheckTournament();

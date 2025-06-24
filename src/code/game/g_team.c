@@ -86,6 +86,27 @@ const char *TeamColorString( team_t team ) {
 }
 
 
+int TeamAliveCount( team_t team ) {
+	int			i;
+	gentity_t	*clientEnt;
+	int count = 0;
+	
+	// Loop through all clients
+	for ( i = 0 ; i < level.maxclients ; i++ ) {
+		clientEnt = g_entities + i;
+		if ( !clientEnt->inuse )
+			continue;
+		
+		// If on specified team and alive (health > 0), add to alive count
+		if ( clientEnt->client->sess.sessionTeam == team && clientEnt->health > 0 ) {
+			count++;
+		}
+	}
+	
+	return count;
+}
+
+
 // NULL for everyone
 void QDECL PrintMsg( gentity_t *ent, const char *fmt, ... ) {
 	char		msg[1024];
@@ -1192,6 +1213,26 @@ void CheckTeamStatus( void ) {
 		}
 	}
 }
+
+#ifdef MISSIONPACK2
+void CheckTeamArenaRules( void ) {
+	if ( g_gametype.integer != GT_TEAMARENA ) {
+		return;
+	}
+	
+	if ( TeamAliveCount(TEAM_RED) < 1 ) {
+		AddTeamScore(g_entities->s.pos.trBase, TEAM_BLUE, 1);
+		level.warmupTime = level.time + g_warmup.integer * 1000;
+		trap_SetConfigstring( CS_WARMUP, va("%i", level.warmupTime) );
+		respawnAll();
+	} else if ( TeamAliveCount(TEAM_BLUE) < 1 ) {
+		AddTeamScore(g_entities->s.pos.trBase, TEAM_RED, 1);
+		level.warmupTime = level.time + g_warmup.integer * 1000;
+		trap_SetConfigstring( CS_WARMUP, va("%i", level.warmupTime) );
+		respawnAll();
+	}
+}
+#endif
 
 /*-----------------------------------------------------------------*/
 

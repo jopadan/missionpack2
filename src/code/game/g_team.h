@@ -51,6 +51,7 @@ int OtherTeam( team_t team );
 const char *TeamName( team_t team );
 const char *OtherTeamName( team_t team );
 const char *TeamColorString( team_t team );
+int TeamAliveCount( team_t team );
 
 void Team_DroppedFlagThink(gentity_t *ent);
 void Team_FragBonuses(gentity_t *targ, gentity_t *inflictor, gentity_t *attacker);
@@ -63,6 +64,10 @@ gentity_t *Team_GetLocation(gentity_t *ent);
 qboolean Team_GetLocationMsg(gentity_t *ent, char *loc, int loclen);
 void TeamplayInfoMessage( gentity_t *ent );
 void CheckTeamStatus(void);
+
+#ifdef MISSIONPACK2
+void CheckTeamArenaRules(void);
+#endif
 
 int Pickup_Team( gentity_t *ent, gentity_t *other );
 void AddTeamScore( vec3_t origin, team_t team, int score );
