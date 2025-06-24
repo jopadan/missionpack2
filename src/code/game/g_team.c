@@ -1215,23 +1215,30 @@ void CheckTeamStatus( void ) {
 }
 
 #ifdef MISSIONPACK2
+
+static void EndTeamArenaRound( team_t winningTeam ) {
+	AddTeamScore(g_entities->s.pos.trBase, winningTeam, 1);
+	level.warmupTime = level.time + g_warmup.integer * 1000;
+	trap_SetConfigstring( CS_WARMUP, va("%i", level.warmupTime) );
+	respawnAll();
+	
+	trap_SetConfigstring( CS_SCORES1, va("%i", level.teamScores[TEAM_RED]) );
+	trap_SetConfigstring( CS_SCORES2, va("%i", level.teamScores[TEAM_BLUE]) );
+}
+
 void CheckTeamArenaRules( void ) {
 	if ( g_gametype.integer != GT_TEAMARENA ) {
 		return;
 	}
 	
+	// Check if either team has no players remaining ; if so, call EndTeamArenaRound
 	if ( TeamAliveCount(TEAM_RED) < 1 ) {
-		AddTeamScore(g_entities->s.pos.trBase, TEAM_BLUE, 1);
-		level.warmupTime = level.time + g_warmup.integer * 1000;
-		trap_SetConfigstring( CS_WARMUP, va("%i", level.warmupTime) );
-		respawnAll();
+		EndTeamArenaRound( TEAM_BLUE ); // Blue wins the round
 	} else if ( TeamAliveCount(TEAM_BLUE) < 1 ) {
-		AddTeamScore(g_entities->s.pos.trBase, TEAM_RED, 1);
-		level.warmupTime = level.time + g_warmup.integer * 1000;
-		trap_SetConfigstring( CS_WARMUP, va("%i", level.warmupTime) );
-		respawnAll();
+		EndTeamArenaRound( TEAM_RED ); // Red wins the round
 	}
 }
+
 #endif
 
 /*-----------------------------------------------------------------*/

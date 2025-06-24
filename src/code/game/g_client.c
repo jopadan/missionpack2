@@ -458,6 +458,13 @@ void respawn( gentity_t *ent ) {
 		tent->r.svFlags = SVF_SINGLECLIENT;
 		tent->r.singleClient = ent->s.clientNum;
 	}
+	
+// #ifdef MISSIONPACK2
+	// Disable shooting upon respawn in Arena gamemodes (  re-enabled on G_WarmupEnd in g_main.c  )
+	// if ( g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA ) {
+		// ent->client->ps.pm_flags |= PMF_NOSHOOT;
+	// }
+// #endif
 }
 
 /*
@@ -1203,6 +1210,9 @@ void ClientSpawn(gentity_t *ent) {
 	if (g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA) {
 		startHealth = g_arenaHealth.integer;
 		startArmor = g_arenaArmor.integer;
+		
+		// Disable shooting upon respawn in Arena gamemodes (  re-enabled on G_WarmupEnd in g_main.c  )
+		client->ps.pm_flags |= PMF_NOSHOOT;
 	}
 #endif
 

@@ -1735,23 +1735,32 @@ static void G_WarmupEnd( void )
 	// return flags
 	Team_ResetFlags();
 
-	memset( level.teamScores, 0, sizeof( level.teamScores ) );
+	if (!isArena) {
+		memset( level.teamScores, 0, sizeof( level.teamScores ) );
+	}
 
 	level.warmupTime = 0;
 	level.startTime = level.time;
-
-	trap_SetConfigstring( CS_SCORES1, "0" );
-	trap_SetConfigstring( CS_SCORES2, "0" );
+	
+	if (isArena) {
+		trap_SetConfigstring( CS_SCORES1, va("%i", level.teamScores[TEAM_RED]) );
+		trap_SetConfigstring( CS_SCORES2, va("%i", level.teamScores[TEAM_BLUE]) );
+	} else {
+		trap_SetConfigstring( CS_SCORES1, "0" );
+		trap_SetConfigstring( CS_SCORES2, "0" );
+	}
 	trap_SetConfigstring( CS_WARMUP, "" );
 	trap_SetConfigstring( CS_LEVEL_START_TIME, va( "%i", level.startTime ) );
 	
-	if (!isArena) {
-		client = level.clients;
-		for ( i = 0; i < level.maxclients; i++, client++ ) {
-			
-			if ( client->pers.connected != CON_CONNECTED )
-				continue;
-
+	client = level.clients;
+	for ( i = 0; i < level.maxclients; i++, client++ ) {
+		
+		if ( client->pers.connected != CON_CONNECTED )
+			continue;
+		
+		if (isArena) {
+			client->ps.pm_flags &= ~PMF_NOSHOOT;
+		} else {
 			// reset player awards
 			client->ps.persistant[PERS_IMPRESSIVE_COUNT] = 0;
 			client->ps.persistant[PERS_EXCELLENT_COUNT] = 0;
