@@ -1025,6 +1025,7 @@ void ClientSpawn(gentity_t *ent) {
 	int		eventSequence;
 	char	userinfo[MAX_INFO_STRING];
 	qboolean isSpectator;
+	int startHealth, startArmor;
 
 	index = ent - g_entities;
 	client = ent->client;
@@ -1174,9 +1175,18 @@ void ClientSpawn(gentity_t *ent) {
 
 	// health will count down towards max_health
 	ent->health = client->ps.stats[STAT_HEALTH] = client->ps.stats[STAT_MAX_HEALTH] + 25;
+	
+	startHealth = g_startHealth.integer;
+	startArmor = g_startArmor.integer;
+#ifdef MISSIONPACK2
+	if (g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA) {
+		startHealth = g_arenaHealth.integer;
+		startArmor = g_arenaArmor.integer;
+	}
+#endif
 
-	if (g_startHealth.integer > 0) {
-		client->ps.stats[STAT_HEALTH] = g_startHealth.integer;
+	if (startHealth > 0) {
+		client->ps.stats[STAT_HEALTH] = startHealth;
 		if (client->ps.stats[STAT_HEALTH] > client->ps.stats[STAT_MAX_HEALTH] * 2)
 			client->ps.stats[STAT_HEALTH] = client->ps.stats[STAT_MAX_HEALTH] * 2;
 		ent->health = client->ps.stats[STAT_HEALTH];
@@ -1184,7 +1194,7 @@ void ClientSpawn(gentity_t *ent) {
 
 
 
-	if (g_startArmor.integer > 0) {
+	if (startArmor > 0) {
 		client->ps.stats[STAT_ARMOR] = g_startArmor.integer;
 		if (client->ps.stats[STAT_ARMOR] > client->ps.stats[STAT_MAX_HEALTH] * 2) {
 			client->ps.stats[STAT_ARMOR] = client->ps.stats[STAT_MAX_HEALTH] * 2;
@@ -1242,8 +1252,8 @@ void ClientSpawn(gentity_t *ent) {
 		} else {
 			client->ps.weapon = g_startingWeapon.integer;
 		}
-		if (g_startArmor.integer > 0) {
-			client->ps.stats[STAT_ARMOR] = g_startArmor.integer;
+		if (startArmor > 0) {
+			client->ps.stats[STAT_ARMOR] = startArmor;
 			if (client->ps.stats[STAT_ARMOR] > client->ps.stats[STAT_MAX_HEALTH] * 2) {
 				client->ps.stats[STAT_ARMOR] = client->ps.stats[STAT_MAX_HEALTH] * 2;
 			}

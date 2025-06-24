@@ -278,44 +278,63 @@ G_RegisterWeapon
 =================
 */
 void G_RegisterWeapon(void) {
+	int wpflags = g_wpflags.integer;
 	
-	if ( g_wpflags.integer & 2 ) {
+#ifdef MISSIONPACK2
+	if (g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA) {
+		wpflags = g_arenaWpflags.integer;
+	}
+#endif
+	
+	if ( wpflags & 2 ) {
 		// the machinegun might already be registered
 		gitem_t *item;
 		item = BG_FindItemForWeapon( WP_SHOTGUN );
 		if ( !Registered( item ) ) RegisterItem( item );
 	}
-	if ( g_wpflags.integer & 4 )
+	if ( wpflags & 4 )
 		RegisterItem( BG_FindItemForWeapon( WP_GRENADE_LAUNCHER ) );
-	if ( g_wpflags.integer & 8 )
+	if ( wpflags & 8 )
 		RegisterItem( BG_FindItemForWeapon( WP_ROCKET_LAUNCHER ) );
-	if ( g_wpflags.integer & 16 )
+	if ( wpflags & 16 )
 		RegisterItem( BG_FindItemForWeapon( WP_LIGHTNING ) );
-	if ( g_wpflags.integer & 32 )
+	if ( wpflags & 32 )
 		RegisterItem( BG_FindItemForWeapon( WP_RAILGUN ) );
-	if ( g_wpflags.integer & 64 )
+	if ( wpflags & 64 )
 		RegisterItem( BG_FindItemForWeapon( WP_PLASMAGUN ) );
-	if ( g_wpflags.integer & 128 )
+	if ( wpflags & 128 )
 		RegisterItem( BG_FindItemForWeapon( WP_BFG ) );
 #ifdef MISSIONPACK
-	if ( g_wpflags.integer & 256 )
+	if ( wpflags & 256 )
 		RegisterItem( BG_FindItemForWeapon( WP_NAILGUN ) );
-	if ( g_wpflags.integer & 512 )
+	if ( wpflags & 512 )
 		RegisterItem( BG_FindItemForWeapon( WP_PROX_LAUNCHER ) );
-	if ( g_wpflags.integer & 1024 )
+	if ( wpflags & 1024 )
 		RegisterItem( BG_FindItemForWeapon( WP_CHAINGUN ) );
 #endif
 #ifdef MISSIONPACK2
-	if ( g_wpflags.integer & 2048 )
+	if ( wpflags & 2048 )
 		RegisterItem( BG_FindItemForWeapon( WP_HMG ) );
 #endif
 	if ( g_grapple.integer > 0 )
 		RegisterItem( BG_FindItemForWeapon( WP_GRAPPLING_HOOK ) );
 }
 
-static int getAmmoValue( const char *ammocvar ) {
+static int getAmmoValue( const char *cvarSuffix ) {
 	int ammo = 0;
-	ammo = trap_Cvar_VariableIntegerValue(ammocvar);
+	const char	*cvarPrefix;
+	
+#ifdef MISSIONPACK2
+	if (g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA) {
+		cvarPrefix = "g_arenaAmmo";
+	} else {
+		cvarPrefix = "g_startAmmo";
+	}
+#else
+	cvarPrefix = "g_startAmmo";
+#endif
+	
+	ammo = trap_Cvar_VariableIntegerValue( va("%s%s", cvarPrefix, cvarSuffix) );
 	if (ammo < 0)
 		return 0;
 	if (ammo > 999)
@@ -329,63 +348,71 @@ G_SpawnWeapon
 =================
 */
 void G_SpawnWeapon ( gclient_t *client ) {
-	client->ps.ammo[ WP_MACHINEGUN ] = getAmmoValue ( "g_startAmmoMG" );
+	int wpflags = g_wpflags.integer;
+	
+	client->ps.ammo[ WP_MACHINEGUN ] = getAmmoValue ( "MG" );
+		
+#ifdef MISSIONPACK2
+	if (g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA) {
+		wpflags = g_arenaWpflags.integer;
+	}
+#endif
 
 	if( g_instagib.integer ) {
-		g_wpflags.integer = 32;
+		wpflags = 32;
 	}
 
 	else {
-		if ( g_removeweapon.integer & 1 && !( g_wpflags.integer & 1 ) ) {
+		if ( g_removeweapon.integer & 1 && !( wpflags & 1 ) ) {
 			client->ps.stats[ STAT_WEAPONS ] &= ~( 1 << WP_MACHINEGUN );
 			client->ps.ammo[ WP_MACHINEGUN ] = 0;
 		}
-		if ( g_wpflags.integer & 2 ) {
+		if ( wpflags & 2 ) {
 			client->ps.stats[ STAT_WEAPONS ] |= 1 << WP_SHOTGUN;
-			client->ps.ammo[ WP_SHOTGUN ] = getAmmoValue ( "g_startAmmoSG" );
+			client->ps.ammo[ WP_SHOTGUN ] = getAmmoValue ( "SG" );
 		}
-		if ( g_wpflags.integer & 4 ) {
+		if ( wpflags & 4 ) {
 			client->ps.stats[ STAT_WEAPONS ] |= 1 << WP_GRENADE_LAUNCHER;
-			client->ps.ammo[ WP_GRENADE_LAUNCHER ] = getAmmoValue ( "g_startAmmoGL" );
+			client->ps.ammo[ WP_GRENADE_LAUNCHER ] = getAmmoValue ( "GL" );
 		}
-		if ( g_wpflags.integer & 8 ) {
+		if ( wpflags & 8 ) {
 			client->ps.stats[ STAT_WEAPONS ] |= 1 << WP_ROCKET_LAUNCHER;
-			client->ps.ammo[ WP_ROCKET_LAUNCHER ] = getAmmoValue ( "g_startAmmoRL" );
+			client->ps.ammo[ WP_ROCKET_LAUNCHER ] = getAmmoValue ( "RL" );
 		}
-		if ( g_wpflags.integer & 16 ) {
+		if ( wpflags & 16 ) {
 			client->ps.stats[ STAT_WEAPONS ] |= 1 << WP_LIGHTNING;
-			client->ps.ammo[ WP_LIGHTNING ] = getAmmoValue ( "g_startAmmoLG" );
+			client->ps.ammo[ WP_LIGHTNING ] = getAmmoValue ( "LG" );
 		}
-		if ( g_wpflags.integer & 32 ) {
+		if ( wpflags & 32 ) {
 			client->ps.stats[ STAT_WEAPONS ] |= 1 << WP_RAILGUN;
-			client->ps.ammo[ WP_RAILGUN ] = getAmmoValue ( "g_startAmmoRG" );
+			client->ps.ammo[ WP_RAILGUN ] = getAmmoValue ( "RG" );
 		}
-		if ( g_wpflags.integer & 64 ) {
+		if ( wpflags & 64 ) {
 			client->ps.stats[ STAT_WEAPONS ] |= 1 << WP_PLASMAGUN;
-			client->ps.ammo[ WP_PLASMAGUN ] = getAmmoValue ( "g_startAmmoPG" );
+			client->ps.ammo[ WP_PLASMAGUN ] = getAmmoValue ( "PG" );
 		}
-		if ( g_wpflags.integer & 128 ) {
+		if ( wpflags & 128 ) {
 			client->ps.stats[ STAT_WEAPONS ] |= 1 << WP_BFG;
-			client->ps.ammo[ WP_BFG ] = getAmmoValue ( "g_startAmmoBFG" );
+			client->ps.ammo[ WP_BFG ] = getAmmoValue ( "BFG" );
 		}
 #ifdef MISSIONPACK
-		if ( g_wpflags.integer & 256 ) {
+		if ( wpflags & 256 ) {
 			client->ps.stats[ STAT_WEAPONS ] |= 1 << WP_NAILGUN;
-			client->ps.ammo[ WP_NAILGUN ] = getAmmoValue ( "g_startAmmoNG" );
+			client->ps.ammo[ WP_NAILGUN ] = getAmmoValue ( "NG" );
 		}
-		if ( g_wpflags.integer & 512 ) {
+		if ( wpflags & 512 ) {
 			client->ps.stats[ STAT_WEAPONS ] |= 1 << WP_PROX_LAUNCHER;
-			client->ps.ammo[ WP_PROX_LAUNCHER ] = getAmmoValue ( "g_startAmmoPL" );
+			client->ps.ammo[ WP_PROX_LAUNCHER ] = getAmmoValue ( "PL" );
 		}
-		if ( g_wpflags.integer & 1024 ) {
+		if ( wpflags & 1024 ) {
 			client->ps.stats[ STAT_WEAPONS ] |= 1 << WP_CHAINGUN;
-			client->ps.ammo[ WP_CHAINGUN ] = getAmmoValue ( "g_startAmmoCG" );
+			client->ps.ammo[ WP_CHAINGUN ] = getAmmoValue ( "CG" );
 		}
 #endif
 #ifdef MISSIONPACK2
-		if ( g_wpflags.integer & 2048 ) {
+		if ( wpflags & 2048 ) {
 			client->ps.stats[ STAT_WEAPONS ] |= 1 << WP_HMG;
-			client->ps.ammo[ WP_HMG ] = getAmmoValue ( "g_startAmmoHMG" );
+			client->ps.ammo[ WP_HMG ] = getAmmoValue ( "HMG" );
 		}
 #endif
 		if ( g_grapple.integer > 0 ) {

@@ -435,16 +435,31 @@ void ClientTimerActions( gentity_t *ent, int msec ) {
 			}
 #endif
 		} else {
+			
+#ifdef MISSIONPACK2
+			// count down health when over max on any gametype except for arena ones
+			if ( g_gametype.integer != GT_ARENA && g_gametype.integer != GT_TEAMARENA && ent->health > client->ps.stats[STAT_MAX_HEALTH] ) {
+				ent->health--;
+			}
+#else
 			// count down health when over max
 			if ( ent->health > client->ps.stats[STAT_MAX_HEALTH] ) {
 				ent->health--;
 			}
+#endif
 		}
 
+#ifdef MISSIONPACK2
+		// count down armor when over max on any gametype except for arena ones
+		if ( g_gametype.integer != GT_ARENA && g_gametype.integer != GT_TEAMARENA && client->ps.stats[STAT_ARMOR] > client->ps.stats[STAT_MAX_HEALTH] ) {
+			client->ps.stats[STAT_ARMOR]--;
+		}
+#else
 		// count down armor when over max
 		if ( client->ps.stats[STAT_ARMOR] > client->ps.stats[STAT_MAX_HEALTH] ) {
 			client->ps.stats[STAT_ARMOR]--;
 		}
+#endif
 	}
 #ifdef MISSIONPACK
 	if( bg_itemlist[client->ps.stats[STAT_PERSISTANT_POWERUP]].giTag == PW_AMMOREGEN ) {
