@@ -2312,6 +2312,20 @@ static qboolean UI_OwnerDrawVisible(int flags) {
 			}
 			flags &= ~UI_SHOW_NETANYNONTEAMGAME;
 		} 
+#ifdef MISSIONPACK2
+		if (flags & UI_SHOW_ARENAGAME) {
+			if (uiInfo.gameTypes[ui_netGameType.integer].gtEnum != GT_ARENA && uiInfo.gameTypes[ui_netGameType.integer].gtEnum != GT_TEAMARENA) {
+				vis = qfalse;
+			}
+			flags &= ~UI_SHOW_ARENAGAME;
+		} 
+		if (flags & UI_SHOW_NOTARENAGAME) {
+			if (uiInfo.gameTypes[ui_netGameType.integer].gtEnum == GT_ARENA || uiInfo.gameTypes[ui_netGameType.integer].gtEnum == GT_TEAMARENA) {
+				vis = qfalse;
+			}
+			flags &= ~UI_SHOW_NOTARENAGAME;
+		} 
+#endif
 		if (flags & UI_SHOW_NEWHIGHSCORE) {
 			if (uiInfo.newHighScoreTime < uiInfo.uiDC.realTime) {
 				vis = qfalse;

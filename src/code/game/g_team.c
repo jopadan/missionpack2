@@ -1260,6 +1260,12 @@ static void EndTeamArenaRound( team_t winningTeam ) {
 	
 	trap_SetConfigstring( CS_SCORES1, va("%i", level.teamScores[TEAM_RED]) );
 	trap_SetConfigstring( CS_SCORES2, va("%i", level.teamScores[TEAM_BLUE]) );
+	
+	if ( g_winlimit.integer ) {
+		if ( level.teamScores[TEAM_RED] >= g_winlimit.integer || level.teamScores[TEAM_BLUE] >= g_winlimit.integer ) {
+			level.intermissionQueued = level.time;
+		}
+	}
 }
 
 void CheckTeamArenaRules( void ) {
