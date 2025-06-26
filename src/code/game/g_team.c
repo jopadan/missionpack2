@@ -1216,8 +1216,9 @@ void CheckTeamStatus( void ) {
 
 #ifdef MISSIONPACK2
 
+vec3_t zeroVec3 = {0, 0, 0};
 static void EndTeamArenaRound( team_t winningTeam ) {
-	AddTeamScore(g_entities->s.pos.trBase, winningTeam, 1);
+	AddTeamScore(zeroVec3, winningTeam, 1);
 	level.warmupTime = level.time + g_warmup.integer * 1000;
 	trap_SetConfigstring( CS_WARMUP, va("%i", level.warmupTime) );
 	respawnAll();
