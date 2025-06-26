@@ -51,7 +51,8 @@ int OtherTeam( team_t team );
 const char *TeamName( team_t team );
 const char *OtherTeamName( team_t team );
 const char *TeamColorString( team_t team );
-int TeamAliveCount( team_t team );
+int Team_PlayerCount( team_t team );
+int Team_PlayerCountAlive( team_t team );
 
 void Team_DroppedFlagThink(gentity_t *ent);
 void Team_FragBonuses(gentity_t *targ, gentity_t *inflictor, gentity_t *attacker);

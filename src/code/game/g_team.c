@@ -86,7 +86,42 @@ const char *TeamColorString( team_t team ) {
 }
 
 
-int TeamAliveCount( team_t team ) {
+/*
+================
+Team_PlayerCount
+
+Finds total number of players on a team
+================
+*/
+int Team_PlayerCount( team_t team ) {
+	int			i;
+	gentity_t	*clientEnt;
+	int count = 0;
+	
+	// Loop through all clients
+	for ( i = 0 ; i < level.maxclients ; i++ ) {
+		clientEnt = g_entities + i;
+		if ( !clientEnt->inuse )
+			continue;
+		
+		// If on specified team and alive (health > 0), add to alive count
+		if ( clientEnt->client->sess.sessionTeam == team ) {
+			count++;
+		}
+	}
+	
+	return count;
+}
+
+
+/*
+================
+Team_PlayerCountAlive
+
+Finds number of currently alive players on a team
+================
+*/
+int Team_PlayerCountAlive( team_t team ) {
 	int			i;
 	gentity_t	*clientEnt;
 	int count = 0;
@@ -1228,14 +1263,14 @@ static void EndTeamArenaRound( team_t winningTeam ) {
 }
 
 void CheckTeamArenaRules( void ) {
-	if ( g_gametype.integer != GT_TEAMARENA ) {
+	if ( g_gametype.integer != GT_TEAMARENA || level.warmupTime ) {
 		return;
 	}
 	
 	// Check if either team has no players remaining ; if so, call EndTeamArenaRound
-	if ( TeamAliveCount(TEAM_RED) < 1 ) {
+	if ( Team_PlayerCountAlive(TEAM_RED) < 1 ) {
 		EndTeamArenaRound( TEAM_BLUE ); // Blue wins the round
-	} else if ( TeamAliveCount(TEAM_BLUE) < 1 ) {
+	} else if ( Team_PlayerCountAlive(TEAM_BLUE) < 1 ) {
 		EndTeamArenaRound( TEAM_RED ); // Red wins the round
 	}
 }
