@@ -948,6 +948,13 @@ void ClientThink_real( gentity_t *ent ) {
 	pm.pmove_fixed = pmove_fixed.integer;
 	pm.pmove_msec = pmove_msec.integer;
 	pm.grapplePull = g_grapplePull.integer;
+	
+	// Set fast weapon switch on pmove
+#ifdef MISSIONPACK2
+	pm.fastWeapSwitch = ( g_fastWeaponSwitch.integer || g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA ) ? qtrue : qfalse;
+#else
+	pm.fastWeapSwitch = ( g_fastWeaponSwitch.integer ) ? qtrue : qfalse;
+#endif
 
 	VectorCopy( client->ps.origin, client->oldOrigin );
 
