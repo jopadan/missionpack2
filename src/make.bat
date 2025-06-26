@@ -21,11 +21,11 @@ cd ..
 xcopy /S /E ..\assets\* .\
 
 rem CREATE PK3
-powershell Compress-Archive .\* pak0.zip
-ren pak0.zip pak0.pk3
+powershell Compress-Archive .\* pak050.zip
+ren pak050.zip pak050.pk3
 
 rem MOVE PK3 AND DELETE TEMP FOLDER
-move pak0.pk3 ..\..\
+move pak050.pk3 ..\..\
 cd ..
 rd /S /Q _temp
 

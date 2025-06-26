@@ -16,7 +16,7 @@
 gametypes {
   { "Free For All" 0 }
   { "Tournament" 1 }
-  { "Arena" 3 }
+//  { "Arena" 3 }
   { "Team Deathmatch" 4 }
   { "Team Arena" 5 }
   { "Capture the Flag" 6 }
