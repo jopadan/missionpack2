@@ -1061,6 +1061,14 @@ void ClientSpawn(gentity_t *ent) {
 	trap_UnlinkEntity( ent );
 
 	isSpectator = client->sess.sessionTeam == TEAM_SPECTATOR;
+	
+#ifdef MISSIONPACK2	
+	if (g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA && !level.warmupTime && !isSpectator ) {
+		return;
+	}
+#endif
+	
+	
 	// find a spawn point
 	// do it before setting health back up, so farthest
 	// ranging doesn't count this client
