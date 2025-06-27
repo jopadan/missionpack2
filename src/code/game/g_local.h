@@ -9,7 +9,7 @@
 //==================================================================
 
 // the "gameversion" client command will print this plus compile date
-#define	GAMEVERSION	"missionpack"
+#define	GAMEVERSION	"missionpack2"
 
 #define BODY_QUEUE_SIZE		8
 
