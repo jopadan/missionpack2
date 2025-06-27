@@ -1036,23 +1036,32 @@ void G_Damage( gentity_t *targ, gentity_t *inflictor, gentity_t *attacker,
 	if ( attacker->client && client && targ != attacker && targ->health > 0
 			&& targ->s.eType != ET_MISSILE
 			&& targ->s.eType != ET_GENERAL) {
-#ifdef MISSIONPACK
-		if ( OnSameTeam( targ, attacker ) ) {
-			attacker->client->ps.persistant[PERS_HITS]--;
-		} else {
-			attacker->client->ps.persistant[PERS_HITS]++;
-		}
-		attacker->client->ps.persistant[PERS_ATTACKEE_ARMOR] = (targ->health<<8)|(client->ps.stats[STAT_ARMOR]);
+#ifdef MISSIONPACK2
+			if ( OnSameTeam( targ, attacker ) ) {
+				attacker->client->ps.persistant[PERS_HITS]--;
+			} else {
+				attacker->client->ps.persistant[PERS_HITS]++;
+			}
+			attacker->client->ps.persistant[PERS_ATTACKEE_ARMOR] = targ->health;
 #else
-		// we may hit multiple targets from different teams
-		// so usual PERS_HITS increments/decrements could result in ZERO delta
-		if ( OnSameTeam( targ, attacker ) ) {
-			attacker->client->damage.team++;
-		} else {
-			attacker->client->damage.enemy++;
-			// accumulate damage during server frame
-			attacker->client->damage.amount += take + asave;
-		}
+	#ifdef MISSIONPACK
+			if ( OnSameTeam( targ, attacker ) ) {
+				attacker->client->ps.persistant[PERS_HITS]--;
+			} else {
+				attacker->client->ps.persistant[PERS_HITS]++;
+			}
+			attacker->client->ps.persistant[PERS_ATTACKEE_ARMOR] = (targ->health<<8)|(client->ps.stats[STAT_ARMOR]);
+	#else
+			// we may hit multiple targets from different teams
+			// so usual PERS_HITS increments/decrements could result in ZERO delta
+			if ( OnSameTeam( targ, attacker ) ) {
+				attacker->client->damage.team++;
+			} else {
+				attacker->client->damage.enemy++;
+				// accumulate damage during server frame
+				attacker->client->damage.amount += take + asave;
+			}
+	#endif
 #endif
 	}
 

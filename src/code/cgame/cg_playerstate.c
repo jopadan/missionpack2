@@ -277,7 +277,18 @@ void CG_CheckLocalSounds( playerState_t *ps, playerState_t *ops ) {
 
 	// hit changes
 	if ( ps->persistant[PERS_HITS] > ops->persistant[PERS_HITS] ) {
-#ifdef MISSIONPACK
+#ifdef MISSIONPACK2
+		int index;
+		health = ps->persistant[PERS_ATTACKEE_ARMOR];
+		
+		if ( health > 100 ) index = 0;
+			else if ( health > 75 ) index = 1;
+			else if ( health > 25 ) index = 2;
+			else index = 3;
+		
+		trap_S_StartLocalSound( cgs.media.hitSounds[ index ], CHAN_LOCAL_SOUND );
+#else
+	#ifdef MISSIONPACK
 		armor  = ps->persistant[PERS_ATTACKEE_ARMOR] & 0xff;
 		health = ps->persistant[PERS_ATTACKEE_ARMOR] >> 8;
 		if (armor > 50 ) {
@@ -287,7 +298,7 @@ void CG_CheckLocalSounds( playerState_t *ps, playerState_t *ops ) {
 		} else {
 			trap_S_StartLocalSound( cgs.media.hitSound, CHAN_LOCAL_SOUND );
 		}
-#else
+	#else
 		if ( cg_hitSounds.integer > 0 && (ps->persistant[PERS_ATTACKEE_ARMOR] & 0xFF00) == 0 )
 		{
 			// high byte of PERS_ATTACKEE_ARMOR is target->health in vq3/ta i.e. it is always non-zero
@@ -310,6 +321,7 @@ void CG_CheckLocalSounds( playerState_t *ps, playerState_t *ops ) {
 		{
 			trap_S_StartLocalSound( cgs.media.hitSound, CHAN_LOCAL_SOUND );
 		}
+	#endif
 #endif
 	} else if ( ps->persistant[PERS_HITS] < ops->persistant[PERS_HITS] ) {
 		trap_S_StartLocalSound( cgs.media.hitTeamSound, CHAN_LOCAL_SOUND );
