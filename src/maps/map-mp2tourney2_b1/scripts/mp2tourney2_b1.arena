@@ -1,6 +1,6 @@
 
 {
-map             "mp2tourney2"
+map             "mp2tourney2_b1"
 bots		    "gorre"
 timelimit 	    "15"
 longname        "Almost Lost"
