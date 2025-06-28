@@ -1,5 +1,8 @@
 @ECHO OFF
 
+set VERSION=051
+set PK3_NAME=pak%VERSION%
+
 cd %~dp0
 
 echo COMPILE QVM
@@ -21,23 +24,25 @@ cd ui
 xcopy /S /E ..\..\ui .\
 cd ..
 xcopy /S /E ..\assets\* .\
+echo ...Done!
 
-echo CREATE MAIN PK3
-powershell Compress-Archive .\* pak050.zip
-ren pak050.zip pak050.pk3
-
-echo MOVE PK3 AND DELETE TEMP FOLDER
-move pak050.pk3 ..\..\
+echo CREATE %PK3_NAME%.pk3
+powershell Compress-Archive .\* %PK3_NAME%.zip
+ren %PK3_NAME%.zip %PK3_NAME%.pk3
+move %PK3_NAME%.pk3 ..\..\
 cd ..
 rd /S /Q _temp
+echo ...Done!
 
 echo CREATE MAP PK3 FILES
 md _temp
 cd _temp
 for /f "delims=" %%i in ('dir /ad/b ..\maps\*') do (
+echo %%i.pk3
 powershell Compress-Archive ..\maps\%%i\* %%i.zip
 ren %%i.zip %%i.pk3
 move %%i.pk3 ..\..\
+echo ...Done!
 )
 cd ..
 rd /S /Q _temp
