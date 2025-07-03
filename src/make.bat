@@ -1,6 +1,6 @@
 @ECHO OFF
 
-set VERSION=051
+set VERSION=052
 set PK3_NAME=pak%VERSION%
 
 cd %~dp0

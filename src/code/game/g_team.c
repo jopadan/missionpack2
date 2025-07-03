@@ -1254,22 +1254,25 @@ void CheckTeamStatus( void ) {
 vec3_t zeroVec3 = {0, 0, 0};
 static void EndTeamArenaRound( team_t winningTeam ) {
 	AddTeamScore(zeroVec3, winningTeam, 1);
-	level.warmupTime = level.time + g_warmup.integer * 1000;
-	trap_SetConfigstring( CS_WARMUP, va("%i", level.warmupTime) );
-	respawnAll();
 	
 	trap_SetConfigstring( CS_SCORES1, va("%i", level.teamScores[TEAM_RED]) );
 	trap_SetConfigstring( CS_SCORES2, va("%i", level.teamScores[TEAM_BLUE]) );
 	
 	if ( g_winlimit.integer ) {
 		if ( level.teamScores[TEAM_RED] >= g_winlimit.integer || level.teamScores[TEAM_BLUE] >= g_winlimit.integer ) {
-			level.intermissionQueued = level.time;
+			return;
 		}
 	}
+	
+	// Begin new round code
+	level.warmupTime = level.time + g_warmup.integer * 1000;
+	trap_SetConfigstring( CS_WARMUP, va("%i", level.warmupTime) );
+
+	respawnAll();
 }
 
 void CheckTeamArenaRules( void ) {
-	if ( g_gametype.integer != GT_TEAMARENA || level.warmupTime ) {
+	if ( g_gametype.integer != GT_TEAMARENA || level.warmupTime || level.intermissiontime || level.intermissionQueued ) {
 		return;
 	}
 	

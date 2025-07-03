@@ -1653,6 +1653,21 @@ static void CheckExitRules( void ) {
 	if ( level.numPlayingClients < 2 ) {
 		return;
 	}
+	
+	if ( g_gametype.integer == GT_TEAMARENA && g_winlimit.integer ) {
+
+		if ( level.teamScores[TEAM_RED] >= g_winlimit.integer ) {
+			G_BroadcastServerCommand( -1, "print \"Red hit the winlimit.\n\"" );
+			LogExit( "Winlimit hit." );
+			return;
+		}
+
+		if ( level.teamScores[TEAM_BLUE] >= g_winlimit.integer ) {
+			G_BroadcastServerCommand( -1, "print \"Blue hit the winlimit.\n\"" );
+			LogExit( "Winlimit hit." );
+			return;
+		}
+	}
 
 	if ( g_gametype.integer < GT_CTF && g_fraglimit.integer ) {
 		if ( level.teamScores[TEAM_RED] >= g_fraglimit.integer ) {
@@ -2332,11 +2347,11 @@ static void G_RunFrame( int levelTime ) {
 	}
 #endif
 
-	// see if it is time to do a tournement restart
-	CheckTournament();
-
 	// see if it is time to end the level
 	CheckExitRules();
+	
+	// see if it is time to do a tournement round restart
+	CheckTournament();
 
 	// update to team status?
 	CheckTeamStatus();
