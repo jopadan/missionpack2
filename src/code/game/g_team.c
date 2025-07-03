@@ -142,6 +142,61 @@ int Team_PlayerCountAlive( team_t team ) {
 }
 
 
+/*
+================
+Team_CountTotalHealth
+
+Finds the total HP of all players on team (if specified, including zero or negative values from dead ones)
+================
+*/
+int Team_CountTotalHealth( team_t team, qboolean includeDead ) {
+	int			i;
+	gentity_t	*clientEnt;
+	int totalHealth = 0;
+	
+	// Loop through all clients
+	for ( i = 0 ; i < level.maxclients ; i++ ) {
+		clientEnt = g_entities + i;
+		if ( !clientEnt->inuse )
+			continue;
+		
+		// If on specified team, add their health
+		if ( clientEnt->client->sess.sessionTeam == team && (clientEnt->health > 0 || includeDead) ) {
+			totalHealth += clientEnt->health;
+		}
+	}
+	
+	return totalHealth;
+}
+
+/*
+================
+Team_CountTotalArmor
+
+Finds the total Armor of all players on team (if specified, including values from dead ones)
+================
+*/
+int Team_CountTotalArmor( team_t team, qboolean includeDead ) {
+	int			i;
+	gentity_t	*clientEnt;
+	int totalArmor = 0;
+	
+	// Loop through all clients
+	for ( i = 0 ; i < level.maxclients ; i++ ) {
+		clientEnt = g_entities + i;
+		if ( !clientEnt->inuse )
+			continue;
+		
+		// If on specified team, add their armor
+		if ( clientEnt->client->sess.sessionTeam == team && (clientEnt->health > 0 || includeDead) ) {
+			totalArmor += clientEnt->client->ps.stats[STAT_ARMOR];
+		}
+	}
+	
+	return totalArmor;
+}
+
+
 // NULL for everyone
 void QDECL PrintMsg( gentity_t *ent, const char *fmt, ... ) {
 	char		msg[1024];
@@ -1251,7 +1306,7 @@ void CheckTeamStatus( void ) {
 
 #ifdef MISSIONPACK2
 
-static void BeginTeamArenaRound( void ) { // TODO: so will this be renamed or we make a separate BeginArenaRound in g_main.c for GT_ARENA
+void Teamarena_BeginRound( void ) {
 	// Begin new round code
 	level.warmupTime = level.time + g_warmup.integer * 1000;
 	trap_SetConfigstring( CS_WARMUP, va("%i", level.warmupTime) );
@@ -1260,7 +1315,7 @@ static void BeginTeamArenaRound( void ) { // TODO: so will this be renamed or we
 }
 
 vec3_t zeroVec3 = {0, 0, 0};
-static void EndTeamArenaRound( team_t winningTeam ) { // TODO: so will this be renamed or we make a separate BeginArenaRound in g_main.c for GT_ARENA
+void Teamarena_EndRound( team_t winningTeam ) {
 	AddTeamScore(zeroVec3, winningTeam, 1);
 	
 	trap_SetConfigstring( CS_SCORES1, va("%i", level.teamScores[TEAM_RED]) );
@@ -1276,7 +1331,16 @@ static void EndTeamArenaRound( team_t winningTeam ) { // TODO: so will this be r
 	
 }
 
-void CheckTeamArenaRules( void ) {
+void Teamarena_TimeoutRound( void ) {
+	 // TODO: You know what this is
+	if ( Team_CountTotalHealth(TEAM_BLUE,qfalse)+Team_CountTotalArmor(TEAM_BLUE,qfalse) > Team_CountTotalHealth(TEAM_RED,qfalse)+Team_CountTotalArmor(TEAM_RED,qfalse) ) {
+		Teamarena_EndRound( TEAM_BLUE );
+		return;
+	}
+	Teamarena_EndRound( TEAM_RED );
+}
+
+void Teamarena_CheckRules( void ) {
 	if ( g_gametype.integer != GT_TEAMARENA || level.warmupTime || level.intermissiontime || level.intermissionQueued ) {
 		return;
 	}
@@ -1284,16 +1348,16 @@ void CheckTeamArenaRules( void ) {
 	if ( level.arenaRoundQueued ) {
 		if ( level.time - level.arenaRoundQueued >= ARENA_ROUND_DELAY_TIME ) {
 			level.arenaRoundQueued = 0;
-			BeginTeamArenaRound();
+			Teamarena_BeginRound();
 		}
 		return;
 	}
 	
-	// Check if either team has no players remaining ; if so, call EndTeamArenaRound
+	// Check if either team has no players remaining ; if so, call Teamarena_EndRound
 	if ( Team_PlayerCountAlive(TEAM_RED) < 1 ) {
-		EndTeamArenaRound( TEAM_BLUE ); // Blue wins the round
+		Teamarena_EndRound( TEAM_BLUE ); // Blue wins the round
 	} else if ( Team_PlayerCountAlive(TEAM_BLUE) < 1 ) {
-		EndTeamArenaRound( TEAM_RED ); // Red wins the round
+		Teamarena_EndRound( TEAM_RED ); // Red wins the round
 	}
 }
 

@@ -1641,9 +1641,24 @@ static void CheckExitRules( void ) {
 		// always wait for sudden death
 		return;
 	}
+	
+#ifdef MISSIONPACK2
+	if ( g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA && g_roundtime.integer && !level.warmupTime && !level.arenaRoundQueued ) {
+		if ( level.time - level.startTime >= g_roundtime.integer*1000 ) {
+			G_BroadcastServerCommand( -1, "print \"Round timelimit hit.\n\"");
+			Teamarena_TimeoutRound();
+			return;
+		}
+	}
+#endif
 
 	if ( g_timelimit.integer && !level.warmupTime ) {
 		if ( level.time - level.startTime >= g_timelimit.integer*60000 ) {
+#ifdef MISSIONPACK2
+			if ( g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA ) {
+				return;
+			}
+#endif
 			G_BroadcastServerCommand( -1, "print \"Timelimit hit.\n\"");
 			LogExit( "Timelimit hit." );
 			return;
@@ -2340,7 +2355,7 @@ static void G_RunFrame( int levelTime ) {
 #ifdef MISSIONPACK2
 	if ( g_gametype.integer == GT_TEAMARENA ) {
 		// see if Clan arena is
-		CheckTeamArenaRules();
+		Teamarena_CheckRules();
 	} else if ( g_gametype.integer == GT_ARENA ) {
 		// check arena
 		//TODO

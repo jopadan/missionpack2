@@ -445,7 +445,11 @@ void CG_CheckLocalSounds( playerState_t *ps, playerState_t *ops ) {
 	}
 
 	// timelimit warnings
+#ifdef MISSIONPACK2
+	if ( cgs.gametype != GT_ARENA && cgs.gametype != GT_TEAMARENA && cgs.timelimit > 0 && !cg.warmup && cg.warmupFightSound < cg.time ) {
+#else
 	if ( cgs.timelimit > 0 && !cg.warmup && cg.warmupFightSound < cg.time ) {
+#endif
 		int		msec;
 
 		msec = cg.time - cgs.levelStartTime;

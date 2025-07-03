@@ -67,7 +67,10 @@ void TeamplayInfoMessage( gentity_t *ent );
 void CheckTeamStatus(void);
 
 #ifdef MISSIONPACK2
-void CheckTeamArenaRules(void);
+void Teamarena_BeginRound(void);
+void Teamarena_EndRound(team_t winningTeam);
+void Teamarena_TimeoutRound(void);
+void Teamarena_CheckRules(void);
 #endif
 
 int Pickup_Team( gentity_t *ent, gentity_t *other );
