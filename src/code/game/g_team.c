@@ -1251,8 +1251,16 @@ void CheckTeamStatus( void ) {
 
 #ifdef MISSIONPACK2
 
+static void BeginTeamArenaRound( void ) { // TODO: so will this be renamed or we make a separate BeginArenaRound in g_main.c for GT_ARENA
+	// Begin new round code
+	level.warmupTime = level.time + g_warmup.integer * 1000;
+	trap_SetConfigstring( CS_WARMUP, va("%i", level.warmupTime) );
+
+	respawnAll();
+}
+
 vec3_t zeroVec3 = {0, 0, 0};
-static void EndTeamArenaRound( team_t winningTeam ) {
+static void EndTeamArenaRound( team_t winningTeam ) { // TODO: so will this be renamed or we make a separate BeginArenaRound in g_main.c for GT_ARENA
 	AddTeamScore(zeroVec3, winningTeam, 1);
 	
 	trap_SetConfigstring( CS_SCORES1, va("%i", level.teamScores[TEAM_RED]) );
@@ -1264,15 +1272,20 @@ static void EndTeamArenaRound( team_t winningTeam ) {
 		}
 	}
 	
-	// Begin new round code
-	level.warmupTime = level.time + g_warmup.integer * 1000;
-	trap_SetConfigstring( CS_WARMUP, va("%i", level.warmupTime) );
-
-	respawnAll();
+	level.arenaRoundQueued = level.time;
+	
 }
 
 void CheckTeamArenaRules( void ) {
 	if ( g_gametype.integer != GT_TEAMARENA || level.warmupTime || level.intermissiontime || level.intermissionQueued ) {
+		return;
+	}
+	
+	if ( level.arenaRoundQueued ) {
+		if ( level.time - level.arenaRoundQueued >= ARENA_ROUND_DELAY_TIME ) {
+			level.arenaRoundQueued = 0;
+			BeginTeamArenaRound();
+		}
 		return;
 	}
 	

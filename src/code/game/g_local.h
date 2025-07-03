@@ -22,6 +22,10 @@
 #define	INTERMISSION_DELAY_TIME	1000
 #define	SP_INTERMISSION_DELAY_TIME	5000
 
+#ifdef MISSIONPACK2
+	#define	ARENA_ROUND_DELAY_TIME	2000
+#endif
+
 // gentity->flags
 #define	FL_GODMODE				0x00000010
 #define	FL_NOTARGET				0x00000020
@@ -418,6 +422,10 @@ typedef struct {
 	int			intermissiontime;		// time the intermission was started
 	qboolean	readyToExit;			// at least one client wants to exit
 	int			exitTime;
+	
+#ifdef MISSIONPACK2
+	int			arenaRoundQueued;		// Same as intermission time for ARENA_ROUND_DELAY_TIME (see g_team.c)
+#endif
 	
 	vec3_t		intermission_origin;	// also used for spectator spawns
 	vec3_t		intermission_angle;
