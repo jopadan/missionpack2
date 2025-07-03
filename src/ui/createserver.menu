@@ -267,6 +267,24 @@ itemDef {
       	type ITEM_TYPE_NUMERICFIELD
 	text "Time Limit:"
 	cvar "timelimit"
+	ownerdrawflag UI_SHOW_NOTARENAGAME
+      	rect 260 77 128 12 
+      	textalign ITEM_ALIGN_RIGHT
+      	textalignx 65
+	maxchars 4
+      	textaligny 12
+	textscale .25        
+      	forecolor 1 1 1 1
+      	visible 1  
+    }
+	
+	itemDef {
+      	name normal
+	group grpsettings
+      	type ITEM_TYPE_NUMERICFIELD
+	text "Round Time:"
+	cvar "roundtime"
+	ownerdrawflag UI_SHOW_ARENAGAME
       	rect 260 77 128 12 
       	textalign ITEM_ALIGN_RIGHT
       	textalignx 65
