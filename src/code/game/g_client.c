@@ -1054,18 +1054,24 @@ void ClientSpawn(gentity_t *ent) {
 	char	userinfo[MAX_INFO_STRING];
 	qboolean isSpectator;
 	int startHealth, startArmor;
+	char *classname;
 
 	index = ent - g_entities;
 	client = ent->client;
 
 	trap_UnlinkEntity( ent );
-
-	isSpectator = client->sess.sessionTeam == TEAM_SPECTATOR;
 	
 #ifdef MISSIONPACK2	
-	if (g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA && !level.warmupTime && !isSpectator ) {
-		return;
+	if ( g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA ) {
+		classname = "bodyque";
+		isSpectator = client->sess.sessionTeam == TEAM_SPECTATOR && !level.warmupTime;
+	} else {
+		classname = "player";
+		isSpectator = client->sess.sessionTeam == TEAM_SPECTATOR;
 	}
+#else
+	classname = "player";
+	isSpectator = client->sess.sessionTeam == TEAM_SPECTATOR;
 #endif
 	
 	
@@ -1164,7 +1170,7 @@ void ClientSpawn(gentity_t *ent) {
 	ent->s.groundEntityNum = ENTITYNUM_NONE;
 	ent->client = &level.clients[index];
 	ent->inuse = qtrue;
-	ent->classname = "player";
+	ent->classname = classname;
 	if ( isSpectator ) {
 		ent->takedamage = qfalse;
 		ent->r.contents = 0;
@@ -1212,8 +1218,6 @@ void ClientSpawn(gentity_t *ent) {
 	// health will count down towards max_health
 	ent->health = client->ps.stats[STAT_HEALTH] = client->ps.stats[STAT_MAX_HEALTH] + 25;
 	
-	startHealth = g_startHealth.integer;
-	startArmor = g_startArmor.integer;
 #ifdef MISSIONPACK2
 	if (g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA) {
 		startHealth = g_arenaHealth.integer;
@@ -1221,7 +1225,13 @@ void ClientSpawn(gentity_t *ent) {
 		
 		// Disable shooting upon respawn in Arena gamemodes (  re-enabled on G_WarmupEnd in g_main.c  )
 		client->ps.pm_flags |= PMF_NOSHOOT;
+	} else {
+		startHealth = g_startHealth.integer;
+		startArmor = g_startArmor.integer;
 	}
+#else
+	startHealth = g_startHealth.integer;
+	startArmor = g_startArmor.integer;
 #endif
 
 	if (startHealth > 0) {
@@ -1298,6 +1308,19 @@ void ClientSpawn(gentity_t *ent) {
 			}
 		}
 	}
+	
+#ifdef MISSIONPACK2
+	// Set the entity/client hp, etc back to zero (kill again) if spawned mid-round in an arena game
+	if (g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA) {
+		if (!level.warmupTime) {
+			ent->health = -500;
+			client->ps.stats[STAT_HEALTH] = -500;
+			client->ps.stats[STAT_ARMOR] = -500;
+			client->ps.pm_type = PM_SPECTATOR;
+			client->ps.pm_flags &= ~PMF_RESPAWNED;
+		}
+	}
+#endif
 
 	// run a client frame to drop exactly to the floor,
 	// initialize animations and other things
