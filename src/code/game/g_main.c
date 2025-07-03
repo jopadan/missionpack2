@@ -1635,15 +1635,9 @@ static void CheckExitRules( void ) {
 #endif
 		return;
 	}
-
-	// check for sudden death
-	if ( ScoreIsTied() ) {
-		// always wait for sudden death
-		return;
-	}
 	
 #ifdef MISSIONPACK2
-	if ( g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA && g_roundtime.integer && !level.warmupTime && !level.arenaRoundQueued ) {
+	if ( (g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA) && g_roundtime.integer && !level.warmupTime && !level.arenaRoundQueued ) {
 		if ( level.time - level.startTime >= g_roundtime.integer*1000 ) {
 			G_BroadcastServerCommand( -1, "print \"Round timelimit hit.\n\"");
 			Teamarena_TimeoutRound();
@@ -1651,6 +1645,12 @@ static void CheckExitRules( void ) {
 		}
 	}
 #endif
+
+	// check for sudden death
+	if ( ScoreIsTied() ) {
+		// always wait for sudden death
+		return;
+	}
 
 	if ( g_timelimit.integer && !level.warmupTime ) {
 		if ( level.time - level.startTime >= g_timelimit.integer*60000 ) {
