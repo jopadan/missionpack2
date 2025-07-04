@@ -1,5 +1,5 @@
 # Quake III Ultimate Arena
-How Quake Zero should have been
+How Quake Zero should have been.
 
 Merged code from Kr3m's missionpack plus features together with my additional things like Arena/Clan Arena gametypes, green armor and HMG from QL. Unlike missionpackplus, this is a standalone mod which doesn't require Team Arena to be installed.
  
@@ -39,14 +39,15 @@ Merged code from Kr3m's missionpack plus features together with my additional th
   - Overload ```8```
   - Harvester ```9```
 * ```g_nailBounce <0|1>``` : defaults to ```1```.  QL-Style nail bounce. A value of ```1``` is on; ```0``` means off.
-* ```g_arenaStartArmor <0|200>``` : allow to define the amount of armor at spawn
-* ```g_arenaStartHealth <0|200>``` : allow to define the amount of health at spawn
+* ```g_arenaArmor <0|200>``` : allow to define the amount of armor at spawn
+* ```g_arenaHealth <0|200>``` : allow to define the amount of health at spawn
+* ```g_arenaAmmo*X* <0|200>``` : allow to define the amount of ammunitions for a weapon in Arena/Team Arena gametypes. *X* can be MG, SG, GL, RL, LG, RG, PG, BFG, NG, PL, CG, HMG
 
 #### From Kr3m's missionpackplus
 * ```g_startingWeapon <0|14>``` : defaults to ```0```.  Choose which weapon you spawn with.
 * ```g_noSelfDamage <0|1>``` : default to 0. Toggle the player self damages. A value of ```0``` means regular self damage is on; ```1``` means off.
-* ```g_startAmmo*X* <0|200>``` : allow to define the amount of ammunitions for a weapon. *X* can be MG, SG, GL, RL, LG, RG, PG, BFG, NG, PL, CG
-* ```g_damage*X* <0|999>``` : allow to define the amount of damage for a weapon. *X* can be MG, SG, GL, RL, LG, RG, PG, BFG, NG, PL, CG
+* ```g_startAmmo*X* <0|200>``` : allow to define the amount of ammunitions for a weapon. *X* can be MG, SG, GL, RL, LG, RG, PG, BFG, NG, PL, CG, HMG
+* ```g_damage*X* <0|999>``` : allow to define the amount of damage for a weapon. *X* can be MG, SG, GL, RL, LG, RG, PG, BFG, NG, PL, CG, HMG
 * ```g_sgPellets <1|?>``` : number of shotgun pellets per shot
 * ```g_sgPelletSpread <1|?>``` : amount of shotgun spread defaults to ```700```
 * ```g_splashDamage*X* <1|?>``` : allow to define the amount of splash damage for a weapon. *X* can be GL, RL, PG, BFG
@@ -78,7 +79,7 @@ Merged code from Kr3m's missionpack plus features together with my additional th
 The following cvars use a "bit flag" value which acts as a combination of integers to specify a group of items:
 
 #### New in Ultimate Arena
-* ```g_arenaWpflags <VAL>``` : defaults to ```2175```.  Starting weapons in loudouts for Arena / Team Arena gamemodes. Default value of ```2175``` is QL CA loadout. See ```g_wpflags``` for weapon bits.
+* ```g_arenaWpflags <VAL>``` : defaults to ```2175```.  Starting weapons in loudouts for Arena / Team Arena gametypes. Default value of ```2175``` is QL CA loadout. See ```g_wpflags``` for weapon bits.
 
 #### From Kr3m's missionpackplus
 * ```g_wpflags <VAL>``` : what weapons a player should have at spawn. &#x1F536; NOTE: It changed from ```wpflags``` from missionpackplus
