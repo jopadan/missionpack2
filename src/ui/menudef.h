@@ -66,6 +66,7 @@
 #define FEEDER_SERVERSTATUS					0x0d			// server status
 #define FEEDER_FINDPLAYER					0x0e			// find player
 #define FEEDER_CINEMATICS					0x0f			// cinematics
+#define FEEDER_MAPS_NEW						0x10			// new maps feeder
 
 // display flags
 #define CG_SHOW_BLUE_TEAM_HAS_REDFLAG     0x00000001

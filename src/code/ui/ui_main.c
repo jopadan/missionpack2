@@ -2482,9 +2482,9 @@ static qboolean UI_NetGameType_HandleKey(int flags, float *special, int key) {
 
   	trap_Cvar_Set( "ui_netGameType", va("%d", ui_netGameType.integer));
   	trap_Cvar_Set( "ui_actualnetGameType", va("%d", uiInfo.gameTypes[ui_netGameType.integer].gtEnum));
-  	trap_Cvar_Set( "ui_currentNetMap", "0");
-		UI_MapCountByGameType(qfalse);
-		Menu_SetFeederSelection(NULL, FEEDER_ALLMAPS, 0, NULL);
+  	//trap_Cvar_Set( "ui_currentNetMap", "0");
+	//	UI_MapCountByGameType(qfalse);
+	//	Menu_SetFeederSelection(NULL, FEEDER_ALLMAPS, 0, NULL);
     return qtrue;
   }
   return qfalse;
@@ -3411,6 +3411,10 @@ static void UI_RunMenuScript(char **args) {
 			UI_LoadArenas();
 			UI_MapCountByGameType(qfalse);
 			Menu_SetFeederSelection(NULL, FEEDER_ALLMAPS, 0, "createserver");
+		} else if (Q_stricmp(name, "loadArenas_new") == 0) {
+			UI_LoadArenas();
+			UI_MapCountTotal(qfalse);
+			Menu_SetFeederSelection(NULL, FEEDER_MAPS_NEW, 0, "maps");
 		} else if (Q_stricmp(name, "saveControls") == 0) {
 			Controls_SetConfig(qtrue);
 		} else if (Q_stricmp(name, "loadControls") == 0) {
@@ -3719,6 +3723,23 @@ static int UI_MapCountByGameType(qboolean singlePlayer) {
 			c++;
 			uiInfo.mapList[i].active = qtrue;
 		}
+	}
+	return c;
+}
+
+/*
+==================
+UI_MapCountTotal
+==================
+*/
+static int UI_MapCountTotal( void ) {
+	int i, c;
+	c = 0;
+
+	for (i = 0; i < uiInfo.mapCount; i++) {
+		uiInfo.mapList[i].active = qfalse;
+		c++;
+		uiInfo.mapList[i].active = qtrue;
 	}
 	return c;
 }
@@ -4348,6 +4369,8 @@ static int UI_FeederCount(float feederID) {
 		return uiInfo.movieCount;
 	} else if (feederID == FEEDER_MAPS || feederID == FEEDER_ALLMAPS) {
 		return UI_MapCountByGameType(feederID == FEEDER_MAPS ? qtrue : qfalse);
+	} else if (feederID == FEEDER_MAPS_NEW) {
+		return UI_MapCountTotal();
 	} else if (feederID == FEEDER_SERVERS) {
 		return uiInfo.serverStatus.numDisplayServers;
 	} else if (feederID == FEEDER_SERVERSTATUS) {
@@ -4443,7 +4466,7 @@ static const char *UI_FeederItemText(float feederID, int index, int column, qhan
 		if (index >= 0 && index < uiInfo.q3HeadCount) {
 			return uiInfo.q3HeadNames[index];
 		}
-	} else if (feederID == FEEDER_MAPS || feederID == FEEDER_ALLMAPS) {
+	} else if (feederID == FEEDER_MAPS || feederID == FEEDER_ALLMAPS || feederID == FEEDER_MAPS_NEW) {
 		int actual;
 		return UI_SelectedMap(index, &actual);
 	} else if (feederID == FEEDER_SERVERS) {
@@ -4556,7 +4579,7 @@ static qhandle_t UI_FeederItemImage(float feederID, int index) {
     if (index >= 0 && index < uiInfo.q3HeadCount) {
       return uiInfo.q3HeadIcons[index];
     }
-	} else if (feederID == FEEDER_ALLMAPS || feederID == FEEDER_MAPS) {
+	} else if (feederID == FEEDER_ALLMAPS || feederID == FEEDER_MAPS || feederID == FEEDER_MAPS_NEW ) {
 		int actual;
 		UI_SelectedMap(index, &actual);
 		index = actual;
@@ -4619,6 +4642,22 @@ static void UI_FeederSelection(float feederID, int index) {
 	  	uiInfo.mapList[ui_currentNetMap.integer].cinematic = trap_CIN_PlayCinematic(va("%s.roq", uiInfo.mapList[ui_currentNetMap.integer].mapLoadName), 0, 0, 0, 0, (CIN_loop | CIN_silent) );
 		}
 
+  } else if (feederID == FEEDER_MAPS_NEW) {
+	  	int actual, map;
+		map = ui_currentNetMap.integer;
+		if (uiInfo.mapList[map].cinematic >= 0) {
+		  trap_CIN_StopCinematic(uiInfo.mapList[map].cinematic);
+		  uiInfo.mapList[map].cinematic = -1;
+		}
+		UI_SelectedMap(index, &actual);
+		trap_Cvar_Set("ui_mapIndex", va("%d", index));
+		ui_mapIndex.integer = index;
+		ui_currentNetMap.integer = actual;
+		trap_Cvar_Set("ui_currentNetMap", va("%d", actual));
+		ui_currentMap.integer = actual;
+		trap_Cvar_Set("ui_currentMap", va("%d", actual));
+		
+		uiInfo.mapList[ui_currentNetMap.integer].cinematic = trap_CIN_PlayCinematic(va("%s.roq", uiInfo.mapList[ui_currentNetMap.integer].mapLoadName), 0, 0, 0, 0, (CIN_loop | CIN_silent) );
   } else if (feederID == FEEDER_SERVERS) {
 		const char *mapName = NULL;
 		uiInfo.serverStatus.currentServer = index;

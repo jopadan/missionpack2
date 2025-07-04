@@ -11,11 +11,10 @@
 	background "menuback_b"
 	outOfBoundsClick	
 	focusColor 1 .75 0 1
-	onEsc { close createserver ; open main }
+	onEsc { close maps ; close createserver ; open main }
 	onOpen { setitemcolor fadebox backcolor 0 0 0 1 ; 
 	fadeout fadebox ; 
 	transition mappreview 7 127 190 1 7 57 190 141 20 10 ; 
-	uiScript loadArenas ;
 	hide lightning ; 
 	hide accept_alt ; 
 	show accept ;
@@ -168,43 +167,24 @@ itemDef {
       	style 0	
  	ownerdraw UI_STARTMAPCINEMATIC
       	rect 7 57 190 141
-      	border 1
-      	bordercolor .5 .5 .5 .5
+      	border 4
+      	bordercolor 0 0 0 .75
       	visible 1 
+		action { play "sound/misc/menu1.wav" ; close createserver ; open maps }
+		mouseEnter { setcolor bordercolor .25 .25 .25 .75 ; play "sound/misc/menu2.wav" }
+      	mouseExit { setcolor bordercolor 0 0 0 .75 }
     	}
 
 itemDef {
       	name mappreview
      	style WINDOW_STYLE_FILLED
       	rect 6 56 192 143
-      	border 1
-      	bordercolor .5 .5 .5 .5
+      	border 4
+      	bordercolor 0 0 0 .75
       	visible 1
+		mouseEnter { setcolor bordercolor .25 .25 .25 .75 }
+      	mouseExit { setcolor bordercolor 0 0 0 .75 }
     }
-
- itemDef {
-	name maplist
-      	rect 6 205 192 211
-	type ITEM_TYPE_LISTBOX
-	style WINDOW_STYLE_FILLED
-	elementwidth 120
-	elementheight 20
-	textscale .25
-	elementtype LISTBOX_TEXT
-	feeder FEEDER_ALLMAPS
-	textstyle 6
-	textalign 3
-	textaligny 14
-	border 1
-	bordercolor .5 .5 .5 .5
-	forecolor 1 1 1 1
-	backcolor 0 0 .5 .25
-	outlinecolor .1 .1 .7 .5
-	visible 1
-	columns 1 2 190 25
-	mouseEnter { fadein message_arena ; setitemcolor maplist bordercolor .7 0 0 1 } 
-	mouseExit { fadeout message_arena ; setitemcolor maplist bordercolor .5 .5 .5 .5 } 
-  	}
 
 //	SETTINGS	//
 
@@ -1292,7 +1272,7 @@ itemDef {
       	background "ui/assets/backarrow.tga"
 	rect 16 424 50 50 
       	visible 1 
-      	action {  close createserver ; open main }
+      	action {  close maps ; close createserver ; open main }
 	mouseEnter { hide back ; show back_alt ; fadein message_back }
     	}
 
@@ -1306,7 +1286,7 @@ itemDef {
       	visible 0
 	type ITEM_TYPE_BUTTON
       	mouseExit { hide back_alt ; show back ; fadeout message_back }	  
-      	action { close createserver ; open main }	  
+      	action { close maps ; close createserver ; open main }	  
     	}
 
 
