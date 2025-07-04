@@ -522,9 +522,23 @@ void player_die( gentity_t *self, gentity_t *inflictor, gentity_t *attacker, int
 		attacker->client->lastkilled_client = self->s.number;
 
 		if ( attacker == self || OnSameTeam (self, attacker ) ) {
+#ifdef MISSIONPACK2
+			if ( g_gametype.integer != GT_ARENA && g_gametype.integer != GT_TEAMARENA ) {  // Suicides don't subtract points in arena gamemodes.
+				AddScore( attacker, self->r.currentOrigin, -1 );
+			}
+#else
 			AddScore( attacker, self->r.currentOrigin, -1 );
+#endif
 		} else {
+#ifdef MISSIONPACK2
+			if ( g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA ) {
+				AddScore( attacker, self->r.currentOrigin, 100 );
+			} else {
+				AddScore( attacker, self->r.currentOrigin, 1 );
+			}
+#else
 			AddScore( attacker, self->r.currentOrigin, 1 );
+#endif
 
 			if( meansOfDeath == MOD_GAUNTLET ) {
 				
@@ -555,7 +569,13 @@ void player_die( gentity_t *self, gentity_t *inflictor, gentity_t *attacker, int
 
 		}
 	} else {
-		AddScore( self, self->r.currentOrigin, -1 );
+#ifdef MISSIONPACK2
+		if ( g_gametype.integer != GT_ARENA && g_gametype.integer != GT_TEAMARENA ) {  // Suicides don't subtract points in arena gamemodes.
+			AddScore( attacker, self->r.currentOrigin, -1 );
+		}
+#else
+		AddScore( attacker, self->r.currentOrigin, -1 );
+#endif
 	}
 
 	// Add team bonuses
@@ -1121,6 +1141,13 @@ void G_Damage( gentity_t *targ, gentity_t *inflictor, gentity_t *attacker,
 		} else if ( targ->pain ) {
 			targ->pain (targ, attacker, take);
 		}
+		
+#ifdef MISSIONPACK2
+		// add damage score in arenas
+		if (g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA) {
+			AddScore( attacker, attacker->r.currentOrigin, take ); // dimmsdale
+		}
+#endif
 	}
 
 }
