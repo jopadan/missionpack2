@@ -317,6 +317,21 @@ itemDef {
 		forecolor 1 1 1 1
 		visible 1 
 	}
+	
+	itemDef {
+      	name expert
+	group grpsettings
+      	type ITEM_TYPE_YESNO
+	text "Auto Download:"
+	cvar "sv_allowdownload"
+	rect 50 325 128 12 
+	textalign ITEM_ALIGN_RIGHT
+	textalignx 65
+	textaligny 12
+	textscale .25        
+	forecolor 1 1 1 1
+	visible 1  
+    }
 
 
 
@@ -422,21 +437,53 @@ itemDef {
     }
 
 
-// 	EXPERT	//	
-
     itemDef {
-      	name expert
+      	name normal
 	group grpsettings
       	type ITEM_TYPE_YESNO
-	text "Auto Download:"
-	cvar "sv_allowdownload"
-	rect 260 190 128 12 
-	textalign ITEM_ALIGN_RIGHT
-	textalignx 65
-	textaligny 12
+	text "Instagib:"
+	cvar "g_instagib"
+      	rect 260 111 128 12 
+      	textalign ITEM_ALIGN_RIGHT
+      	textalignx 65
+      	textaligny 12
 	textscale .25        
-	forecolor 1 1 1 1
-	visible 1  
+      	forecolor 1 1 1 1
+      	visible 1  
+    }
+
+
+    itemDef {
+      	name normal
+	group grpsettings
+      	type ITEM_TYPE_YESNO
+	text "Fast Switch:"
+	cvar "g_fastweaponswitch"
+      	rect 260 128 128 12 
+      	textalign ITEM_ALIGN_RIGHT
+      	textalignx 65
+      	textaligny 12
+	textscale .25        
+      	forecolor 1 1 1 1
+      	visible 1  
+    }
+
+
+// 	EXPERT	//	
+	
+	itemDef {
+      	name normal
+	group grpsettings
+      	type ITEM_TYPE_YESNO
+	text "Grappling Hook:"
+	cvar "g_grapple"
+      	rect 260 191 128 12 
+      	textalign ITEM_ALIGN_RIGHT
+      	textalignx 65
+      	textaligny 12
+	textscale .25        
+      	forecolor 1 1 1 1
+      	visible 1  
     }
 
     itemDef {
