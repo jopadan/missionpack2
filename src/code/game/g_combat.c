@@ -1145,7 +1145,7 @@ void G_Damage( gentity_t *targ, gentity_t *inflictor, gentity_t *attacker,
 #ifdef MISSIONPACK2
 		// add damage score in arenas
 		if (g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA) {
-			AddScore( attacker, attacker->r.currentOrigin, take ); // dimmsdale
+			AddScore( attacker, targ->r.currentOrigin, take ); // dimmsdale
 		}
 #endif
 	}
