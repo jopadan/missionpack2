@@ -11,7 +11,7 @@
 	background "menuback_b"
 	outOfBoundsClick	
 	focusColor 1 .75 0 1
-	onEsc { close maps ; open createserver }
+	onEsc { play "sound/misc/menu3.wav" ; close maps ; open createserver }
 	onOpen { setitemcolor fadebox backcolor 0 0 0 1 ; 
 	fadeout fadebox ; 
 	uiScript loadArenas_new ;
@@ -138,7 +138,7 @@ itemDef {
       	background "ui/assets/backarrow.tga"
 	rect 16 424 50 50 
       	visible 1 
-      	action {  close maps ; open createserver }
+      	action {  play "sound/misc/menu3.wav" ; close maps ; open createserver }
 	mouseEnter { hide back ; show back_alt ; fadein message_back }
     	}
 
@@ -152,7 +152,7 @@ itemDef {
       	visible 0
 	type ITEM_TYPE_BUTTON
       	mouseExit { hide back_alt ; show back ; fadeout message_back }	  
-      	action { close maps ; open createserver }	  
+      	action { play "sound/misc/menu3.wav" ; close maps ; open createserver }	  
     	}
 
 

@@ -13,7 +13,8 @@
 	focusColor 1 .75 0 1
 	onEsc { close maps ; close createserver ; open main }
 	onOpen { setitemcolor fadebox backcolor 0 0 0 1 ; 
-	fadeout fadebox ; 
+	fadeout fadebox ;  
+	uiScript loadArenas_new ;
 	hide lightning ; 
 	hide accept_alt ; 
 	show accept ;
@@ -200,6 +201,124 @@ itemDef {
 //	SETTINGS	//
 
 
+// HOST //
+    itemDef {
+      	name host
+	group grpsettings
+      	type ITEM_TYPE_EDITFIELD
+	text "Host Name:"
+	cvar "sv_hostname"
+	maxChars 32
+	maxPaintChars 10
+      	rect 50 220 128 12 
+      	textalign ITEM_ALIGN_RIGHT
+      	textalignx 65
+      	textaligny 12
+	textscale .25        
+      	forecolor 1 1 1 1
+      	visible 1  
+    }
+
+    
+
+    itemDef {
+      	name expert
+	group grpsettings
+      	type ITEM_TYPE_NUMERICFIELD
+	text "Maximum Players:"
+	cvar "sv_maxclients"
+      	rect 50 235 128 12 
+      	textalign ITEM_ALIGN_RIGHT
+      	textalignx 65
+	maxchars 4
+      	textaligny 12
+	textscale .25        
+      	forecolor 1 1 1 1
+      	visible 1  
+    	}
+		
+    itemDef {
+      	name expert
+	group grpsettings
+ 	type ITEM_TYPE_YESNO
+	text "Require Password:"
+	cvar "g_needpassword"
+      	rect 50 250 128 12 
+      	textalign ITEM_ALIGN_RIGHT
+      	textalignx 65
+      	textaligny 12
+	textscale .25        
+      	forecolor 1 1 1 1
+      	visible 1  
+    	}
+
+    itemDef {
+      	name expert
+	group grpsettings
+      	type 4
+	text "Password:"
+	cvar "g_password"
+      	rect 50 265 128 12 
+	maxchars 10
+	maxPaintChars 10
+      	textalign ITEM_ALIGN_RIGHT
+      	textalignx 65
+      	textaligny 12
+	textscale .25        
+      	forecolor 1 1 1 1
+      	visible 1  
+    	}
+
+    itemDef {
+  	name normal
+	group grpsettings
+      	type ITEM_TYPE_YESNO
+	text "Pure Server:"
+	cvar "sv_pure"
+      	rect 50 280 128 12 
+      	textalign ITEM_ALIGN_RIGHT
+      	textalignx 65
+      	textaligny 12
+	textscale .25        
+      	forecolor 1 1 1 1
+      	visible 1  
+    	}
+
+    itemDef {
+      	name normal
+	group grpsettings
+      	type ITEM_TYPE_MULTI
+	text "Dedicated:"
+	// syntax for this is cvar name followed by a semicolan separated list of choices first choice equals 0
+	// dedicated is a special cvar in that as soon as it is set, the game goes to console only so the ui catches this one specifically
+	cvar "ui_dedicated"
+	cvarFloatList { "No" 0 "LAN" 1 "Internet" 2 }
+	rect 50 295 128 12 
+	textalign ITEM_ALIGN_RIGHT
+	textalignx 65
+	textaligny 12
+	textscale .25        
+      	forecolor 1 1 1 1
+     	visible 1 
+    	}
+
+	itemDef {
+		name normal
+		group grpsettings
+		type ITEM_TYPE_MULTI
+		text "Punkbuster:"
+		cvar "sv_punkbuster"
+		cvarFloatList { "No" 0 "Yes" 1 }
+		rect 50 310 128 12 
+		textalign ITEM_ALIGN_RIGHT
+		textalignx 65
+		textaligny 12
+		textscale .25        
+		forecolor 1 1 1 1
+		visible 1 
+	}
+
+
 
 // 	NORMAL	//	
 
@@ -302,76 +421,8 @@ itemDef {
       	visible 1  
     }
 
-    itemDef {
-  	name normal
-	group grpsettings
-      	type ITEM_TYPE_YESNO
-	text "Pure Server:"
-	cvar "sv_pure"
-      	rect 260 111 128 12 
-      	textalign ITEM_ALIGN_RIGHT
-      	textalignx 65
-      	textaligny 12
-	textscale .25        
-      	forecolor 1 1 1 1
-      	visible 1  
-    	}
-
-    itemDef {
-      	name normal
-	group grpsettings
-      	type ITEM_TYPE_MULTI
-	text "Dedicated:"
-	// syntax for this is cvar name followed by a semicolan separated list of choices first choice equals 0
-	// dedicated is a special cvar in that as soon as it is set, the game goes to console only so the ui catches this one specifically
-	cvar "ui_dedicated"
-	cvarFloatList { "No" 0 "LAN" 1 "Internet" 2 }
-	rect 260 128 128 12 
-	textalign ITEM_ALIGN_RIGHT
-	textalignx 65
-	textaligny 12
-	textscale .25        
-      	forecolor 1 1 1 1
-     	visible 1 
-    	}
-
-	itemDef {
-		name normal
-		group grpsettings
-		type ITEM_TYPE_MULTI
-		text "Punkbuster:"
-		cvar "sv_punkbuster"
-		cvarFloatList { "No" 0 "Yes" 1 }
-		rect 260 145 128 12 
-		textalign ITEM_ALIGN_RIGHT
-		textalignx 65
-		textaligny 12
-		textscale .25        
-		forecolor 1 1 1 1
-		visible 1 
-	}
-
 
 // 	EXPERT	//	
-
-    itemDef {
-      	name expert
-	group grpsettings
-      	type ITEM_TYPE_EDITFIELD
-	text "Host Name:"
-	cvar "sv_hostname"
-	maxChars 32
-	maxPaintChars 10
-      	rect 260 175 128 12 
-      	textalign ITEM_ALIGN_RIGHT
-      	textalignx 65
-      	textaligny 12
-	textscale .25        
-      	forecolor 1 1 1 1
-      	visible 1  
-    }
-
-
 
     itemDef {
       	name expert
@@ -397,24 +448,6 @@ itemDef {
       	rect 260 205 128 12 
       	textalign ITEM_ALIGN_RIGHT
       	textalignx 65
-      	textaligny 12
-	textscale .25        
-      	forecolor 1 1 1 1
-      	visible 1  
-    	}
-
-    
-
-    itemDef {
-      	name expert
-	group grpsettings
-      	type ITEM_TYPE_NUMERICFIELD
-	text "Maximum Players:"
-	cvar "sv_maxclients"
-      	rect 260 220 128 12 
-      	textalign ITEM_ALIGN_RIGHT
-      	textalignx 65
-	maxchars 4
       	textaligny 12
 	textscale .25        
       	forecolor 1 1 1 1
@@ -578,37 +611,6 @@ itemDef {
       	forecolor 1 1 1 1
       	visible 1  
     	}
-    itemDef {
-      	name expert
-	group grpsettings
- 	type ITEM_TYPE_YESNO
-	text "Require Password:"
-	cvar "g_needpassword"
-      	rect 260 385 128 12 
-      	textalign ITEM_ALIGN_RIGHT
-      	textalignx 65
-      	textaligny 12
-	textscale .25        
-      	forecolor 1 1 1 1
-      	visible 1  
-    	}
-
-    itemDef {
-      	name expert
-	group grpsettings
-      	type 4
-	text "Password:"
-	cvar "g_password"
-      	rect 260 400 128 12 
-	maxchars 10
-	maxPaintChars 10
-      	textalign ITEM_ALIGN_RIGHT
-      	textalignx 65
-      	textaligny 12
-	textscale .25        
-      	forecolor 1 1 1 1
-      	visible 1  
-    	}
 
 
 
@@ -649,7 +651,7 @@ itemDef {
        visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  hideCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     }
@@ -670,7 +672,7 @@ itemDef {
        visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  hideCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     }
@@ -691,7 +693,7 @@ itemDef {
        visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  hideCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     }
@@ -712,7 +714,7 @@ itemDef {
        visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  hideCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     }
@@ -733,7 +735,7 @@ itemDef {
       visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  hideCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     }
@@ -754,7 +756,7 @@ itemDef {
       visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  hideCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     }
@@ -775,7 +777,7 @@ itemDef {
       visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  hideCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     }
@@ -817,7 +819,7 @@ itemDef {
       visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  hideCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     }
@@ -838,7 +840,7 @@ itemDef {
        visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  hideCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     }
@@ -859,7 +861,7 @@ itemDef {
        visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  hideCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     }
@@ -880,7 +882,7 @@ itemDef {
       visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  hideCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     	}
@@ -901,7 +903,7 @@ itemDef {
       	 visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  hideCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" } 
+	action { play "sound/misc/menu1.wav" } 
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     	}
@@ -922,7 +924,7 @@ itemDef {
       	 visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  hideCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" } 
+	action { play "sound/misc/menu1.wav" } 
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     	}
@@ -943,7 +945,7 @@ itemDef {
       	 visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  hideCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" } 
+	action { play "sound/misc/menu1.wav" } 
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     	}
@@ -967,7 +969,7 @@ itemDef {
         visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  showCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     }
@@ -988,7 +990,7 @@ itemDef {
         visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  showCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     }
@@ -1009,7 +1011,7 @@ itemDef {
         visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  showCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     }
@@ -1030,7 +1032,7 @@ itemDef {
        visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  showCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     }
@@ -1051,7 +1053,7 @@ itemDef {
        visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  showCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     }
@@ -1078,7 +1080,7 @@ itemDef {
       	 visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  showCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     }
@@ -1099,7 +1101,7 @@ itemDef {
        	 visible 1 
 	  cvarTest "ui_actualNetGameType"
 	 showCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     	}
@@ -1120,7 +1122,7 @@ itemDef {
        	 visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  showCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     }
@@ -1141,7 +1143,7 @@ itemDef {
       visible 1 
 	  cvarTest "ui_actualNetGameType"
 	showCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     	}
@@ -1162,7 +1164,7 @@ itemDef {
        visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  showCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" } 
+	action { play "sound/misc/menu1.wav" } 
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     	}
@@ -1183,7 +1185,7 @@ itemDef {
       visible 1 
 	  cvarTest "ui_actualNetGameType"
 	showCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     	}
@@ -1204,7 +1206,7 @@ itemDef {
        visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  showCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" } 
+	action { play "sound/misc/menu1.wav" } 
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     	}
@@ -1225,7 +1227,7 @@ itemDef {
       visible 1 
 	  cvarTest "ui_actualNetGameType"
 	showCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" }
+	action { play "sound/misc/menu1.wav" }
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     	}
@@ -1246,7 +1248,7 @@ itemDef {
        visible 1 
 	  cvarTest "ui_actualNetGameType"
 	  showCvar { "0" ; "1" ; "2" ; "3" }
-	action { play "sound/misc/menu3.wav" } 
+	action { play "sound/misc/menu1.wav" } 
 	mouseEnter { fadein message_slot } 
 	mouseExit { fadeout message_slot } 
     	}

@@ -3414,7 +3414,7 @@ static void UI_RunMenuScript(char **args) {
 		} else if (Q_stricmp(name, "loadArenas_new") == 0) {
 			UI_LoadArenas();
 			UI_MapCountTotal(qfalse);
-			Menu_SetFeederSelection(NULL, FEEDER_MAPS_NEW, 0, "maps");
+			Menu_SetFeederSelection(NULL, FEEDER_MAPS_NEW, ui_currentMap.integer, "maps");
 		} else if (Q_stricmp(name, "saveControls") == 0) {
 			Controls_SetConfig(qtrue);
 		} else if (Q_stricmp(name, "loadControls") == 0) {
