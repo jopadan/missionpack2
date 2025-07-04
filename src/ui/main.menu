@@ -89,7 +89,7 @@ itemDef {
       	border 4
       	bordercolor 0.5 0.5 0.5 0.75
       	bordersize 1
-      	visible 1 
+      	visible 1
       	mouseEnter { setcolor backcolor .15 .15 .15 .25 ; hide play ; show playselection  }
       	mouseExit { setcolor backcolor 0 0 0 .75 ; show play ; hide playselection  }
 	decoration 	
@@ -108,7 +108,8 @@ itemDef {
 	textalignx 320
 	textaligny 23
    	forecolor 1 1 1 1
-	visible 1 
+	visible 1  
+	action { setcolor backcolor .15 .15 .15 .25 ; hide play ; show playselection ; show gametype; hide teamarena ; show options ; hide optionselection  }
 	}
 	
 
@@ -181,7 +182,7 @@ itemDef {
       	border 4
       	bordercolor 0.5 0.5 0.5 0.75
       	bordersize 1
-      	visible 1 
+      	visible 1
       	mouseEnter { hide gametype ; show teamarena ; setcolor backcolor .15 .15 .15 .25  }
       	mouseExit { show gametype ; hide teamarena ; setcolor backcolor 0 0 0 .75 }	
 	decoration 	
@@ -201,7 +202,8 @@ itemDef {
 	textaligny 23 
       	textalign 1
 	textscale .416		
-      	visible 1 		  
+      	visible 1 	 
+		action { hide gametype ; show teamarena ; setcolor backcolor .15 .15 .15 .25 ; show play ; hide playselection ; show options ; hide optionselection }	  
     	}
 
 itemDef {
@@ -274,7 +276,7 @@ itemDef {
       	border 4
       	bordercolor 0.5 0.5 0.5 0.75
       	bordersize 1
-      	visible 1 
+      	visible 1
       	mouseEnter { setcolor backcolor .15 .15 .15 .25 ; hide options ; show optionselection  }
       	mouseExit { setcolor backcolor 0 0 0 .75 ; show options ; hide optionselection }
       	decoration 
@@ -293,7 +295,8 @@ itemDef {
 	textscale .416
       	textalign 1	   
    	forecolor 1 1 1 1
-      	visible 1 
+      	visible 1  
+	action { setcolor backcolor .15 .15 .15 .25 ; hide options ; show optionselection ; show play ; hide playselection ; show gametype ; hide teamarena  }
 	mouseenter { hide grpMessage; fadein message_options }
 	mouseexit { fadeout message_options }
     	}
