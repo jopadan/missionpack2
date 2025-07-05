@@ -4466,9 +4466,37 @@ static const char *UI_FeederItemText(float feederID, int index, int column, qhan
 		if (index >= 0 && index < uiInfo.q3HeadCount) {
 			return uiInfo.q3HeadNames[index];
 		}
-	} else if (feederID == FEEDER_MAPS || feederID == FEEDER_ALLMAPS || feederID == FEEDER_MAPS_NEW) {
+	} else if (feederID == FEEDER_MAPS || feederID == FEEDER_ALLMAPS) {
 		int actual;
 		return UI_SelectedMap(index, &actual);
+	} else if ( feederID == FEEDER_MAPS_NEW ) {
+		int actual, gametype;
+		qboolean active = qfalse;
+		
+		gametype = uiInfo.gameTypes[ui_netGameType.integer].gtEnum; // The correct way ~Dimmskii
+		if ( gametype == GT_CTF ) {
+			if ( uiInfo.mapList[index].typeBits & (1 << GT_CTF) ) {
+				active = qtrue;
+			}
+		} else if (gametype == GT_1FCTF || gametype == GT_OBELISK || gametype == GT_HARVESTER ) {
+			if ( uiInfo.mapList[index].typeBits & (1 << GT_1FCTF) || uiInfo.mapList[index].typeBits & (1 << GT_OBELISK) || uiInfo.mapList[index].typeBits & (1 << GT_HARVESTER) ) {
+				active = qtrue;
+			}
+		} else if (gametype == GT_TOURNAMENT ) {
+			if ( uiInfo.mapList[index].typeBits & (1 << GT_TOURNAMENT) ) {
+				active = qtrue;
+			}
+		} else if (gametype <= GT_TEAM ) {
+			if ( uiInfo.mapList[index].typeBits & (1 << GT_FFA) ) {
+				active = qtrue;
+			}
+		}
+		
+		if ( active ) {
+			return va( "%s", UI_SelectedMap(index, &actual) );
+		} else {
+			return va( "^1%s", UI_SelectedMap(index, &actual) );
+		}
 	} else if (feederID == FEEDER_SERVERS) {
 		if (index >= 0 && index < uiInfo.serverStatus.numDisplayServers) {
 			int ping, game, punkbuster;
