@@ -222,7 +222,7 @@ itemDef {
     
 
     itemDef {
-      	name expert
+      	name host
 	group grpsettings
       	type ITEM_TYPE_NUMERICFIELD
 	text "Maximum Players:"
@@ -238,7 +238,7 @@ itemDef {
     	}
 		
     itemDef {
-      	name expert
+      	name host
 	group grpsettings
  	type ITEM_TYPE_YESNO
 	text "Require Password:"
@@ -253,7 +253,7 @@ itemDef {
     	}
 
     itemDef {
-      	name expert
+      	name host
 	group grpsettings
       	type 4
 	text "Password:"
@@ -270,7 +270,7 @@ itemDef {
     	}
 
     itemDef {
-  	name normal
+  	name host
 	group grpsettings
       	type ITEM_TYPE_YESNO
 	text "Pure Server:"
@@ -285,7 +285,7 @@ itemDef {
     	}
 
     itemDef {
-      	name normal
+      	name host
 	group grpsettings
       	type ITEM_TYPE_MULTI
 	text "Dedicated:"
@@ -303,7 +303,7 @@ itemDef {
     	}
 
 	itemDef {
-		name normal
+		name host
 		group grpsettings
 		type ITEM_TYPE_MULTI
 		text "Punkbuster:"
@@ -319,7 +319,7 @@ itemDef {
 	}
 	
 	itemDef {
-      	name expert
+      	name host
 	group grpsettings
       	type ITEM_TYPE_YESNO
 	text "Auto Download:"
@@ -331,6 +331,70 @@ itemDef {
 	textscale .25        
 	forecolor 1 1 1 1
 	visible 1  
+    }
+	
+	itemDef {
+      	name host
+	group grpsettings
+      	type ITEM_TYPE_NUMERICFIELD
+	text "Max Rate:"
+	cvar "sv_maxrate"
+      	rect 50 340 128 12 
+      	textalign ITEM_ALIGN_RIGHT
+      	textalignx 65
+	maxchars 4
+      	textaligny 12
+	textscale .25        
+      	forecolor 1 1 1 1
+      	visible 1  
+    	}
+
+    itemDef {
+      	name host
+	group grpsettings
+      	type ITEM_TYPE_NUMERICFIELD
+	text "Zombie Time:"
+	cvar "sv_zombietime"
+      	rect 50 355 128 12 
+	maxchars 4
+      	textalign ITEM_ALIGN_RIGHT
+      	textalignx 65
+      	textaligny 12
+	textscale .25        
+      	forecolor 1 1 1 1
+      	visible 1  
+    	}
+		
+	itemDef {
+	name expert
+	group grpsettings
+      	type ITEM_TYPE_NUMERICFIELD
+	text "Maximum Ping:"
+	cvar "sv_maxping"
+      	rect 50 370 128 12 
+      	textalign ITEM_ALIGN_RIGHT
+      	textalignx 65
+      	textaligny 12
+	maxchars 4
+	textscale .25        
+      	forecolor 1 1 1 1
+      	visible 1  
+    }
+	
+	itemDef {
+      	name host
+	group grpsettings
+      	type ITEM_TYPE_NUMERICFIELD
+	text "Reconnect Limit:"
+	cvar "sv_reconnectlimit"
+	maxchars 4
+      	rect 50 385 128 12 
+      	textalign ITEM_ALIGN_RIGHT
+      	textalignx 65
+      	textaligny 12
+	textscale .25        
+      	forecolor 1 1 1 1
+      	visible 1  
     }
 
 
@@ -344,7 +408,7 @@ itemDef {
 	text "Capture Limit:"
 	cvar "capturelimit" 
 	ownerdrawflag  0x00004800 //UI_SHOW_NETANYTEAMGAME | UI_SHOW_NOTARENAGAME
- 	rect 260 60 128 12 
+ 	rect 260 70 128 12 
 	textalign ITEM_ALIGN_RIGHT
 	textalignx 65
 	textaligny 12
@@ -360,7 +424,7 @@ itemDef {
 	text "Frag Limit:"
 	cvar "fraglimit"
 	ownerdrawflag 0x00004400 //UI_SHOW_NETANYNONTEAMGAME | UI_SHOW_NOTARENAGAME
-      	rect 260 60 128 12 
+      	rect 260 70 128 12 
       	textalign ITEM_ALIGN_RIGHT
       	textalignx 65
 	maxchars 4
@@ -376,7 +440,7 @@ itemDef {
 	text "Win Limit:"
 	cvar "winlimit"
 	ownerdrawflag UI_SHOW_ARENAGAME
-      	rect 260 60 128 12 
+      	rect 260 70 128 12 
       	textalign ITEM_ALIGN_RIGHT
       	textalignx 65
 	maxchars 4
@@ -393,7 +457,7 @@ itemDef {
 	text "Time Limit:"
 	cvar "timelimit"
 	ownerdrawflag UI_SHOW_NOTARENAGAME
-      	rect 260 77 128 12 
+      	rect 260 85 128 12 
       	textalign ITEM_ALIGN_RIGHT
       	textalignx 65
 	maxchars 4
@@ -410,7 +474,7 @@ itemDef {
 	text "Round Time:"
 	cvar "roundtime"
 	ownerdrawflag UI_SHOW_ARENAGAME
-      	rect 260 77 128 12 
+      	rect 260 85 128 12 
       	textalign ITEM_ALIGN_RIGHT
       	textalignx 65
 	maxchars 4
@@ -427,7 +491,7 @@ itemDef {
       	type ITEM_TYPE_YESNO
 	text "Friendly Fire:"
 	cvar "g_friendlyfire"
-      	rect 260 94 128 12 
+      	rect 260 100 128 12 
       	textalign ITEM_ALIGN_RIGHT
       	textalignx 65
       	textaligny 12
@@ -443,7 +507,7 @@ itemDef {
       	type ITEM_TYPE_YESNO
 	text "Instagib:"
 	cvar "g_instagib"
-      	rect 260 111 128 12 
+      	rect 260 115 128 12 
       	textalign ITEM_ALIGN_RIGHT
       	textalignx 65
       	textaligny 12
@@ -459,7 +523,23 @@ itemDef {
       	type ITEM_TYPE_YESNO
 	text "Fast Switch:"
 	cvar "g_fastweaponswitch"
-      	rect 260 128 128 12 
+      	rect 260 130 128 12 
+      	textalign ITEM_ALIGN_RIGHT
+      	textalignx 65
+      	textaligny 12
+	textscale .25        
+      	forecolor 1 1 1 1
+      	visible 1  
+    }
+
+
+    itemDef {
+      	name normal
+	group grpsettings
+      	type ITEM_TYPE_YESNO
+	text "Self-damage off:"
+	cvar "g_disableSelfDamage"
+      	rect 260 145 128 12 
       	textalign ITEM_ALIGN_RIGHT
       	textalignx 65
       	textaligny 12
@@ -470,21 +550,37 @@ itemDef {
 
 
 // 	EXPERT	//	
-	
-	itemDef {
-      	name normal
+
+    itemDef {
+      	name expert
 	group grpsettings
       	type ITEM_TYPE_YESNO
-	text "Grappling Hook:"
-	cvar "g_grapple"
-      	rect 260 191 128 12 
+	text "Do Warmup:"
+	cvar "g_dowarmup"
+      	rect 260 175 128 12 
       	textalign ITEM_ALIGN_RIGHT
       	textalignx 65
       	textaligny 12
 	textscale .25        
       	forecolor 1 1 1 1
       	visible 1  
-    }
+    	}
+
+    itemDef {
+	name expert
+	group grpsettings
+      	type ITEM_TYPE_NUMERICFIELD
+	text "Warmup time:"
+	cvar "g_warmup"
+      	rect 260 190 128 12 
+      	textalign ITEM_ALIGN_RIGHT
+      	textalignx 65
+      	textaligny 12
+	textscale .25  
+	maxchars 4
+      	forecolor 1 1 1 1
+      	visible 1  
+    	}
 
     itemDef {
       	name expert
@@ -492,7 +588,7 @@ itemDef {
       	type ITEM_TYPE_YESNO
 	text "Enable Voting:"
 	cvar "g_allowvote"
-      	rect 260 205 128 12 
+      	rect 260 220 128 12 
       	textalign ITEM_ALIGN_RIGHT
       	textalignx 65
       	textaligny 12
@@ -500,40 +596,6 @@ itemDef {
       	forecolor 1 1 1 1
       	visible 1  
     	}
-
-
-
-    itemDef {
-      	name expert
-	group grpsettings
-      	type ITEM_TYPE_NUMERICFIELD
-	text "Minimum Ping:"
-	cvar "sv_minping"
-      	rect 260 235 128 12 
-      	textalign ITEM_ALIGN_RIGHT
-      	textalignx 65
-	maxchars 4
-      	textaligny 12
-	textscale .25        
-      	forecolor 1 1 1 1
-      	visible 1  
-    }
-
-    itemDef {
-	name expert
-	group grpsettings
-      	type ITEM_TYPE_NUMERICFIELD
-	text "Maximum Ping:"
-	cvar "sv_maxping"
-      	rect 260 250 128 12 
-      	textalign ITEM_ALIGN_RIGHT
-      	textalignx 65
-      	textaligny 12
-	maxchars 4
-	textscale .25        
-      	forecolor 1 1 1 1
-      	visible 1  
-    }
 
     itemDef {
 	name expert
@@ -541,7 +603,7 @@ itemDef {
       	type ITEM_TYPE_YESNO
 	text "Force Join:"
 	cvar "g_teamautojoin"
-      	rect 260 265 128 12 
+      	rect 260 235 128 12 
       	textalign ITEM_ALIGN_RIGHT
       	textalignx 65
       	textaligny 12
@@ -549,6 +611,21 @@ itemDef {
       	forecolor 1 1 1 1
       	visible 1  
     	}
+
+	itemDef {
+      	name normal
+	group grpsettings
+      	type ITEM_TYPE_YESNO
+	text "Grappling Hook:"
+	cvar "g_grapple"
+      	rect 260 265 128 12 
+      	textalign ITEM_ALIGN_RIGHT
+      	textalignx 65
+      	textaligny 12
+	textscale .25        
+      	forecolor 1 1 1 1
+      	visible 1  
+    }
 
     itemDef {
       	name expert
@@ -565,36 +642,7 @@ itemDef {
       	visible 1  
     	}
 
-    itemDef {
-      	name expert
-	group grpsettings
-      	type ITEM_TYPE_YESNO
-	text "Do Warmup:"
-	cvar "g_dowarmup"
-      	rect 260 295 128 12 
-      	textalign ITEM_ALIGN_RIGHT
-      	textalignx 65
-      	textaligny 12
-	textscale .25        
-      	forecolor 1 1 1 1
-      	visible 1  
-    	}
 
-    itemDef {
-	name expert
-	group grpsettings
-      	type ITEM_TYPE_NUMERICFIELD
-	text "Warmup time:"
-	cvar "g_warmup"
-      	rect 260 310 128 12 
-      	textalign ITEM_ALIGN_RIGHT
-      	textalignx 65
-      	textaligny 12
-	textscale .25  
-	maxchars 4
-      	forecolor 1 1 1 1
-      	visible 1  
-    	}
 
     itemDef {
       	name expert
@@ -602,55 +650,7 @@ itemDef {
       	type ITEM_TYPE_YESNO
 	text "Synchronous Client:"
 	cvar "g_synchronousclients"
-      	rect 260 325 128 12 
-      	textalign ITEM_ALIGN_RIGHT
-      	textalignx 65
-      	textaligny 12
-	textscale .25        
-      	forecolor 1 1 1 1
-      	visible 1  
-    	}
-
-    itemDef {
-      	name expert
-	group grpsettings
-      	type ITEM_TYPE_NUMERICFIELD
-	text "Max Rate:"
-	cvar "sv_maxrate"
-      	rect 260 340 128 12 
-      	textalign ITEM_ALIGN_RIGHT
-      	textalignx 65
-	maxchars 4
-      	textaligny 12
-	textscale .25        
-      	forecolor 1 1 1 1
-      	visible 1  
-    	}
-
-    itemDef {
-      	name expert
-	group grpsettings
-      	type ITEM_TYPE_NUMERICFIELD
-	text "Zombie Time:"
-	cvar "sv_zombietime"
-      	rect 260 355 128 12 
-	maxchars 4
-      	textalign ITEM_ALIGN_RIGHT
-      	textalignx 65
-      	textaligny 12
-	textscale .25        
-      	forecolor 1 1 1 1
-      	visible 1  
-    	}
-
-    itemDef {
-      	name expert
-	group grpsettings
-      	type ITEM_TYPE_NUMERICFIELD
-	text "Reconnect Limit:"
-	cvar "sv_reconnectlimit"
-	maxchars 4
-      	rect 260 370 128 12 
+      	rect 260 295 128 12 
       	textalign ITEM_ALIGN_RIGHT
       	textalignx 65
       	textaligny 12
