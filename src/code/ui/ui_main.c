@@ -4478,18 +4478,16 @@ static const char *UI_FeederItemText(float feederID, int index, int column, qhan
 			if ( uiInfo.mapList[index].typeBits & (1 << GT_CTF) ) {
 				active = qtrue;
 			}
+#ifdef MISSIONPACK2
+		} else if (gametype == GT_ARENA || gametype == GT_TEAMARENA) {
+					active = uiInfo.mapList[index].typeBits & (1 << GT_TOURNAMENT ) || uiInfo.mapList[index].typeBits & (1 << GT_FFA );
+#endif
 		} else if (gametype == GT_1FCTF || gametype == GT_OBELISK || gametype == GT_HARVESTER ) {
-			if ( uiInfo.mapList[index].typeBits & (1 << GT_1FCTF) || uiInfo.mapList[index].typeBits & (1 << GT_OBELISK) || uiInfo.mapList[index].typeBits & (1 << GT_HARVESTER) ) {
-				active = qtrue;
-			}
+			active = uiInfo.mapList[index].typeBits & (1 << gametype);
 		} else if (gametype == GT_TOURNAMENT ) {
-			if ( uiInfo.mapList[index].typeBits & (1 << GT_TOURNAMENT) ) {
-				active = qtrue;
-			}
+			active = uiInfo.mapList[index].typeBits & (1 << GT_TOURNAMENT ) || uiInfo.mapList[index].typeBits & (1 << GT_FFA );
 		} else if (gametype <= GT_TEAM ) {
-			if ( uiInfo.mapList[index].typeBits & (1 << GT_FFA) ) {
-				active = qtrue;
-			}
+			active = uiInfo.mapList[index].typeBits & (1 << GT_FFA);
 		}
 		
 		if ( active ) {
