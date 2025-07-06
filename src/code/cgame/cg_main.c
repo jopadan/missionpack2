@@ -1327,9 +1327,9 @@ void CG_LoadMenus(const char *menuFile) {
 	len = trap_FS_FOpenFile( menuFile, &f, FS_READ );
 	if ( !f ) {
 		trap_Error( va( S_COLOR_YELLOW "menu file not found: %s, using default\n", menuFile ) );
-		len = trap_FS_FOpenFile( "ui/mpp.txt", &f, FS_READ );
+		len = trap_FS_FOpenFile( "ui/hud2.txt", &f, FS_READ );
 		if (!f) {
-			trap_Error( va( S_COLOR_RED "default menu file not found: ui/mpp.txt, unable to continue!\n", menuFile ) );
+			trap_Error( va( S_COLOR_RED "default menu file not found: ui/hud2.txt, unable to continue!\n", menuFile ) );
 		}
 	}
 
@@ -1691,7 +1691,7 @@ void CG_LoadHudMenu( void ) {
 	trap_Cvar_VariableStringBuffer("cg_hudFiles", buff, sizeof(buff));
 	hudSet = buff;
 	if (hudSet[0] == '\0') {
-		hudSet = "ui/mpp.txt";
+		hudSet = "ui/hud2.txt";
 	}
 
 	CG_LoadMenus(hudSet);

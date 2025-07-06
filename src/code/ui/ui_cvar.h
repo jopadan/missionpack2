@@ -130,7 +130,7 @@ UI_CVAR( ui_findPlayer, "ui_findPlayer", "Sarge", CVAR_ARCHIVE )
 #ifndef MISSIONPACK2
 UI_CVAR( ui_Q3Model, "ui_q3model", "0", CVAR_ARCHIVE )
 #endif
-UI_CVAR( ui_hudFiles, "cg_hudFiles", "ui/mpp.txt", CVAR_ARCHIVE )
+UI_CVAR( ui_hudFiles, "cg_hudFiles", "ui/hud2.txt", CVAR_ARCHIVE )
 UI_CVAR( ui_recordSPDemo, "ui_recordSPDemo", "0", CVAR_ARCHIVE )
 UI_CVAR( ui_teamArenaFirstRun, "ui_teamArenaFirstRun", "0", CVAR_ARCHIVE )
 UI_CVAR( ui_realWarmUp, "g_warmup", "20", CVAR_ARCHIVE )
