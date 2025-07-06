@@ -115,7 +115,7 @@ itemDef {
 
 itemDef {
       	name playselection
-      	text "Skirmish"
+      	text "Missions"
 	type 1
       	textstyle 6	
       	rect 165 272 100 30
@@ -123,12 +123,12 @@ itemDef {
 	textaligny 22
 	textscale .333
       	textalign 1		
-   	forecolor .5 .5 .5 1
+   	forecolor 1 1 1 1 
       	visible 0 
 	mouseenter { hide grpMessage; fadein message_singleplayer }
 	mouseexit { fadeout message_singleplayer }
-      	//action { close main ; open skirmish }
-		action { play "sound/misc/menu4.wav" }
+      	action { play "sound/misc/menu1.wav" ; close main ; open singleplayer }
+		//action { play "sound/misc/menu4.wav" }
     	}
 
 
