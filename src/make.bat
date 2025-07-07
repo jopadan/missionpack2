@@ -34,12 +34,12 @@ cd ..
 rd /S /Q _temp
 echo ...Done!
 
-echo CREATE MAP PK3 FILES
+echo CREATE CONTENT PK3 FILES
 md _temp
 cd _temp
-for /f "delims=" %%i in ('dir /ad/b ..\maps\*') do (
+for /f "delims=" %%i in ('dir /ad/b ..\pk3\*') do (
 echo %%i.pk3
-powershell Compress-Archive ..\maps\%%i\* %%i.zip
+powershell Compress-Archive ..\pk3\%%i\* %%i.zip
 ren %%i.zip %%i.pk3
 move %%i.pk3 ..\..\
 echo ...Done!
