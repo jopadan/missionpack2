@@ -33,7 +33,7 @@ uibackground5
   nopicmip
   nomipmaps
   {
-    map ui/assets/background3.tga
+    map ui/assets/backscreen.tga
     rgbgen identity
   }
 	

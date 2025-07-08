@@ -411,7 +411,7 @@ uibackground4
 			rgbgen wave square .5 .05 0 5
 		}
 		{
-			map ui/assets/background3.tga
+			map ui/assets/backscreen.tga
 			blendfunc add
 			//tcmod turb 1 .002 0 5	
 		}
