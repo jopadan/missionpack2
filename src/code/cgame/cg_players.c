@@ -636,7 +636,8 @@ static qboolean CG_RegisterClientModelname( clientInfo_t *ci, const char *modelN
 /* advance this function on any new pm skin added */
 static qboolean CG_IsKnownModel( const char *modelName ) {
 
-	if ( Q_stricmp(modelName, "anarki") &&
+	if (
+		 Q_stricmp(modelName, "anarki") &&
 		 Q_stricmp(modelName, "biker") &&
 		 Q_stricmp(modelName, "bitterman") &&
 		 Q_stricmp(modelName, "bones") &&
@@ -658,7 +659,12 @@ static qboolean CG_IsKnownModel( const char *modelName ) {
 		 Q_stricmp(modelName, "tankjr") &&
 		 Q_stricmp(modelName, "uriel") &&
 		 Q_stricmp(modelName, "visor") &&
-		 Q_stricmp(modelName, "xaero") )
+		 Q_stricmp(modelName, "xaero")
+#ifdef MISSIONPACK2
+		 && Q_stricmp(modelName, "callisto")
+#endif
+		 )
+		 
 		return qfalse;
 	else
 		return qtrue;

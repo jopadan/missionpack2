@@ -1,0 +1,7 @@
+{
+name		Callisto
+model		callisto
+funname	"Callisto"
+color		6
+aifile	bots/callisto_c.c
+}
