@@ -1,4 +1,24 @@
-// Copyright (C) 1999-2000 Id Software, Inc.
+/*
+===========================================================================
+Copyright (C) 1999-2005 Id Software, Inc.
+
+This file is part of Quake III Arena source code.
+
+Quake III Arena source code is free software; you can redistribute it
+and/or modify it under the terms of the GNU General Public License as
+published by the Free Software Foundation; either version 2 of the License,
+or (at your option) any later version.
+
+Quake III Arena source code is distributed in the hope that it will be
+useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Quake III Arena source code; if not, write to the Free Software
+Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+===========================================================================
+*/
 //
 
 /*****************************************************************************
@@ -53,7 +73,7 @@ int BotNumActivePlayers(void) {
 	for (i = 0; i < level.maxclients; i++) {
 		trap_GetConfigstring(CS_PLAYERS+i, buf, sizeof(buf));
 		//if no config string or no name
-		if (!buf[0] || !*Info_ValueForKey(buf, "n")) continue;
+		if (!strlen(buf) || !strlen(Info_ValueForKey(buf, "n"))) continue;
 		//skip spectators
 		if (atoi(Info_ValueForKey(buf, "t")) == TEAM_SPECTATOR) continue;
 		//
@@ -76,12 +96,11 @@ int BotIsFirstInRankings(bot_state_t *bs) {
 	for (i = 0; i < level.maxclients; i++) {
 		trap_GetConfigstring(CS_PLAYERS+i, buf, sizeof(buf));
 		//if no config string or no name
-		if (!buf[0] || !*Info_ValueForKey(buf, "n")) continue;
+		if (!strlen(buf) || !strlen(Info_ValueForKey(buf, "n"))) continue;
 		//skip spectators
 		if (atoi(Info_ValueForKey(buf, "t")) == TEAM_SPECTATOR) continue;
 		//
-		BotAI_GetClientState(i, &ps);
-		if (score < ps.persistant[PERS_SCORE]) return qfalse;
+		if (BotAI_GetClientState(i, &ps) && score < ps.persistant[PERS_SCORE]) return qfalse;
 	}
 	return qtrue;
 }
@@ -100,12 +119,11 @@ int BotIsLastInRankings(bot_state_t *bs) {
 	for (i = 0; i < level.maxclients; i++) {
 		trap_GetConfigstring(CS_PLAYERS+i, buf, sizeof(buf));
 		//if no config string or no name
-		if (!buf[0] || !*Info_ValueForKey(buf, "n")) continue;
+		if (!strlen(buf) || !strlen(Info_ValueForKey(buf, "n"))) continue;
 		//skip spectators
 		if (atoi(Info_ValueForKey(buf, "t")) == TEAM_SPECTATOR) continue;
 		//
-		BotAI_GetClientState(i, &ps);
-		if (score > ps.persistant[PERS_SCORE]) return qfalse;
+		if (BotAI_GetClientState(i, &ps) && score > ps.persistant[PERS_SCORE]) return qfalse;
 	}
 	return qtrue;
 }
@@ -126,20 +144,18 @@ char *BotFirstClientInRankings(void) {
 	for (i = 0; i < level.maxclients; i++) {
 		trap_GetConfigstring(CS_PLAYERS+i, buf, sizeof(buf));
 		//if no config string or no name
-		if (!buf[0] || !*Info_ValueForKey(buf, "n")) continue;
+		if (!strlen(buf) || !strlen(Info_ValueForKey(buf, "n"))) continue;
 		//skip spectators
 		if (atoi(Info_ValueForKey(buf, "t")) == TEAM_SPECTATOR) continue;
 		//
-		BotAI_GetClientState(i, &ps);
-		if (ps.persistant[PERS_SCORE] > bestscore) {
+		if (BotAI_GetClientState(i, &ps) && ps.persistant[PERS_SCORE] > bestscore) {
 			bestscore = ps.persistant[PERS_SCORE];
 			bestclient = i;
 		}
 	}
-	EasyClientName( bestclient, name, sizeof( name ) );
+	EasyClientName(bestclient, name, 32);
 	return name;
 }
-
 
 /*
 ==================
@@ -157,20 +173,18 @@ char *BotLastClientInRankings(void) {
 	for (i = 0; i < level.maxclients; i++) {
 		trap_GetConfigstring(CS_PLAYERS+i, buf, sizeof(buf));
 		//if no config string or no name
-		if (!buf[0] || !*Info_ValueForKey(buf, "n")) continue;
+		if (!strlen(buf) || !strlen(Info_ValueForKey(buf, "n"))) continue;
 		//skip spectators
 		if (atoi(Info_ValueForKey(buf, "t")) == TEAM_SPECTATOR) continue;
 		//
-		BotAI_GetClientState(i, &ps);
-		if (ps.persistant[PERS_SCORE] < worstscore) {
+		if (BotAI_GetClientState(i, &ps) && ps.persistant[PERS_SCORE] < worstscore) {
 			worstscore = ps.persistant[PERS_SCORE];
 			bestclient = i;
 		}
 	}
-	EasyClientName( bestclient, name, sizeof( name ) );
+	EasyClientName(bestclient, name, 32);
 	return name;
 }
-
 
 /*
 ==================
@@ -190,7 +204,7 @@ char *BotRandomOpponentName(bot_state_t *bs) {
 		//
 		trap_GetConfigstring(CS_PLAYERS+i, buf, sizeof(buf));
 		//if no config string or no name
-		if (!buf[0] || !*Info_ValueForKey(buf, "n")) continue;
+		if (!strlen(buf) || !strlen(Info_ValueForKey(buf, "n"))) continue;
 		//skip spectators
 		if (atoi(Info_ValueForKey(buf, "t")) == TEAM_SPECTATOR) continue;
 		//skip team mates
@@ -211,14 +225,21 @@ char *BotRandomOpponentName(bot_state_t *bs) {
 	return name;
 }
 
-
 /*
 ==================
 BotMapTitle
 ==================
 */
-static const char *BotMapTitle( void )
-{
+
+char *BotMapTitle(void) {
+	char info[1024];
+	static char mapname[128];
+
+	trap_GetServerinfo(info, sizeof(info));
+
+	strncpy(mapname, Info_ValueForKey( info, "mapname" ), sizeof(mapname)-1);
+	mapname[sizeof(mapname)-1] = '\0';
+
 	return mapname;
 }
 
@@ -228,6 +249,7 @@ static const char *BotMapTitle( void )
 BotWeaponNameForMeansOfDeath
 ==================
 */
+
 char *BotWeaponNameForMeansOfDeath(int mod) {
 	switch(mod) {
 		case MOD_SHOTGUN: return "Shotgun";
@@ -249,9 +271,6 @@ char *BotWeaponNameForMeansOfDeath(int mod) {
 		case MOD_PROXIMITY_MINE: return "Proximity Launcher";
 		case MOD_KAMIKAZE: return "Kamikaze";
 		case MOD_JUICED: return "Prox mine";
-#endif
-#ifdef MISSIONPACK2
-		case MOD_HMG: return "HMG";
 #endif
 		case MOD_GRAPPLE: return "Grapple";
 		default: return "[unknown weapon]";
