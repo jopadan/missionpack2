@@ -7,9 +7,9 @@ cd %~dp0
 
 :MAKE_QVM
 echo MAKE QVM
-start /wait code\game\game_ua.bat -DDEBUG
-start /wait code\cgame\cgame_ua.bat -DDEBUG
-start /wait code\ui\ui.bat -DDEBUG
+cmd /c code\game\game_ua.bat -DDEBUG
+cmd /c code\cgame\cgame_ua.bat -DDEBUG
+cmd /c code\ui\ui.bat -DDEBUG
 echo ...Done!
 goto COPYFILES_QVM
 
