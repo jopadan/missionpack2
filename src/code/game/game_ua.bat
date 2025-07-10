@@ -1,4 +1,8 @@
-rem This is portablemod
+setlocal
+@echo on
+
+set oldcd=%cd%
+
 cd %~dp0
 cd ..\..\bin
 set PATH=%cd%;%PATH%
@@ -13,7 +17,7 @@ cd vm
 set cc=q3lcc -DQ3_VM -DMISSIONPACK -DMISSIONPACK2 -S -Wf-target=bytecode -Wf-g -I..\..\cgame -I..\..\game -I..\..\ui %1
 
 %cc%  ../g_main.c
-@if errorlevel 1 goto quit
+@if errorlevel 1 goto errorquit
 
 rem %cc%  ../g_syscalls.c
 rem @if errorlevel 1 goto quit
@@ -74,6 +78,8 @@ rem @if errorlevel 1 goto quit
 @if errorlevel 1 goto errorquit
 %cc% ../g_team.c
 @if errorlevel 1 goto errorquit
+%cc% ../g_arena.c
+@if errorlevel 1 goto errorquit
 %cc% ../g_trigger.c
 @if errorlevel 1 goto errorquit
 %cc% ../g_unlagged.c
@@ -100,5 +106,5 @@ pause > nul
 goto quit
 
 :quit
-cd ..
-exit
+cd %oldcd%
+endlocal

@@ -1,4 +1,8 @@
-rem This is portablemod
+setlocal
+@echo on
+
+set oldcd=%cd%
+
 cd %~dp0
 cd ..\..\bin
 set PATH=%cd%;%PATH%
@@ -76,5 +80,5 @@ pause > nul
 goto quit
 
 :quit
-cd ..
-exit
+cd %oldcd%
+endlocal

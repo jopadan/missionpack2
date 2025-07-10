@@ -1,15 +1,20 @@
-@ECHO OFF
+setlocal
+@echo off
+
+set oldcd=%cd%
 
 set VERSION=054
 set PK3_NAME=pak%VERSION%
 
 cd %~dp0
 
-echo COMPILE QVM
-start /wait code\game\game_ua.bat
-start /wait code\cgame\cgame_ua.bat
-start /wait code\ui\ui.bat
+:MAKE_QVM
+echo MAKE QVM
+cmd /c code\game\game_ua.bat
+cmd /c code\cgame\cgame_ua.bat
+cmd /c code\ui\ui.bat
 
+:COPYFILES_QVM
 echo CREATE TEMP FOLDER AND COPY FILES
 md _temp
 cd _temp
@@ -46,5 +51,11 @@ echo ...Done!
 )
 cd ..
 rd /S /Q _temp
+goto QUIT
+
 
 :QUIT
+cd %oldcd%
+endlocal
+echo Press any key to exit . . .
+pause > NUL

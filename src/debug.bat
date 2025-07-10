@@ -1,4 +1,6 @@
-@ECHO OFF
+setlocal
+@echo off
+
 set oldcd=%cd%
 
 cd %~dp0
@@ -38,5 +40,6 @@ goto QUIT
 
 :QUIT
 cd %oldcd%
+endlocal
 echo Press any key to exit . . .
 pause > NUL
