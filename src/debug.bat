@@ -1,5 +1,5 @@
 @ECHO OFF
-oldcd=%cd%
+set oldcd=%cd%
 
 cd %~dp0
 
