@@ -5499,6 +5499,8 @@ void BotShutdownDeathmatchAI(void) {
 }
 
 
+// ~DIMMSKII
+#ifdef MISSIONPACK2
 /*
 ==================
 BotArenaPickEnemyToKill
@@ -5509,6 +5511,9 @@ void BotArenaPickEnemyToKill(bot_state_t *bs) {
 	gentity_t	*clientEnt;
 	int count = 0;
 	aas_entityinfo_t entinfo;
+	#ifdef DEBUG
+	char botname[MAX_NETNAME], othername[MAX_NETNAME];
+	#endif //DEBUG
 	
 	// Loop through all clients
 	for ( i = 0 ; i < level.maxclients ; i++ ) {
@@ -5517,8 +5522,13 @@ void BotArenaPickEnemyToKill(bot_state_t *bs) {
 			continue;
 		
 		// If on specified team and alive (health > 0), add to alive count
-		if ( clientEnt->client->sess.sessionTeam != BotTeam(bs) && clientEnt->health > 0 ) {
-			BotAI_Print(PRT_MESSAGE, "brooke\n");
+		if ( clientEnt->client->sess.sessionTeam != BotTeam(bs) && clientEnt->client->sess.sessionTeam != TEAM_SPECTATOR && clientEnt->health > 0 ) {
+	#ifdef DEBUG
+			ClientName(bs->client, botname, sizeof(botname));
+			ClientName( clientEnt->client->ps.clientNum, othername, sizeof( othername ) );
+			BotAI_Print(PRT_MESSAGE, va("%s arenapicks %s\n", botname, othername));
+	#endif //DEBUG
+			
 			break;
 		}
 	}
@@ -5527,7 +5537,9 @@ void BotArenaPickEnemyToKill(bot_state_t *bs) {
 	if (entinfo.valid) {
 		areanum = BotPointAreaNum(entinfo.origin);
 		if (areanum) {// && trap_AAS_AreaReachability(areanum)) {
-			BotAI_Print(PRT_MESSAGE, "areanum\n");
+			#ifdef DEBUG
+			BotAI_Print(PRT_MESSAGE, va("%s gets valid entinfo for arenapick\n", botname));
+			#endif //DEBUG
 			BotRoamGoal(bs,entinfo.origin);
 			bs->teamgoal.entitynum = clientEnt->client->ps.clientNum;
 			bs->teamgoal.areanum = areanum;
@@ -5539,8 +5551,13 @@ void BotArenaPickEnemyToKill(bot_state_t *bs) {
 			bs->ltgtype = LTG_CAMP;
 		}
 	} else {
+		#ifdef DEBUG
+		BotAI_Print(PRT_MESSAGE, va("^1%s gets NO entinfo for arenapick\n", botname));
+		#endif //DEBUG
 		bs->ltg_time = 0;
 		bs->ltgtype = 0;
 	}
 }
+#endif
+// END ~DIMMSKII
 

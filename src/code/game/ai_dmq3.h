@@ -126,7 +126,9 @@ void BotCTFSeekGoals(bot_state_t *bs);
 void BotCTFRetreatGoals(bot_state_t *bs);
 
 // ~DIMMSKII
+#ifdef MISSIONPACK2
 void BotArenaPickEnemyToKill(bot_state_t *bs);
+#endif
 // END ~DIMMSKII
 
 //
