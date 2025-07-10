@@ -1,24 +1,4 @@
-/*
-===========================================================================
-Copyright (C) 1999-2005 Id Software, Inc.
-
-This file is part of Quake III Arena source code.
-
-Quake III Arena source code is free software; you can redistribute it
-and/or modify it under the terms of the GNU General Public License as
-published by the Free Software Foundation; either version 2 of the License,
-or (at your option) any later version.
-
-Quake III Arena source code is distributed in the hope that it will be
-useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with Quake III Arena source code; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-===========================================================================
-*/
+// Copyright (C) 1999-2000 Id Software, Inc.
 //
 
 /*****************************************************************************
@@ -34,7 +14,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 void BotSetupDeathmatchAI(void);
 //shutdown the deathmatch AI
 void BotShutdownDeathmatchAI(void);
-//let the bot live within its deathmatch AI net
+//let the bot live within it's deathmatch AI net
 void BotDeathmatchAI(bot_state_t *bs, float thinktime);
 //free waypoints
 void BotFreeWaypoints(bot_waypoint_t *wp);
@@ -66,8 +46,6 @@ qboolean EntityIsShooting(aas_entityinfo_t *entinfo);
 //returns true if this entity has the kamikaze
 qboolean EntityHasKamikaze(aas_entityinfo_t *entinfo);
 #endif
-// set a user info key/value pair
-void BotSetUserInfo(bot_state_t *bs, char *key, char *value);
 // set the team status (offense, defense etc.)
 void BotSetTeamStatus(bot_state_t *bs);
 //returns the name of the client
@@ -136,7 +114,7 @@ int BotPopFromActivateGoalStack(bot_state_t *bs);
 void BotClearActivateGoalStack(bot_state_t *bs);
 //returns the team the bot is in
 int BotTeam(bot_state_t *bs);
-//returns the opposite team of the bot
+//retuns the opposite team of the bot
 int BotOppositeTeam(bot_state_t *bs);
 //returns the flag the bot is carrying (CTFFLAG_?)
 int BotCTFCarryingFlag(bot_state_t *bs);
@@ -169,10 +147,10 @@ bot_waypoint_t *BotCreateWayPoint(char *name, vec3_t origin, int areanum);
 //find a waypoint with the given name
 bot_waypoint_t *BotFindWayPoint(bot_waypoint_t *waypoints, char *name);
 //strstr but case insensitive
-char *stristr(char *str, char *charset);
+const char *stristr(const char *str, const char *charset);
 //returns the number of the client with the given name
-int ClientFromName(char *name);
-int ClientOnSameTeamFromName(bot_state_t *bs, char *name);
+int ClientFromName( const char *name );
+int ClientOnSameTeamFromName( bot_state_t *bs, const char *name );
 //
 int BotPointAreaNum(vec3_t origin);
 //
@@ -187,7 +165,7 @@ void BotMapScripts(bot_state_t *bs);
 #define CTF_SKIN_BLUETEAM	"blue"
 
 extern int gametype;		//game type
-extern int maxclients;		//maximum number of clients
+extern char mapname[ MAX_QPATH ];
 
 extern vmCvar_t bot_grapple;
 extern vmCvar_t bot_rocketjump;

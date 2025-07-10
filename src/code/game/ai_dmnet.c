@@ -1,24 +1,4 @@
-/*
-===========================================================================
-Copyright (C) 1999-2005 Id Software, Inc.
-
-This file is part of Quake III Arena source code.
-
-Quake III Arena source code is free software; you can redistribute it
-and/or modify it under the terms of the GNU General Public License as
-published by the Free Software Foundation; either version 2 of the License,
-or (at your option) any later version.
-
-Quake III Arena source code is distributed in the hope that it will be
-useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with Quake III Arena source code; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-===========================================================================
-*/
+// Copyright (C) 1999-2000 Id Software, Inc.
 //
 
 /*****************************************************************************
@@ -54,9 +34,11 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "match.h"			//string matching types and vars
 
 // for the voice chats
+#ifdef MISSIONPACK
 #include "../../ui/menudef.h"
+#endif
 
-//goal flag, see ../botlib/be_ai_goal.h for the other GFL_*
+//goal flag, see be_ai_goal.h for the other GFL_*
 #define GFL_AIR			128
 
 int numnodeswitches;
@@ -85,7 +67,7 @@ void BotDumpNodeSwitches(bot_state_t *bs) {
 	ClientName(bs->client, netname, sizeof(netname));
 	BotAI_Print(PRT_MESSAGE, "%s at %1.1f switched more than %d AI nodes\n", netname, FloatTime(), MAX_NODESWITCHES);
 	for (i = 0; i < numnodeswitches; i++) {
-		BotAI_Print(PRT_MESSAGE, "%s", nodeswitch[i]);
+		BotAI_Print( PRT_MESSAGE, "%s", nodeswitch[i] );
 	}
 	BotAI_Print(PRT_FATAL, "");
 }
@@ -102,7 +84,7 @@ void BotRecordNodeSwitch(bot_state_t *bs, char *node, char *str, char *s) {
 	Com_sprintf(nodeswitch[numnodeswitches], 144, "%s at %2.1f entered %s: %s from %s\n", netname, FloatTime(), node, str, s);
 #ifdef DEBUG
 	if (0) {
-		BotAI_Print(PRT_MESSAGE, "%s", nodeswitch[numnodeswitches]);
+		BotAI_Print( PRT_MESSAGE, "%s", nodeswitch[numnodeswitches] );
 	}
 #endif //DEBUG
 	numnodeswitches++;
@@ -336,7 +318,7 @@ int BotGetItemLongTermGoal(bot_state_t *bs, int tfl, bot_goal_t *goal) {
 ==================
 BotGetLongTermGoal
 
-we could also create a separate AI node for every long term goal type
+we could also create a seperate AI node for every long term goal type
 however this saves us a lot of code
 ==================
 */
@@ -354,7 +336,9 @@ int BotGetLongTermGoal(bot_state_t *bs, int tfl, int retreat, bot_goal_t *goal) 
 		if (bs->teammessage_time && bs->teammessage_time < FloatTime()) {
 			BotAI_BotInitialChat(bs, "help_start", EasyClientName(bs->teammate, netname, sizeof(netname)), NULL);
 			trap_BotEnterChat(bs->cs, bs->decisionmaker, CHAT_TELL);
+#ifdef MISSIONPACK
 			BotVoiceChatOnly(bs, bs->decisionmaker, VOICECHAT_YES);
+#endif
 			trap_EA_Action(bs->client, ACTION_AFFIRMATIVE);
 			bs->teammessage_time = 0;
 		}
@@ -399,7 +383,9 @@ int BotGetLongTermGoal(bot_state_t *bs, int tfl, int retreat, bot_goal_t *goal) 
 		if (bs->teammessage_time && bs->teammessage_time < FloatTime()) {
 			BotAI_BotInitialChat(bs, "accompany_start", EasyClientName(bs->teammate, netname, sizeof(netname)), NULL);
 			trap_BotEnterChat(bs->cs, bs->decisionmaker, CHAT_TELL);
+#ifdef MISSIONPACK
 			BotVoiceChatOnly(bs, bs->decisionmaker, VOICECHAT_YES);
+#endif
 			trap_EA_Action(bs->client, ACTION_AFFIRMATIVE);
 			bs->teammessage_time = 0;
 		}
@@ -544,7 +530,9 @@ int BotGetLongTermGoal(bot_state_t *bs, int tfl, int retreat, bot_goal_t *goal) 
 			trap_BotGoalName(bs->teamgoal.number, buf, sizeof(buf));
 			BotAI_BotInitialChat(bs, "defend_start", buf, NULL);
 			trap_BotEnterChat(bs->cs, 0, CHAT_TEAM);
+#ifdef MISSIONPACK
 			BotVoiceChatOnly(bs, -1, VOICECHAT_ONDEFENSE);
+#endif
 			bs->teammessage_time = 0;
 		}
 		//set the bot goal
@@ -600,7 +588,9 @@ int BotGetLongTermGoal(bot_state_t *bs, int tfl, int retreat, bot_goal_t *goal) 
 			trap_BotGoalName(bs->teamgoal.number, buf, sizeof(buf));
 			BotAI_BotInitialChat(bs, "getitem_start", buf, NULL);
 			trap_BotEnterChat(bs->cs, bs->decisionmaker, CHAT_TELL);
+#ifdef MISSIONPACK
 			BotVoiceChatOnly(bs, bs->decisionmaker, VOICECHAT_YES);
+#endif
 			trap_EA_Action(bs->client, ACTION_AFFIRMATIVE);
 			bs->teammessage_time = 0;
 		}
@@ -632,7 +622,9 @@ int BotGetLongTermGoal(bot_state_t *bs, int tfl, int retreat, bot_goal_t *goal) 
 			if (bs->ltgtype == LTG_CAMPORDER) {
 				BotAI_BotInitialChat(bs, "camp_start", EasyClientName(bs->teammate, netname, sizeof(netname)), NULL);
 				trap_BotEnterChat(bs->cs, bs->decisionmaker, CHAT_TELL);
+#ifdef MISSIONPACK
 				BotVoiceChatOnly(bs, bs->decisionmaker, VOICECHAT_YES);
+#endif
 				trap_EA_Action(bs->client, ACTION_AFFIRMATIVE);
 			}
 			bs->teammessage_time = 0;
@@ -656,7 +648,9 @@ int BotGetLongTermGoal(bot_state_t *bs, int tfl, int retreat, bot_goal_t *goal) 
 				if (bs->ltgtype == LTG_CAMPORDER) {
 					BotAI_BotInitialChat(bs, "camp_arrive", EasyClientName(bs->teammate, netname, sizeof(netname)), NULL);
 					trap_BotEnterChat(bs->cs, bs->decisionmaker, CHAT_TELL);
+#ifdef MISSIONPACK
 					BotVoiceChatOnly(bs, bs->decisionmaker, VOICECHAT_INPOSITION);
+#endif
 				}
 				bs->arrive_time = FloatTime();
 			}
@@ -712,7 +706,9 @@ int BotGetLongTermGoal(bot_state_t *bs, int tfl, int retreat, bot_goal_t *goal) 
 			}
 			BotAI_BotInitialChat(bs, "patrol_start", buf, NULL);
 			trap_BotEnterChat(bs->cs, bs->decisionmaker, CHAT_TELL);
+#ifdef MISSIONPACK
 			BotVoiceChatOnly(bs, bs->decisionmaker, VOICECHAT_YES);
+#endif
 			trap_EA_Action(bs->client, ACTION_AFFIRMATIVE);
 			bs->teammessage_time = 0;
 		}
@@ -763,7 +759,9 @@ int BotGetLongTermGoal(bot_state_t *bs, int tfl, int retreat, bot_goal_t *goal) 
 			if (bs->teammessage_time && bs->teammessage_time < FloatTime()) {
 				BotAI_BotInitialChat(bs, "captureflag_start", NULL);
 				trap_BotEnterChat(bs->cs, 0, CHAT_TEAM);
+#ifdef MISSIONPACK
 				BotVoiceChatOnly(bs, -1, VOICECHAT_ONGETFLAG);
+#endif
 				bs->teammessage_time = 0;
 			}
 			//
@@ -821,7 +819,9 @@ int BotGetLongTermGoal(bot_state_t *bs, int tfl, int retreat, bot_goal_t *goal) 
 			if (bs->teammessage_time && bs->teammessage_time < FloatTime()) {
 				BotAI_BotInitialChat(bs, "returnflag_start", NULL);
 				trap_BotEnterChat(bs->cs, 0, CHAT_TEAM);
+#ifdef MISSIONPACK
 				BotVoiceChatOnly(bs, -1, VOICECHAT_ONRETURNFLAG);
+#endif
 				bs->teammessage_time = 0;
 			}
 			//
@@ -1364,7 +1364,7 @@ void BotClearPath(bot_state_t *bs, bot_moveresult_t *moveresult) {
 				moveresult->flags |= MOVERESULT_MOVEMENTWEAPON | MOVERESULT_MOVEMENTVIEW;
 				// if holding the right weapon
 				if (bs->cur_ps.weapon == moveresult->weapon) {
-					// if the bot is pretty close with its aim
+					// if the bot is pretty close with it's aim
 					if (InFieldOfVision(bs->viewangles, 20, moveresult->ideal_viewangles)) {
 						//
 						BotAI_Trace(&bsptrace, bs->eye, NULL, NULL, target, bs->entitynum, MASK_SHOT);
@@ -1421,7 +1421,7 @@ void BotClearPath(bot_state_t *bs, bot_moveresult_t *moveresult) {
 				moveresult->flags |= MOVERESULT_MOVEMENTWEAPON | MOVERESULT_MOVEMENTVIEW;
 				// if holding the right weapon
 				if (bs->cur_ps.weapon == moveresult->weapon) {
-					// if the bot is pretty close with its aim
+					// if the bot is pretty close with it's aim
 					if (InFieldOfVision(bs->viewangles, 20, moveresult->ideal_viewangles)) {
 						//
 						BotAI_Trace(&bsptrace, bs->eye, NULL, NULL, target, bs->entitynum, MASK_SHOT);
@@ -1507,7 +1507,7 @@ int AINode_Seek_ActivateEntity(bot_state_t *bs) {
 			if (bs->cur_ps.weapon == bs->activatestack->weapon) {
 				VectorSubtract(bs->activatestack->target, bs->eye, dir);
 				vectoangles(dir, ideal_viewangles);
-				// if the bot is pretty close with its aim
+				// if the bot is pretty close with it's aim
 				if (InFieldOfVision(bs->viewangles, 20, ideal_viewangles)) {
 					trap_EA_Attack(bs->client);
 				}
@@ -1540,7 +1540,7 @@ int AINode_Seek_ActivateEntity(bot_state_t *bs) {
 	}
 	else {
 		// if the bot has no goal
-		if (!goal) {
+		if (!goal) { // FIXME: always false?
 			bs->activatestack->time = 0;
 		}
 		// if the bot does not have a shoot goal
@@ -2024,7 +2024,9 @@ int AINode_Battle_Fight(bot_state_t *bs) {
 #endif
 	}
 	//if no enemy
-	if (bs->enemy < 0) {
+	if (bs->enemy < 0 || ( g_gametype.integer >= GT_TEAM && bs->enemy < level.maxclients &&
+							level.clients[bs->client].sess.sessionTeam == level.clients[bs->enemy].sess.sessionTeam ) ) {
+		bs->enemy = -1;
 		AIEnter_Seek_LTG(bs, "battle fight: no enemy");
 		return qfalse;
 	}

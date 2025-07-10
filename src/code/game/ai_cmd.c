@@ -1,24 +1,4 @@
-/*
-===========================================================================
-Copyright (C) 1999-2005 Id Software, Inc.
-
-This file is part of Quake III Arena source code.
-
-Quake III Arena source code is free software; you can redistribute it
-and/or modify it under the terms of the GNU General Public License as
-published by the Free Software Foundation; either version 2 of the License,
-or (at your option) any later version.
-
-Quake III Arena source code is distributed in the hope that it will be
-useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with Quake III Arena source code; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-===========================================================================
-*/
+// Copyright (C) 1999-2000 Id Software, Inc.
 //
 
 /*****************************************************************************
@@ -54,7 +34,9 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "match.h"				//string matching types and vars
 
 // for the voice chats
+#ifdef MISSIONPACK
 #include "../../ui/menudef.h"
+#endif
 
 int notleader[MAX_CLIENTS];
 
@@ -229,47 +211,56 @@ float BotGetTime(bot_match_t *match) {
 	return 0;
 }
 
+
 /*
 ==================
 FindClientByName
 ==================
 */
-int FindClientByName(char *name) {
+int FindClientByName( const char *name ) {
+	char buf[ MAX_INFO_STRING ];
 	int i;
-	char buf[MAX_INFO_STRING];
 
-	for (i = 0; i < level.maxclients; i++) {
-		ClientName(i, buf, sizeof(buf));
-		if (!Q_stricmp(buf, name)) return i;
+	for ( i = 0; i < level.maxclients; i++ ) {
+		ClientName( i, buf, sizeof( buf ) );
+		if ( !Q_stricmp( buf, name ) ) 
+			return i; // exact match
 	}
-	for (i = 0; i < level.maxclients; i++) {
-		ClientName(i, buf, sizeof(buf));
-		if (stristr(buf, name)) return i;
+
+	for ( i = 0; i < level.maxclients ; i++ ) {
+		ClientName(i, buf, sizeof( buf ) );
+		if ( stristr( buf, name ) )
+			return i; // partial match
 	}
+
 	return -1;
 }
+
 
 /*
 ==================
 FindEnemyByName
 ==================
 */
-int FindEnemyByName(bot_state_t *bs, char *name) {
-	int i;
+int FindEnemyByName( bot_state_t *bs, const char *name ) {
 	char buf[MAX_INFO_STRING];
+	int i;
 
 	for (i = 0; i < level.maxclients; i++) {
 		if (BotSameTeam(bs, i)) continue;
 		ClientName(i, buf, sizeof(buf));
 		if (!Q_stricmp(buf, name)) return i;
 	}
+
 	for (i = 0; i < level.maxclients; i++) {
 		if (BotSameTeam(bs, i)) continue;
 		ClientName(i, buf, sizeof(buf));
 		if (stristr(buf, name)) return i;
 	}
+
 	return -1;
 }
+
 
 /*
 ==================
@@ -283,7 +274,7 @@ int NumPlayersOnSameTeam(bot_state_t *bs) {
 	num = 0;
 	for (i = 0; i < level.maxclients; i++) {
 		trap_GetConfigstring(CS_PLAYERS+i, buf, MAX_INFO_STRING);
-		if (strlen(buf)) {
+		if (buf[0]) {
 			if (BotSameTeam(bs, i+1)) num++;
 		}
 	}
@@ -1043,7 +1034,9 @@ void BotMatch_TaskPreference(bot_state_t *bs, bot_match_t *match) {
 	EasyClientName(teammate, teammatename, sizeof(teammatename));
 	BotAI_BotInitialChat(bs, "keepinmind", teammatename, NULL);
 	trap_BotEnterChat(bs->cs, teammate, CHAT_TELL);
+#ifdef MISSIONPACK
 	BotVoiceChatOnly(bs, teammate, VOICECHAT_YES);
+#endif
 	trap_EA_Action(bs->client, ACTION_AFFIRMATIVE);
 }
 
@@ -1105,8 +1098,7 @@ void BotMatch_JoinSubteam(bot_state_t *bs, bot_match_t *match) {
 	//get the sub team name
 	trap_BotMatchVariable(match, TEAMNAME, teammate, sizeof(teammate));
 	//set the sub team name
-	strncpy(bs->subteam, teammate, 32);
-	bs->subteam[31] = '\0';
+	Q_strncpyz( bs->subteam, teammate, sizeof( bs->subteam ) );
 	//
 	trap_BotMatchVariable(match, NETNAME, netname, sizeof(netname));
 	BotAI_BotInitialChat(bs, "joinedteam", teammate, NULL);
@@ -1268,8 +1260,9 @@ BotMatch_Suicide
 */
 void BotMatch_Suicide(bot_state_t *bs, bot_match_t *match) {
 	char netname[MAX_MESSAGE_SIZE];
+#ifdef MISSIONPACK
 	int client;
-
+#endif
 	if (!TeamPlayIsOn()) return;
 	//if not addressed to this bot
 	if (!BotAddressedToBot(bs, match)) return;
@@ -1277,9 +1270,11 @@ void BotMatch_Suicide(bot_state_t *bs, bot_match_t *match) {
 	trap_EA_Command(bs->client, "kill");
 	//
 	trap_BotMatchVariable(match, NETNAME, netname, sizeof(netname));
-	client = ClientFromName(netname);
 	//
+#ifdef MISSIONPACK
+	client = ClientFromName(netname);
 	BotVoiceChat(bs, client, VOICECHAT_TAUNT);
+#endif
 	trap_EA_Action(bs->client, ACTION_AFFIRMATIVE);
 }
 
@@ -1297,8 +1292,7 @@ void BotMatch_StartTeamLeaderShip(bot_state_t *bs, bot_match_t *match) {
 	if (match->subtype & ST_I) {
 		//get the team mate that will be the team leader
 		trap_BotMatchVariable(match, NETNAME, teammate, sizeof(teammate));
-		strncpy(bs->teamleader, teammate, sizeof(bs->teamleader));
-		bs->teamleader[sizeof(bs->teamleader)-1] = '\0';
+		Q_strncpyz( bs->teamleader, teammate, sizeof( bs->teamleader ) );
 	}
 	//chats for someone else
 	else {

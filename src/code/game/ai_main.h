@@ -1,24 +1,4 @@
-/*
-===========================================================================
-Copyright (C) 1999-2005 Id Software, Inc.
-
-This file is part of Quake III Arena source code.
-
-Quake III Arena source code is free software; you can redistribute it
-and/or modify it under the terms of the GNU General Public License as
-published by the Free Software Foundation; either version 2 of the License,
-or (at your option) any later version.
-
-Quake III Arena source code is distributed in the hope that it will be
-useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with Quake III Arena source code; if not, write to the Free Software
-Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-===========================================================================
-*/
+// Copyright (C) 1999-2000 Id Software, Inc.
 //
 
 /*****************************************************************************
@@ -192,6 +172,7 @@ typedef struct bot_state_s
 	float lastair_time;								//last time the bot had air
 	float teleport_time;							//last time the bot teleported
 	float camp_time;								//last time camped
+	float camp_range;								//camp range
 	float weaponchange_time;						//time the bot started changing weapons
 	float firethrottlewait_time;					//amount of time to wait
 	float firethrottleshoot_time;					//amount of time to shoot
@@ -227,7 +208,7 @@ typedef struct bot_state_s
 	int decisionmaker;								//player who decided to go for this goal
 	int ordered;									//true if ordered to do something
 	float order_time;								//time ordered to do something
-	int owndecision_time;							//time the bot made its own decision
+	int owndecision_time;							//time the bot made it's own decision
 	bot_goal_t teamgoal;							//the team goal
 	bot_goal_t altroutegoal;						//alternative route goal
 	float reachedaltroutegoal_time;					//time the bot reached the alt route goal
@@ -263,6 +244,11 @@ typedef struct bot_state_s
 	int ctfstrategy;								//ctf strategy
 	char subteam[32];								//sub team name
 	float formation_dist;							//formation team mate intervening space
+	char formation_teammate[16];					//netname of the team mate the bot uses for relative positioning
+	float formation_angle;							//angle relative to the formation team mate
+	vec3_t formation_dir;							//the direction the formation is moving in
+	vec3_t formation_origin;						//origin the bot uses for relative positioning
+	bot_goal_t formation_goal;						//formation goal
 
 	bot_activategoal_t *activatestack;				//first activate goal on the stack
 	bot_activategoal_t activategoalheap[MAX_ACTIVATESTACK];	//activate goal heap
@@ -284,10 +270,10 @@ extern float floattime;
 #define FloatTime() floattime
 
 // from the game source
-void	QDECL BotAI_Print(int type, char *fmt, ...);
+void	QDECL BotAI_Print( int type, const char *fmt, ... );
 void	QDECL QDECL BotAI_BotInitialChat( bot_state_t *bs, char *type, ... );
 void	BotAI_Trace(bsp_trace_t *bsptrace, vec3_t start, vec3_t mins, vec3_t maxs, vec3_t end, int passent, int contentmask);
 int		BotAI_GetClientState( int clientNum, playerState_t *state );
-int		BotAI_GetEntityState( int entityNum, entityState_t *state );
+qboolean BotAI_GetEntityState( int entityNum, entityState_t *state );
 int		BotAI_GetSnapshotEntity( int clientNum, int sequence, entityState_t *state );
 int		BotTeamLeader(bot_state_t *bs);
