@@ -1749,6 +1749,9 @@ void BotUpdateInventory(bot_state_t *bs) {
 	bs->inventory[INVENTORY_PROXLAUNCHER] = (bs->cur_ps.stats[STAT_WEAPONS] & (1 << WP_PROX_LAUNCHER)) != 0;;
 	bs->inventory[INVENTORY_CHAINGUN] = (bs->cur_ps.stats[STAT_WEAPONS] & (1 << WP_CHAINGUN)) != 0;;
 #endif
+#ifdef MISSIONPACK2
+	//bs->inventory[INVENTORY_HMG] = (bs->cur_ps.stats[STAT_WEAPONS] & (1 << WP_HMG)) != 0;
+#endif
 	//ammo
 	bs->inventory[INVENTORY_SHELLS] = bs->cur_ps.ammo[WP_SHOTGUN];
 	bs->inventory[INVENTORY_BULLETS] = bs->cur_ps.ammo[WP_MACHINEGUN];
@@ -1762,6 +1765,9 @@ void BotUpdateInventory(bot_state_t *bs) {
 	bs->inventory[INVENTORY_NAILS] = bs->cur_ps.ammo[WP_NAILGUN];
 	bs->inventory[INVENTORY_MINES] = bs->cur_ps.ammo[WP_PROX_LAUNCHER];
 	bs->inventory[INVENTORY_BELT] = bs->cur_ps.ammo[WP_CHAINGUN];
+#endif
+#ifdef MISSIONPACK2
+	//bs->inventory[INVENTORY_HMGAMMO] = bs->cur_ps.ammo[WP_HMG];
 #endif
 	//powerups
 	bs->inventory[INVENTORY_HEALTH] = bs->cur_ps.stats[STAT_HEALTH];
@@ -2209,6 +2215,13 @@ BotAggression
 ==================
 */
 float BotAggression(bot_state_t *bs) {
+// BEGIN ~DIMMSKII
+#ifdef MISSIONPACK2
+	if ( gametype == GT_ARENA || gametype == GT_TEAMARENA ) {
+		return 100; // Always agressive in arena gamemodes
+	}
+#endif
+// END ~DIMMSKII
 	//if the bot has quad
 	if (bs->inventory[INVENTORY_QUAD]) {
 		//if the bot is not holding the gauntlet or the enemy is really nearby
@@ -2257,6 +2270,13 @@ BotFeelingBad
 ==================
 */
 float BotFeelingBad(bot_state_t *bs) {
+// BEGIN ~DIMMSKII
+#ifdef MISSIONPACK2
+	if ( gametype == GT_ARENA || gametype == GT_TEAMARENA ) {
+		return 0; // Bots never feel bad in arena gamemodes
+	}
+#endif
+// END ~DIMMSKII
 	if (bs->weaponnum == WP_GAUNTLET) {
 		return 100;
 	}
@@ -5476,5 +5496,51 @@ BotShutdownDeathmatchAI
 */
 void BotShutdownDeathmatchAI(void) {
 	altroutegoals_setup = qfalse;
+}
+
+
+/*
+==================
+BotArenaPickEnemyToKill
+==================
+*/
+void BotArenaPickEnemyToKill(bot_state_t *bs) {
+	int			i, areanum;
+	gentity_t	*clientEnt;
+	int count = 0;
+	aas_entityinfo_t entinfo;
+	
+	// Loop through all clients
+	for ( i = 0 ; i < level.maxclients ; i++ ) {
+		clientEnt = g_entities + i;
+		if ( !clientEnt->inuse )
+			continue;
+		
+		// If on specified team and alive (health > 0), add to alive count
+		if ( clientEnt->client->sess.sessionTeam != BotTeam(bs) && clientEnt->health > 0 ) {
+			BotAI_Print(PRT_MESSAGE, "brooke\n");
+			break;
+		}
+	}
+	BotEntityInfo(clientEnt->client->ps.clientNum, &entinfo);
+	//if info is valid (in PVS)
+	if (entinfo.valid) {
+		areanum = BotPointAreaNum(entinfo.origin);
+		if (areanum) {// && trap_AAS_AreaReachability(areanum)) {
+			BotAI_Print(PRT_MESSAGE, "areanum\n");
+			BotRoamGoal(bs,entinfo.origin);
+			bs->teamgoal.entitynum = clientEnt->client->ps.clientNum;
+			bs->teamgoal.areanum = areanum;
+			bs->teamgoal_time = FloatTime() + 0.5f;
+			bs->ltg_time = FloatTime() + 0.5f;
+			VectorCopy(entinfo.origin, bs->teamgoal.origin);
+			VectorSet(bs->teamgoal.mins, -8, -8, -8);
+			VectorSet(bs->teamgoal.maxs, 8, 8, 8);
+			bs->ltgtype = LTG_CAMP;
+		}
+	} else {
+		bs->ltg_time = 0;
+		bs->ltgtype = 0;
+	}
 }
 

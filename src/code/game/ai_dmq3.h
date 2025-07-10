@@ -124,6 +124,11 @@ void BotRememberLastOrderedTask(bot_state_t *bs);
 void BotCTFSeekGoals(bot_state_t *bs);
 //set ctf goals (defend base, get enemy flag) during retreat
 void BotCTFRetreatGoals(bot_state_t *bs);
+
+// ~DIMMSKII
+void BotArenaPickEnemyToKill(bot_state_t *bs);
+// END ~DIMMSKII
+
 //
 #ifdef MISSIONPACK
 int Bot1FCTFCarryingFlag(bot_state_t *bs);
