@@ -1,12 +1,13 @@
 @ECHO OFF
+oldcd=%cd%
 
 cd %~dp0
 
 :MAKE_QVM
 echo MAKE QVM
-start /wait code\game\game_ua.bat
-start /wait code\cgame\cgame_ua.bat
-start /wait code\ui\ui.bat
+start /wait code\game\game_ua.bat -DDEBUG
+start /wait code\cgame\cgame_ua.bat -DDEBUG
+start /wait code\ui\ui.bat -DDEBUG
 echo ...Done!
 goto COPYFILES_QVM
 
@@ -31,10 +32,11 @@ goto RUN_GAME
 
 
 :RUN_GAME
-start /wait ..\missionpack2.bat +set sv_pure 0
+start ..\missionpack2.bat +set sv_pure 0
 goto QUIT
 
 
 :QUIT
+cd %oldcd%
 echo Press any key to exit . . .
 pause > NUL
