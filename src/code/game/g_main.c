@@ -1644,7 +1644,7 @@ static void CheckExitRules( void ) {
 			return;
 		}
 	}
-#endif
+#endif //MISSIONPACK2
 
 	// check for sudden death
 	if ( ScoreIsTied() ) {
@@ -1658,7 +1658,7 @@ static void CheckExitRules( void ) {
 			if ( g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA ) {
 				return;
 			}
-#endif
+#endif //MISSIONPACK2
 			G_BroadcastServerCommand( -1, "print \"Timelimit hit.\n\"");
 			LogExit( "Timelimit hit." );
 			return;
@@ -1668,6 +1668,9 @@ static void CheckExitRules( void ) {
 	if ( level.numPlayingClients < 2 ) {
 		return;
 	}
+	
+#ifdef MISSIONPACK2
+	//if ( g_gametype.integer == GT_ARENA && g_winlimit.integer ) { // TODO CHECK ARENA EXIT HERE
 	
 	if ( g_gametype.integer == GT_TEAMARENA && g_winlimit.integer ) {
 
@@ -1683,6 +1686,12 @@ static void CheckExitRules( void ) {
 			return;
 		}
 	}
+	
+	// Don't check any more fraglimit or capture limit stuff in Arena gametypes
+	if ( g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA ) {
+		return;
+	}
+#endif //MISSIONPACK2
 
 	if ( g_gametype.integer < GT_CTF && g_fraglimit.integer ) {
 		if ( level.teamScores[TEAM_RED] >= g_fraglimit.integer ) {
@@ -2353,12 +2362,9 @@ static void G_RunFrame( int levelTime ) {
 	}
 	
 #ifdef MISSIONPACK2
-	if ( g_gametype.integer == GT_TEAMARENA ) {
+	if ( g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA ) {
 		// see if Clan arena is
 		Arena_CheckRules();
-	} else if ( g_gametype.integer == GT_ARENA ) {
-		// check arena
-		//TODO
 	}
 #endif
 
