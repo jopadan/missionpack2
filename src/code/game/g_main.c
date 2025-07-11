@@ -1640,7 +1640,7 @@ static void CheckExitRules( void ) {
 	if ( (g_gametype.integer == GT_ARENA || g_gametype.integer == GT_TEAMARENA) && g_roundtime.integer && !level.warmupTime && !level.arenaRoundQueued ) {
 		if ( level.time - level.startTime >= g_roundtime.integer*1000 ) {
 			G_BroadcastServerCommand( -1, "print \"Round timelimit hit.\n\"");
-			Teamarena_TimeoutRound();
+			Arena_TimeoutRound();
 			return;
 		}
 	}
@@ -2355,7 +2355,7 @@ static void G_RunFrame( int levelTime ) {
 #ifdef MISSIONPACK2
 	if ( g_gametype.integer == GT_TEAMARENA ) {
 		// see if Clan arena is
-		Teamarena_CheckRules();
+		Arena_CheckRules();
 	} else if ( g_gametype.integer == GT_ARENA ) {
 		// check arena
 		//TODO

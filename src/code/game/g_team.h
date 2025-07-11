@@ -51,8 +51,6 @@ int OtherTeam( team_t team );
 const char *TeamName( team_t team );
 const char *OtherTeamName( team_t team );
 const char *TeamColorString( team_t team );
-int Team_PlayerCount( team_t team );
-int Team_PlayerCountAlive( team_t team );
 
 void Team_DroppedFlagThink(gentity_t *ent);
 void Team_FragBonuses(gentity_t *targ, gentity_t *inflictor, gentity_t *attacker);
@@ -66,12 +64,12 @@ qboolean Team_GetLocationMsg(gentity_t *ent, char *loc, int loclen);
 void TeamplayInfoMessage( gentity_t *ent );
 void CheckTeamStatus(void);
 
-#ifdef MISSIONPACK2
-void Teamarena_BeginRound(void);
-void Teamarena_EndRound(team_t winningTeam);
-void Teamarena_TimeoutRound(void);
-void Teamarena_CheckRules(void);
-#endif
-
 int Pickup_Team( gentity_t *ent, gentity_t *other );
 void AddTeamScore( vec3_t origin, team_t team, int score );
+
+// BEGIN ~DIMMSKII
+int Team_PlayerCount( team_t team );
+int Team_PlayerCountAlive( team_t team );
+int Team_CountTotalHealth( team_t team, qboolean includeDead );
+int Team_CountTotalArmor( team_t team, qboolean includeDead );
+// END ~DIMMSKII

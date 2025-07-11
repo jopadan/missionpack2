@@ -46,6 +46,8 @@ rem @if errorlevel 1 goto errorquit
 @if errorlevel 1 goto errorquit
 %cc% ../g_active.c
 @if errorlevel 1 goto errorquit
+%cc% ../g_arena.c
+@if errorlevel 1 goto errorquit
 %cc% ../g_arenas.c
 @if errorlevel 1 goto errorquit
 %cc% ../g_bot.c
@@ -77,8 +79,6 @@ rem @if errorlevel 1 goto errorquit
 %cc% ../g_target.c
 @if errorlevel 1 goto errorquit
 %cc% ../g_team.c
-@if errorlevel 1 goto errorquit
-%cc% ../g_arena.c
 @if errorlevel 1 goto errorquit
 %cc% ../g_trigger.c
 @if errorlevel 1 goto errorquit
