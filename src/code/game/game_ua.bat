@@ -20,7 +20,7 @@ set cc=q3lcc -DQ3_VM -DMISSIONPACK -DMISSIONPACK2 -S -Wf-target=bytecode -Wf-g -
 @if errorlevel 1 goto errorquit
 
 rem %cc%  ../g_syscalls.c
-rem @if errorlevel 1 goto quit
+rem @if errorlevel 1 goto errorquit
 
 %cc% ../ai_chat.c 
 @if errorlevel 1 goto errorquit
@@ -96,6 +96,11 @@ rem @if errorlevel 1 goto quit
 
 
 q3asm -vq3 -r -m -v -f ../game_ta
+
+@echo off
+
+
+@if errorlevel 1 goto errorquit
 
 goto quit
 

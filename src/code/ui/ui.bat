@@ -40,6 +40,11 @@ set cc=q3lcc -DMISSIONPACK -DMISSIONPACK2 -DQ3_VM -S -Wf-target=bytecode -Wf-g -
 
 q3asm -vq3 -r -m -v -f ../ui
 
+@echo off
+
+
+@if errorlevel 1 goto errorquit
+
 goto quit
 
 :errorquit

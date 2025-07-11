@@ -71,6 +71,10 @@ set cc=q3lcc -DQ3_VM -DMISSIONPACK -DMISSIONPACK2 -DCGAME -S -Wf-target=bytecode
 
 q3asm -vq3 -r -m -v -f ../cgame_ta
 
+@echo off
+
+@if errorlevel 1 goto errorquit
+
 goto quit
 
 :errorquit
