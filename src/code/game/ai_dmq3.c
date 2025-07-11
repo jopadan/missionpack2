@@ -5522,24 +5522,26 @@ void BotArenaPickEnemyToKill(bot_state_t *bs) {
 			continue;
 		
 		// If on specified team and alive (health > 0), add to alive count
-		if ( clientEnt->client->sess.sessionTeam != BotTeam(bs) && clientEnt->client->sess.sessionTeam != TEAM_SPECTATOR && clientEnt->health > 0 ) {
+		if ( gametype < GT_TEAM || clientEnt->client->sess.sessionTeam != BotTeam(bs) ) {
+			if ( clientEnt->client->sess.sessionTeam != TEAM_SPECTATOR && clientEnt->health > 0 ) {
 	#ifdef DEBUG
-			ClientName(bs->client, botname, sizeof(botname));
-			ClientName( clientEnt->client->ps.clientNum, othername, sizeof( othername ) );
-			BotAI_Print(PRT_MESSAGE, va("%s arenapicks %s\n", botname, othername));
+				ClientName(bs->client, botname, sizeof(botname));
+				ClientName( clientEnt->client->ps.clientNum, othername, sizeof( othername ) );
+				BotAI_Print(PRT_MESSAGE, va("%s arenapicks %s\n", botname, othername));
 	#endif //DEBUG
-			
-			break;
+				
+				break;
+			}
 		}
 	}
 	BotEntityInfo(clientEnt->client->ps.clientNum, &entinfo);
 	//if info is valid (in PVS)
 	if (entinfo.valid) {
+	#ifdef DEBUG
+		BotAI_Print(PRT_MESSAGE, va("%s gets valid entinfo for arenapick\n", botname));
+	#endif //DEBUG
 		areanum = BotPointAreaNum(entinfo.origin);
 		if (areanum) {// && trap_AAS_AreaReachability(areanum)) {
-			#ifdef DEBUG
-			BotAI_Print(PRT_MESSAGE, va("%s gets valid entinfo for arenapick\n", botname));
-			#endif //DEBUG
 			BotRoamGoal(bs,entinfo.origin);
 			bs->teamgoal.entitynum = clientEnt->client->ps.clientNum;
 			bs->teamgoal.areanum = areanum;
@@ -5551,9 +5553,9 @@ void BotArenaPickEnemyToKill(bot_state_t *bs) {
 			bs->ltgtype = LTG_CAMP;
 		}
 	} else {
-		#ifdef DEBUG
-		BotAI_Print(PRT_MESSAGE, va("^1%s gets NO entinfo for arenapick\n", botname));
-		#endif //DEBUG
+	#ifdef DEBUG
+		BotAI_Print(PRT_MESSAGE, va("%s GETS NO VALID entinfo for arenapick\n", botname));
+	#endif //DEBUG
 		bs->ltg_time = 0;
 		bs->ltgtype = 0;
 	}
