@@ -34,7 +34,7 @@ goto RUN_GAME
 
 
 :RUN_GAME
-start ..\missionpack2.bat +set sv_pure 0
+..\missionpack2.bat +set sv_pure 0
 goto QUIT
 
 
