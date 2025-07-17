@@ -5523,7 +5523,7 @@ void BotArenaPickEnemyToKill(bot_state_t *bs) {
 		
 		// If on specified team and alive (health > 0), add to alive count
 		if ( gametype < GT_TEAM || clientEnt->client->sess.sessionTeam != BotTeam(bs) ) {
-			if ( clientEnt->client->sess.sessionTeam != TEAM_SPECTATOR && clientEnt->health > 0 ) {
+			if ( bs->client != clientEnt->client->ps.clientNum && clientEnt->client->sess.sessionTeam != TEAM_SPECTATOR && clientEnt->health > 0 ) {
 	#ifdef DEBUG
 				ClientName(bs->client, botname, sizeof(botname));
 				ClientName( clientEnt->client->ps.clientNum, othername, sizeof( othername ) );
