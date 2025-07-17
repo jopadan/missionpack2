@@ -1612,13 +1612,6 @@ void CG_OwnerDraw(float x, float y, float w, float h, float text_x, float text_y
   case CG_PLAYER_SCORE:
     CG_DrawPlayerScore(&rect, scale, color, shader, textStyle);
     break;
-// ~Dimmskii
-#ifdef MISSIONPACK2
-  case CG_PLAYER_WINS: 	// Arena wins
-    CG_DrawPlayerWins(&rect, scale, color, shader, textStyle);
-    break;
-#endif
-// END ~Dimmskii
   case CG_PLAYER_HEALTH:
     CG_DrawPlayerHealth(&rect, scale, color, shader, textStyle);
     break;
@@ -1628,6 +1621,13 @@ void CG_OwnerDraw(float x, float y, float w, float h, float text_x, float text_y
   case CG_BLUE_SCORE:
     CG_DrawBlueScore(&rect, scale, color, shader, textStyle);
     break;
+// ~Dimmskii
+#ifdef MISSIONPACK2
+  case CG_PLAYER_WINS: 	// Arena wins
+    CG_DrawPlayerWins(&rect, scale, color, shader, textStyle);
+    break;
+#endif
+// END ~Dimmskii
   case CG_RED_NAME:
     CG_DrawRedName(&rect, scale, color, textStyle);
     break;
