@@ -1691,7 +1691,7 @@ void CG_LoadHudMenu( void ) {
 	trap_Cvar_VariableStringBuffer("cg_hudFiles", buff, sizeof(buff));
 	hudSet = buff;
 	if (hudSet[0] == '\0') {
-		hudSet = "ui/hud2.txt";
+		hudSet = "ui/hud.txt";
 	}
 
 	CG_LoadMenus(hudSet);
