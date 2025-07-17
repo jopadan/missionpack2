@@ -34,13 +34,18 @@ void Arena_EndRound( team_t winningTeam ) {
 			// If not spectator and alive, add arena score
 			if ( clientEnt->client->sess.sessionTeam != TEAM_SPECTATOR && clientEnt->health > 0 ) {
 				clientEnt->client->ps.persistant[PERS_WINS] ++;
+				if ( g_winlimit.integer ) {
+					if ( clientEnt->client->ps.persistant[PERS_WINS] >= g_winlimit.integer ) {
+						return; // Round enqueue after winning preventative measure
+					}
+				}
 			}
 		}
 	}
 	
 	if ( g_winlimit.integer ) {
 		if ( level.teamScores[TEAM_RED] >= g_winlimit.integer || level.teamScores[TEAM_BLUE] >= g_winlimit.integer ) {
-			return;
+			return; // Round enqueue after winning preventative measure
 		}
 	}
 	
