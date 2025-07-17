@@ -1670,9 +1670,24 @@ static void CheckExitRules( void ) {
 	}
 	
 #ifdef MISSIONPACK2
-	//if ( g_gametype.integer == GT_ARENA && g_winlimit.integer ) { // TODO CHECK ARENA EXIT HERE
-	
-	if ( g_gametype.integer == GT_TEAMARENA && g_winlimit.integer ) {
+	if ( g_gametype.integer == GT_ARENA && g_winlimit.integer ) {
+		for ( i = 0 ; i < level.maxclients ; i++ ) {
+			cl = level.clients + i;
+			if ( cl->pers.connected != CON_CONNECTED ) {
+				continue;
+			}
+			if ( cl->sess.sessionTeam != TEAM_FREE ) {
+				continue;
+			}
+
+			if ( cl->ps.persistant[PERS_WINS] >= g_winlimit.integer ) {
+				LogExit( "Winlimit hit." );
+				G_BroadcastServerCommand( -1, va("print \"%s" S_COLOR_WHITE " hit the winlimit.\n\"",
+					cl->pers.netname ) );
+				return;
+			}
+		}
+	} else if ( g_gametype.integer == GT_TEAMARENA && g_winlimit.integer ) {
 
 		if ( level.teamScores[TEAM_RED] >= g_winlimit.integer ) {
 			G_BroadcastServerCommand( -1, "print \"Red hit the winlimit.\n\"" );
