@@ -347,6 +347,26 @@ itemdef {
 	forecolor 1 1 1 1
 	textscale .25
 	cvar "fraglimit"
+	visible 1
+	cvarTest "g_gametype"
+	 hideCvar { "3" }
+	decoration
+	}
+itemdef {
+	name playerscore
+	type 4
+	text "Winlimit:"
+   	rect 30 405 40 10
+	textalignx 0
+	textaligny 10
+   	visible 1 
+	textalign 0
+	forecolor 1 1 1 1
+	textscale .25
+	cvar "winlimit"
+	visible 1
+	cvarTest "g_gametype"
+	 showCvar { "3" }
 	decoration
 	}
 
@@ -354,7 +374,7 @@ itemdef {
 
 itemdef {
 	name playerscore
-	text "Score:"
+	text "Map:"
    	rect 30 420 40 10
 	textalignx 0
 	textaligny 10
@@ -362,7 +382,7 @@ itemdef {
 	textalign 0
 	forecolor 1 1 1 1
 	textscale .25
-	ownerdraw CG_PLAYER_SCORE
+	ownerdraw CG_MAP_NAME
 	decoration
 	}
 
