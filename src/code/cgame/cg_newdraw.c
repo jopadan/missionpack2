@@ -1034,6 +1034,26 @@ qboolean CG_OwnerDrawVisible(int flags) {
 		return qfalse;
 	}
 
+// ~Dimmskii
+#ifdef MISSIONPACK2
+	if (flags & CG_SHOW_ANYARENAGAME) {
+		if( cgs.gametype == GT_ARENA || cgs.gametype == GT_TEAMARENA ) {
+			return qtrue;
+		} else {
+			return qfalse;
+		}
+	}
+
+	if (flags & CG_SHOW_ANYNONARENAGAME) {
+		if( cgs.gametype != GT_ARENA && cgs.gametype != GT_TEAMARENA ) {
+			return qtrue;
+		} else {
+			return qfalse;
+		}
+	}
+#endif
+// END ~Dimmskii
+
 	if (flags & CG_SHOW_ANYTEAMGAME) {
 		if( cgs.gametype >= GT_TEAM) {
 			return qtrue;
@@ -1156,7 +1176,21 @@ static void CG_DrawKiller(rectDef_t *rect, float scale, vec4_t color, qhandle_t 
 
 
 static void CG_DrawCapFragLimit(rectDef_t *rect, float scale, vec4_t color, qhandle_t shader, int textStyle) {
+	//int limit = (cgs.gametype >= GT_CTF) ? cgs.capturelimit : cgs.fraglimit;
+	int limit;
+// ~Dimmskii
+#ifdef MISSIONPACK2
+	if (cgs.gametype == GT_ARENA || cgs.gametype == GT_TEAMARENA) {
+		limit = cgs.winlimit;
+	} else if (cgs.gametype >= GT_CTF) {
+		limit = cgs.capturelimit;
+	} else {
+		limit = cgs.fraglimit;
+	}
+#else
 	int limit = (cgs.gametype >= GT_CTF) ? cgs.capturelimit : cgs.fraglimit;
+#endif
+// END ~Dimmskii
 	CG_Text_Paint(rect->x, rect->y, scale, color, va("%2i", limit),0, 0, textStyle); 
 }
 

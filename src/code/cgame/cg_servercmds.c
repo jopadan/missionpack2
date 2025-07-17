@@ -136,6 +136,11 @@ void CG_ParseServerinfo( void ) {
 	cgs.teamflags = atoi( Info_ValueForKey( info, "teamflags" ) );
 	cgs.fraglimit = atoi( Info_ValueForKey( info, "fraglimit" ) );
 	cgs.capturelimit = atoi( Info_ValueForKey( info, "capturelimit" ) );
+// ~Dimmskii
+#ifdef MISSIONPACK2
+	cgs.winlimit = atoi( Info_ValueForKey( info, "winlimit" ) );
+#endif
+// END ~Dimmskii
 	cgs.timelimit = atoi( Info_ValueForKey( info, "timelimit" ) );
 	cgs.maxclients = atoi( Info_ValueForKey( info, "sv_maxclients" ) );
 	cgs.g_grappleDelayTime = atoi(Info_ValueForKey(info, "g_grappleDelayTime"));

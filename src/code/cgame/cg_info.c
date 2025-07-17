@@ -274,6 +274,7 @@ void CG_DrawInformation( void ) {
 		s = "Harvester";
 		break;
 #endif
+// ~Dimmskii
 #ifdef MISSIONPACK2
 	case GT_ARENA:
 		s = "Arena";
@@ -282,6 +283,7 @@ void CG_DrawInformation( void ) {
 		s = "Team Arena";
 		break;
 #endif
+// END ~Dimmskii
 	default:
 		BG_sprintf( buf, "Gametype #%i", cgs.gametype );
 		s = buf;
@@ -315,5 +317,18 @@ void CG_DrawInformation( void ) {
 			y += PROP_HEIGHT;
 		}
 	}
+	
+// ~Dimmskii
+#ifdef MISSIONPACK2
+	if (cgs.gametype == GT_ARENA || cgs.gametype == GT_TEAMARENA) {
+		value = atoi( Info_ValueForKey( info, "winlimit" ) );
+		if ( value ) {
+			UI_DrawProportionalString( 320, y, va( "winlimit %i", value ),
+				UI_CENTER|UI_SMALLFONT|UI_DROPSHADOW, colorWhite );
+			y += PROP_HEIGHT;
+		}
+	}
+#endif
+// END ~Dimmskii
 }
 

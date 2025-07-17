@@ -1065,6 +1065,11 @@ typedef struct {
 	int				teamflags;
 	int				fraglimit;
 	int				capturelimit;
+// ~Dimmskii
+#ifdef MISSIONPACK2
+	int				winlimit;
+#endif
+// END ~Dimmskii
 	int				timelimit;
 	int				maxclients;
 	char			mapname[MAX_QPATH];

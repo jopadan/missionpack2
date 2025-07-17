@@ -536,7 +536,7 @@ menuDef {
     	fullScreen MENU_FALSE
     	visible MENU_TRUE
     	rect 418 455 150 24
-	ownerdrawflag CG_SHOW_ANYNONTEAMGAME    
+	ownerdrawflag 0x00280000 // CG_SHOW_ANYNONARENAGAME | CG_SHOW_ANYNONTEAMGAME    
 
 
 	itemDef {
