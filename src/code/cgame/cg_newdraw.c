@@ -1037,17 +1037,13 @@ qboolean CG_OwnerDrawVisible(int flags) {
 // ~Dimmskii
 #ifdef MISSIONPACK2
 	if (flags & CG_SHOW_ANYARENAGAME) {
-		if( cgs.gametype == GT_ARENA || cgs.gametype == GT_TEAMARENA ) {
-			return qtrue;
-		} else {
+		if( cgs.gametype != GT_ARENA && cgs.gametype != GT_TEAMARENA ) {
 			return qfalse;
 		}
 	}
 
 	if (flags & CG_SHOW_ANYNONARENAGAME) {
-		if( cgs.gametype != GT_ARENA && cgs.gametype != GT_TEAMARENA ) {
-			return qtrue;
-		} else {
+		if( cgs.gametype == GT_ARENA || cgs.gametype == GT_TEAMARENA ) {
 			return qfalse;
 		}
 	}

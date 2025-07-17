@@ -590,6 +590,57 @@ menuDef {
 	ownerdraw CG_2NDPLACE
 	}
   	}
+	
+	
+//	TEAMSCORE	//
+
+menuDef {
+    	name "teamScore"
+    	fullScreen MENU_FALSE
+    	visible MENU_TRUE
+    	rect 418 455 150 24
+	ownerdrawflag 0x00180000 // CG_SHOW_ANYARENAGAME | CG_SHOW_ANYNONTEAMGAME
+
+
+	itemDef {
+	name "teamScoreRect"
+	visible 1
+	rect 0 0 150 24
+	border 1
+	bordersize 1
+	bordercolor .5 .5 .5 1
+	style 4
+	}
+
+
+	itemDef {
+      	name "playerScore"
+        rect 8 18 40 0
+	visible 1
+	textstyle 3
+    	decoration
+	forecolor 1 1 1 1
+	textscale .25
+	text ""
+	ownerdraw CG_CAPFRAGLIMIT 
+	}
+
+
+
+
+	itemDef {
+      	name "r"
+        rect 40 6 18 12
+	textstyle 3
+	text "Wins:"
+	textaligny 12
+	visible 1
+	decoration
+	forecolor .15 .8 .15 1
+	textscale 0.25
+	ownerdraw CG_PLAYER_WINS 
+	}
+  	}
 
 //	PLAYERSCORE	//
 
