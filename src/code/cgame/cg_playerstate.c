@@ -431,7 +431,14 @@ void CG_CheckLocalSounds( playerState_t *ps, playerState_t *ops ) {
 		if ( !cg.warmup ) {
 			// never play lead changes during warmup
 			if ( ps->persistant[PERS_RANK] != ops->persistant[PERS_RANK] ) {
+//				if ( cgs.gametype < GT_TEAM) {
+// ~Dimmskii
+#ifdef MISSIONPACK2
+				if ( cgs.gametype < GT_ARENA) { // Only play on non-team gametypes < 3 (0=ffa, 1=tourney, 2=ffa)
+#else
 				if ( cgs.gametype < GT_TEAM) {
+#endif
+// END ~Dimmskii
 					if (  ps->persistant[PERS_RANK] == 0 ) {
 						CG_AddBufferedSound(cgs.media.takenLeadSound);
 					} else if ( ps->persistant[PERS_RANK] == RANK_TIED_FLAG ) {
