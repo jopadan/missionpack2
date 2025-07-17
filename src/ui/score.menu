@@ -115,7 +115,7 @@ itemDef {
 itemDef {
       	name teamheadings
       	text "Skill"
-	textscale .35
+	textscale .25
       	style 0	
       	rect 25 65 30 30 
       	textalign 0		
@@ -142,7 +142,7 @@ itemDef {
 itemDef {
       	name teamheadings
       	text "Status"
-	textscale .35
+	textscale .25
       	style 0	
       	rect 85 65 64 30 
       	textalign 0		
@@ -169,7 +169,7 @@ itemDef {
 itemDef {
       	name teamheadings
       	text "Name"
-	textscale .35
+	textscale .25
       	style 0	
       	rect 170 65 64 30 
       	textalign 0		
@@ -196,7 +196,7 @@ itemDef {
 itemDef {
       	name teamheadings
       	text "Score"
-      	textscale .35
+      	textscale .25
       	style 0	
       	rect 385 65 64 30 
       	textalign 0		
@@ -223,7 +223,7 @@ itemDef {
 itemDef {
       	name teamheadings
       	text "Time"
-      	textscale .35
+      	textscale .25
       	style 0	
       	rect 490 65 64 30 
       	textalign 0		
@@ -250,7 +250,7 @@ itemDef {
 itemDef {
       	name teamheadings
       	text "Ping"
-      	textscale .35
+      	textscale .25
       	style 0	
       	rect 560 65 64 30 
       	textalign 0		
@@ -288,7 +288,7 @@ itemDef	 {
 	type ITEM_TYPE_LISTBOX
 	elementwidth 592
 	elementheight 20
-	textscale .25
+	textscale .2
 	elementtype LISTBOX_TEXT
 	feeder FEEDER_SCOREBOARD
 	notselectable
