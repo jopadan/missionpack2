@@ -16,11 +16,26 @@ void Arena_BeginRound( void ) {
 vec3_t zeroVec3 = {0, 0, 0};
 void Arena_EndRound( team_t winningTeam ) {
 	
-	if ( winningTeam == TEAM_RED || winningTeam == TEAM_BLUE ) {
+	if ( winningTeam == TEAM_RED || winningTeam == TEAM_BLUE ) { // CA
 		AddTeamScore(zeroVec3, winningTeam, 1);
 		
 		trap_SetConfigstring( CS_SCORES1, va("%i", level.teamScores[TEAM_RED]) );
 		trap_SetConfigstring( CS_SCORES2, va("%i", level.teamScores[TEAM_BLUE]) );
+	} else if ( winningTeam != TEAM_SPECTATOR ) { // FFA
+		int			i;
+		gentity_t	*clientEnt;
+	
+		// Loop through all clients
+		for ( i = 0 ; i < level.maxclients ; i++ ) {
+			clientEnt = g_entities + i;
+			if ( !clientEnt->inuse )
+				continue;
+			
+			// If not spectator and alive, add arena score
+			if ( clientEnt->client->sess.sessionTeam != TEAM_SPECTATOR && clientEnt->health > 0 ) {
+				clientEnt->client->ps.persistant[PERS_WINS] ++;
+			}
+		}
 	}
 	
 	if ( g_winlimit.integer ) {

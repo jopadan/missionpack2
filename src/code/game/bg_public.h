@@ -234,6 +234,11 @@ typedef enum {
 	PERS_ASSIST_COUNT,				// assist awards
 	PERS_GAUNTLET_FRAG_COUNT,		// kills with the gauntlet
 	PERS_CAPTURES					// captures
+// ~Dimmskii
+#ifdef MISSIONPACK2
+	,PERS_WINS						// arena wins
+#endif
+// END ~Dimmskii
 } persEnum_t;
 
 
