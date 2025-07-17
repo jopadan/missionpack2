@@ -206,7 +206,14 @@ static void CG_Obituary( entityState_t *ent ) {
 	if ( attacker == cg.snap->ps.clientNum ) {
 		char	*s;
 
-		if ( cgs.gametype < GT_TEAM ) {
+//		if ( cgs.gametype < GT_TEAM ) {
+// ~Dimmskii
+#ifdef MISSIONPACK2
+		if ( cgs.gametype < GT_ARENA) { // Only on non-team gametypes < 3 (0=ffa, 1=tourney, 2=ffa)
+#else
+		if ( cgs.gametype < GT_TEAM) {
+#endif
+// END ~Dimmskii
 			s = va("You fragged %s\n%s place with %i", targetName, 
 				CG_PlaceString( cg.snap->ps.persistant[PERS_RANK] + 1 ),
 				cg.snap->ps.persistant[PERS_SCORE] );
