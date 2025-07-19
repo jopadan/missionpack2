@@ -196,7 +196,7 @@ G_CVAR( g_arenaAmmoBFG, "g_arenaAmmoBFG", "5", 0, 0, qfalse, qfalse )
 	#endif
 G_CVAR( g_arenaAmmoHMG, "g_arenaAmmoHMG", "150", 0, 150, qfalse, qfalse )
 
-G_CVAR( g_arenaWpflags, "g_arenaWpflags", "2175", 0, 0, qfalse, qfalse )
+G_CVAR( g_arenaWpflags, "arenaWpflags", "2175", 0, 0, qfalse, qfalse )
 #endif
 
 G_CVAR( g_tossWeapon, "g_tossWeapon", "1", CVAR_ARCHIVE, 0, qtrue, qtrue )
@@ -206,7 +206,7 @@ G_CVAR( g_removeammo, "g_removeammo", "0", 0, 0, qfalse, qfalse )
 G_CVAR( g_removeitem, "g_removeitem", "0", 0, 0, qfalse, qfalse )
 G_CVAR( g_removepowerup, "g_removepowerup", "0", 0, 0, qfalse, qfalse )
 G_CVAR( g_removeweapon, "g_removeweapon", "0", 0, 0, qfalse, qfalse )
-G_CVAR( g_wpflags, "g_wpflags", "0", 0, 0, qfalse, qfalse )
+G_CVAR( g_wpflags, "wpflags", "0", 0, 0, qfalse, qfalse )
 
 G_CVAR( g_1FRespawn, "g_1FRespawn", "0", 0, 0, qfalse, qfalse)
 G_CVAR( g_loadCustomEnts, "g_loadCustomEnts", "0", 0, 0, qfalse, qfalse)
