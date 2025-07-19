@@ -57,13 +57,15 @@ static const char *teamArenaGameTypes[] = {
 	"FFA",
 	"TOURNAMENT",
 	"SP",
-	// "ARENA",
+	"ARENA",
 	"TEAM DM",
+	"TEAMARENA",
+	"FREEZE",
 	"CTF",
 	"1FCTF",
 	"OVERLOAD",
 	"HARVESTER",
-	"TEAMARENA"
+	"TEAMTOURNAMENT"
 };
 
 static int const numTeamArenaGameTypes = sizeof(teamArenaGameTypes) / sizeof(const char*);
@@ -73,13 +75,15 @@ static const char *teamArenaGameNames[] = {
 	"Free For All",
 	"Tournament",
 	"Single Player",
-	// "Arena",
+	"Arena",
 	"Team Deathmatch",
+	"Team Arena",
+	"Freeze Tag",
 	"Capture the Flag",
 	"One Flag CTF",
 	"Overload",
 	"Harvester",
-	"Team Arena",
+	"Team Tournament",
 };
 
 static int const numTeamArenaGameNames = sizeof(teamArenaGameNames) / sizeof(const char*);

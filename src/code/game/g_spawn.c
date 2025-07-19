@@ -394,9 +394,9 @@ void G_SpawnGEntityFromSpawnVars( void ) {
 	gentity_t	*ent;
 	char		*s, *value, *gametypeName;
 #ifdef MISSIONPACK2
-	static char *gametypeNames[] = {"ffa", "tournament", "single", "arena", "team", "teamarena", "ctf", "oneflag", "obelisk", "harvester"};
+	static char *gametypeNames[] = {"ffa", "tournament", "single", "arena", "team", "teamarena", "freeze", "ctf", "oneflag", "obelisk", "harvester", "teamtournament"};
 #else
-	static char *gametypeNames[] = {"ffa", "tournament", "single", "team", "ctf", "oneflag", "obelisk", "harvester"};
+	static char *gametypeNames[] = {"ffa", "tournament", "single", "team", "ctf", "oneflag", "obelisk", "harvester", "teamtournament"};
 #endif
 
 	// get the next free entity

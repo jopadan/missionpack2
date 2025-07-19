@@ -162,8 +162,13 @@ void UI_LoadArenas( void ) {
 		if( *type ) {
 			if( strstr( type, "ffa" ) ) {
 				uiInfo.mapList[uiInfo.mapCount].typeBits |= (1 << GT_FFA);
+// ~Dimmskii
+#ifdef MISSIONPACK2
 				uiInfo.mapList[uiInfo.mapCount].typeBits |= (1 << GT_ARENA);
 				uiInfo.mapList[uiInfo.mapCount].typeBits |= (1 << GT_TEAMARENA);
+				uiInfo.mapList[uiInfo.mapCount].typeBits |= (1 << GT_FREEZE);
+#endif //MISSIONPACK2
+// END ~Dimmskii
 			}
 			if( strstr( type, "tourney" ) ) {
 				uiInfo.mapList[uiInfo.mapCount].typeBits |= (1 << GT_TOURNAMENT);

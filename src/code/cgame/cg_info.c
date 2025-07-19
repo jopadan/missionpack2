@@ -282,6 +282,9 @@ void CG_DrawInformation( void ) {
 	case GT_TEAMARENA:
 		s = "Team Arena";
 		break;
+	case GT_FREEZE:
+		s = "Freeze Tag";
+		break;
 #endif
 // END ~Dimmskii
 	default:
@@ -320,7 +323,7 @@ void CG_DrawInformation( void ) {
 	
 // ~Dimmskii
 #ifdef MISSIONPACK2
-	if (cgs.gametype == GT_ARENA || cgs.gametype == GT_TEAMARENA) {
+	if (cgs.gametype == GT_ARENA || cgs.gametype == GT_TEAMARENA || cgs.gametype == GT_FREEZE) {
 		value = atoi( Info_ValueForKey( info, "winlimit" ) );
 		if ( value ) {
 			UI_DrawProportionalString( 320, y, va( "winlimit %i", value ),
