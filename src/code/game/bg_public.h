@@ -94,7 +94,7 @@ typedef enum {
 	GT_TEAM,			// team deathmatch
 #ifdef MISSIONPACK2
 	GT_TEAMARENA,		// team arena AKA clan arena AKA team last man standing
-	GT_FREEZE,			// freeze tag
+	GT_FREEZETAG,			// freeze tag
 #endif
 	GT_CTF,				// capture the flag
 #ifdef MISSIONPACK

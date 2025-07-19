@@ -60,7 +60,7 @@ static const char *teamArenaGameTypes[] = {
 	"ARENA",
 	"TEAM DM",
 	"TEAMARENA",
-	"FREEZE",
+	"FREEZETAG",
 	"CTF",
 	"1FCTF",
 	"OVERLOAD",

@@ -166,7 +166,7 @@ void UI_LoadArenas( void ) {
 #ifdef MISSIONPACK2
 				uiInfo.mapList[uiInfo.mapCount].typeBits |= (1 << GT_ARENA);
 				uiInfo.mapList[uiInfo.mapCount].typeBits |= (1 << GT_TEAMARENA);
-				uiInfo.mapList[uiInfo.mapCount].typeBits |= (1 << GT_FREEZE);
+				uiInfo.mapList[uiInfo.mapCount].typeBits |= (1 << GT_FREEZETAG);
 #endif //MISSIONPACK2
 // END ~Dimmskii
 			}
