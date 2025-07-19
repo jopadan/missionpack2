@@ -7,8 +7,8 @@
 // 2 - GT_SINGLE_PLAYER,	// single player ffa
 // 3 - GT_ARENA,			// arena AKA last man standing
 // 4 - GT_TEAM,				// team deathmatch
-// 5 - GT_TEAMARENA			// team arena AKA clan arena
-// 6 - GT_FREEZETAG			// freeze tag
+// 5 - GT_TEAMARENA,		// team arena AKA clan arena
+// 6 - GT_FREEZETAG,		// freeze tag
 // 7 - GT_CTF,				// capture the flag
 // 8 - GT_1FCTF,			// one flag ctf
 // 9 - GT_OBELISK,			// obelisk
