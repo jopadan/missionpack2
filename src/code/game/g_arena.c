@@ -34,6 +34,7 @@ void Arena_EndRound( team_t winningTeam ) {
 			// If not spectator and alive, add arena score
 			if ( clientEnt->client->sess.sessionTeam != TEAM_SPECTATOR && clientEnt->health > 0 ) {
 				clientEnt->client->ps.persistant[PERS_ROUNDWINS] ++;
+				clientEnt->client->ps.persistant[PERS_CAPTURES] ++; // Temp hack to display
 				if ( g_winlimit.integer ) {
 					if ( clientEnt->client->ps.persistant[PERS_ROUNDWINS] >= g_winlimit.integer ) {
 						return; // Round enqueue after winning preventative measure

@@ -1534,7 +1534,7 @@ static const char *CG_FeederItemText(float feederID, int index, int column, qhan
 // ~Dimmskii
 #ifdef MISSIONPACK2
 				if ( cgs.gametype == GT_ARENA ) {
-					return va("(%i) %i", info->wins, info->score);
+					return va("(%i) %i", sp->captures, info->score);
 				} else {
 					return va("%i", info->score);
 				}
