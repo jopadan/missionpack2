@@ -1020,6 +1020,22 @@ static int QDECL SortRanks( const void *a, const void *b ) {
 	if ( cb->sess.sessionTeam == TEAM_SPECTATOR ) {
 		return -1;
 	}
+	
+// ~Dimmskii
+#ifdef MISSIONPACK2
+	if ( g_gametype.integer == GT_ARENA ) {
+		// sort by wins higher priority
+		if ( ca->ps.persistant[PERS_WINS]
+			> cb->ps.persistant[PERS_WINS] ) {
+			return -1;
+		}
+		if ( ca->ps.persistant[PERS_WINS]
+			< cb->ps.persistant[PERS_WINS] ) {
+			return 1;
+		}
+	}
+#endif //MISSIONPACK2
+// END ~Dimmskii
 
 	// then sort by score
 	if ( ca->ps.persistant[PERS_SCORE]
