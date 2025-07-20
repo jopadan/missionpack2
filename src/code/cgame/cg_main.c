@@ -1531,7 +1531,18 @@ static const char *CG_FeederItemText(float feederID, int index, int column, qhan
 				return info->name;
 			break;
 			case 4:
+// ~Dimmskii
+#ifdef MISSIONPACK2
+				if ( cgs.gametype == GT_ARENA ) {
+					return va("(%i) %i", info->wins, info->score);
+				} else {
+					return va("%i", info->score);
+				}
+#else
 				return va("%i", info->score);
+#endif //MISISONPACK2
+// END ~Dimmskii
+//				return va("%i", info->score);
 			break;
 			case 5:
 				return va("%4i", sp->time);
