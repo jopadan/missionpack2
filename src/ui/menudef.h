@@ -141,7 +141,7 @@
 #define CG_PLAYER_ITEM 19
 #define CG_PLAYER_SCORE 20
 
-#define CG_PLAYER_WINS 21
+#define CG_PLAYER_ROUNDWINS 21		// Arena wins
 
 #define CG_BLUE_FLAGHEAD 22
 #define CG_BLUE_FLAGSTATUS 23

@@ -237,7 +237,7 @@ typedef enum {
 	PERS_CAPTURES					// captures
 // ~Dimmskii
 #ifdef MISSIONPACK2
-	,PERS_WINS						// arena wins
+	,PERS_ROUNDWINS					// arena wins
 #endif
 // END ~Dimmskii
 } persEnum_t;

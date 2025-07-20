@@ -1025,12 +1025,12 @@ static int QDECL SortRanks( const void *a, const void *b ) {
 #ifdef MISSIONPACK2
 	if ( g_gametype.integer == GT_ARENA ) {
 		// sort by wins higher priority
-		if ( ca->ps.persistant[PERS_WINS]
-			> cb->ps.persistant[PERS_WINS] ) {
+		if ( ca->ps.persistant[PERS_ROUNDWINS]
+			> cb->ps.persistant[PERS_ROUNDWINS] ) {
 			return -1;
 		}
-		if ( ca->ps.persistant[PERS_WINS]
-			< cb->ps.persistant[PERS_WINS] ) {
+		if ( ca->ps.persistant[PERS_ROUNDWINS]
+			< cb->ps.persistant[PERS_ROUNDWINS] ) {
 			return 1;
 		}
 	}
@@ -1696,7 +1696,7 @@ static void CheckExitRules( void ) {
 				continue;
 			}
 
-			if ( cl->ps.persistant[PERS_WINS] >= g_winlimit.integer ) {
+			if ( cl->ps.persistant[PERS_ROUNDWINS] >= g_winlimit.integer ) {
 				LogExit( "Winlimit hit." );
 				G_BroadcastServerCommand( -1, va("print \"%s" S_COLOR_WHITE " hit the winlimit.\n\"",
 					cl->pers.netname ) );

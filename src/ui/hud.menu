@@ -638,7 +638,7 @@ menuDef {
 	decoration
 	forecolor .15 .8 .15 1
 	textscale 0.25
-	ownerdraw CG_PLAYER_WINS 
+	ownerdraw CG_PLAYER_ROUNDWINS 
 	}
   	}
 
