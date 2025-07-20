@@ -43,6 +43,7 @@ void Arena_EndRound( team_t winningTeam ) {
 		if (aliveCount == 1) { // We only award FFA arena point if exactly one person remains in the round (to conider: we assume it's a timeout draw otherwise)
 			clientEntWon->client->ps.persistant[PERS_ROUNDWINS] ++;
 			clientEntWon->client->ps.persistant[PERS_CAPTURES] ++; // Temp hack to display
+			CalculateRanks(); // Make sure FFA arena scoreboard is sorted immediately
 			if ( g_winlimit.integer ) {
 				if ( clientEntWon->client->ps.persistant[PERS_ROUNDWINS] >= g_winlimit.integer ) {
 					return; // Round enqueue after winning preventative measure
