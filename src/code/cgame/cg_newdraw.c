@@ -464,7 +464,7 @@ static void CG_DrawPlayerScore( rectDef_t *rect, float scale, vec4_t color, qhan
 
 // ~Dimmskii
 #ifdef MISSIONPACK2
-static void CG_DrawPlayerWins( rectDef_t *rect, float scale, vec4_t color, qhandle_t shader, int textStyle ) {
+static void CG_DrawPlayerRoundWins( rectDef_t *rect, float scale, vec4_t color, qhandle_t shader, int textStyle ) {
   char num[16];
   int value = cg.snap->ps.persistant[PERS_ROUNDWINS];
 
@@ -1654,7 +1654,7 @@ void CG_OwnerDraw(float x, float y, float w, float h, float text_x, float text_y
 // ~Dimmskii
 #ifdef MISSIONPACK2
   case CG_PLAYER_ROUNDWINS: 	// Arena wins
-    CG_DrawPlayerWins(&rect, scale, color, shader, textStyle);
+    CG_DrawPlayerRoundWins(&rect, scale, color, shader, textStyle);
     break;
 #endif
 // END ~Dimmskii
