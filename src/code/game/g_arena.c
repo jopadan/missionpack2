@@ -22,10 +22,12 @@ void Arena_EndRound( team_t winningTeam ) {
 		trap_SetConfigstring( CS_SCORES1, va("%i", level.teamScores[TEAM_RED]) );
 		trap_SetConfigstring( CS_SCORES2, va("%i", level.teamScores[TEAM_BLUE]) );
 	} else if ( winningTeam != TEAM_SPECTATOR ) { // FFA
-		int			i;
+		int			i, aliveCount;
 		gentity_t	*clientEnt;
+		gentity_t	*clientEntWon;
 	
 		// Loop through all clients
+		aliveCount = 0;
 		for ( i = 0 ; i < level.maxclients ; i++ ) {
 			clientEnt = g_entities + i;
 			if ( !clientEnt->inuse )
@@ -33,12 +35,17 @@ void Arena_EndRound( team_t winningTeam ) {
 			
 			// If not spectator and alive, add arena score
 			if ( clientEnt->client->sess.sessionTeam != TEAM_SPECTATOR && clientEnt->health > 0 ) {
-				clientEnt->client->ps.persistant[PERS_ROUNDWINS] ++;
-				clientEnt->client->ps.persistant[PERS_CAPTURES] ++; // Temp hack to display
-				if ( g_winlimit.integer ) {
-					if ( clientEnt->client->ps.persistant[PERS_ROUNDWINS] >= g_winlimit.integer ) {
-						return; // Round enqueue after winning preventative measure
-					}
+				clientEntWon = clientEnt;
+				aliveCount ++;
+			}
+		}
+		
+		if (aliveCount == 1) { // We only award FFA arena point if exactly one person remains in the round (to conider: we assume it's a timeout draw otherwise)
+			clientEntWon->client->ps.persistant[PERS_ROUNDWINS] ++;
+			clientEntWon->client->ps.persistant[PERS_CAPTURES] ++; // Temp hack to display
+			if ( g_winlimit.integer ) {
+				if ( clientEntWon->client->ps.persistant[PERS_ROUNDWINS] >= g_winlimit.integer ) {
+					return; // Round enqueue after winning preventative measure
 				}
 			}
 		}
