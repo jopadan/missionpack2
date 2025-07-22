@@ -11,6 +11,7 @@
 			outOfBoundsClick			// this closes the window if it gets a click out of the rectangle
     	rect 23 32 128 128
 	focusColor 1 .75 0 1
+	disableColor .5 .5 .5 1			// For join team butts ~Dimmskii
 
 
 itemDef {
@@ -78,7 +79,7 @@ itemDef {
 
 itemDef {
      	name team
-     	text "Team RED"
+     	text "Team ^1Red"
 	type 1
       	style 2	
      	rect 0 20 128 20   
@@ -88,12 +89,14 @@ itemDef {
 	textscale .25
       	forecolor 1 1 1 1
       	visible 1 
+		cvarTest "g_gametype"
+		disableCvar { "0" ; "1" ; "2" ; "3" }
       	action { exec "cmd team red" ; uiScript closeingame }
     	}
 
  itemDef {
       	name team
-      	text "Team BLUE"
+      	text "Team ^4Blue"
 	type 1
       	style 2	
       	rect 0 40 128 20   
@@ -103,13 +106,15 @@ itemDef {
 	textscale .25
       	forecolor  1 1 1 1
       	visible 1 
+		cvarTest "g_gametype"
+		disableCvar { "0" ; "1" ; "2" ; "3" }
       	action { exec "cmd team blue" ; uiScript closeingame }
     	}
  
 
  itemDef {
       	name team
-      	text "Auto TEAM"
+      	text "Auto-Join"
 	type 1
       	style 2	
       	rect 0 60 128 20   
@@ -119,6 +124,26 @@ itemDef {
 	textscale .25
       	forecolor  1 1 1 1
       	visible 1 
+		cvarTest "g_gametype"
+		hideCvar { "0" ; "1" ; "2" ; "3" }
+      	action { exec "cmd team free" ; uiScript closeingame }
+    	}
+ 
+
+ itemDef {
+      	name team
+      	text "Join Match"
+	type 1
+      	style 2	
+      	rect 0 60 128 20   
+      	textalign 1	
+      	textalignx 64
+      	textaligny 18
+	textscale .25
+      	forecolor  1 1 1 1
+      	visible 1 
+		cvarTest "g_gametype"
+		showCvar { "0" ; "1" ; "2" ; "3" }
       	action { exec "cmd team free" ; uiScript closeingame }
     	}
 
