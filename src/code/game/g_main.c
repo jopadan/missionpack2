@@ -499,6 +499,10 @@ qboolean G_RemoveItem ( gitem_t *item ) {
 		|| ( ( g_removeitem.integer & 2048 ) && ( !Q_stricmp( item->classname, "holdable_invulnerability" ) ) ) )
 			return qtrue;
 #endif
+#ifdef MISSIONPACK2
+	if ( ( g_removeitem.integer & 4096 ) && ( !Q_stricmp( item->classname, "item_armor_jacket" ) ) )
+			return qtrue;
+#endif
 	return qfalse;
 }
 
