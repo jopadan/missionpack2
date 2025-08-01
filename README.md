@@ -22,22 +22,24 @@ Merged code from Kr3m's missionpack plus features together with my additional th
 
 ## Launching
 #### Windows
- - Inside the ```missionpack2``` folder, run ```missionpack2.bat```. If you installed correctly on the CD, Steam, or GOG retail copies, the game should launch.
+ - Inside the ```missionpack2``` folder, run ```missionpack2.bat```. If you installed correctly off of CD, Steam, or GOG retail copies, the game should launch.
 
 ## New Cvars
 
 #### New in Ultimate Arena
-* ```g_gametype <0|1|2|3|4|5|6|7|8|9>``` : the gametype ints have changed since Q3 and Q3TA. The gametype values are:
+* ```g_gametype <0|10>``` : the gametype ints have changed since Q3 and Q3TA. The gametype values are:
 
-  - Free For All ```0```
-  - Tournament ```1```
-  - Arena ```3```
-  - Team Deathmatch ```4```
-  - Team Arena ```5```
-  - Capture the Flag ```6```
-  - One Flag CTF ```7```
-  - Overload ```8```
-  - Harvester ```9```
+  - ```0``` Free For All
+  - ```1``` Tournament
+  - ```2``` SP
+  - ```3``` Arena
+  - ```4``` Team Deathmatch
+  - ```5``` Team Arena
+  - ```6``` FT
+  - ```7``` Capture the Flag
+  - ```8``` One Flag CTF
+  - ```9``` Overload
+  - ```10``` Harvester
 * ```g_nailBounce <0|1>``` : defaults to ```1```.  QL-Style nail bounce. A value of ```1``` is on; ```0``` means off.
 * ```g_arenaArmor <0|200>``` : allow to define the amount of armor at spawn
 * ```g_arenaHealth <0|200>``` : allow to define the amount of health at spawn
@@ -79,10 +81,10 @@ Merged code from Kr3m's missionpack plus features together with my additional th
 The following cvars use a "bit flag" value which acts as a combination of integers to specify a group of items:
 
 #### New in Ultimate Arena
-* ```g_arenaWpflags <VAL>``` : defaults to ```2175```.  Starting weapons in loudouts for Arena / Team Arena gametypes. Default value of ```2175``` is QL CA loadout. See ```g_wpflags``` for weapon bits.
+* ```arenaWpflags <VAL>``` : defaults to ```2175```.  Starting weapons in loudouts for Arena / Team Arena gametypes. Default value of ```2175``` is QL CA loadout. See ```g_wpflags``` for weapon bits. A zero value means no change (spawn with Gauntlet and MG).
 
 #### From Kr3m's missionpackplus
-* ```g_wpflags <VAL>``` : what weapons a player should have at spawn. &#x1F536; NOTE: It changed from ```wpflags``` from missionpackplus
+* ```wpflags <VAL>``` : defaults to ```0```. what weapons a player should have at spawn. A zero value means no change (spawn with Gauntlet and MG).
   
 The corresponding bits for ```VAL``` are:
 
@@ -115,6 +117,10 @@ The **removeX** cvars allow to choose to remove items from a map, **X** is eithe
   * item_health_mega ```64```
   * holdable_teleporter ```128```
   * holdable_medkit ```256```
+  * holdable_kamikaze ```512``` *-DMISSIONPACK Only*
+  * holdable_portal ```1024``` *-DMISSIONPACK Only*
+  * holdable_invulnerability ```2048``` *-DMISSIONPACK Only*
+  * armor_jacket ```4096``` *Ultimate Arena Only*
  * removepowerup "VAL", where VAL can used the following values:
    * item_quad ```1```
    * item_enviro ```2```
@@ -129,16 +135,14 @@ The build system included should be completely portable provided that you are on
 - Make a gamedir folder in the root of your Quake 3/ioquake3 install called `missionpack2`
 - Extract the *contents* of the repository folder into `missionpack2`
 - Navigate to `missionpack2\src`
-- Run `make.bat` -- this will compile all 3 QVM modules with `-DMISSIONPACK` and `-DMISSIONPACK2`, copy assets and create core/map .pk3 files file ready to go
+- Run `make.bat` -- this will compile all 3 QVM modules with `-DMISSIONPACK` and `-DMISSIONPACK2`, copy assets and create core/map .pk3 files ready to go
 - Use the `missionpack2.bat` file in its place to run. Alternatively, as always, you can start the mod with any engine of your choice:
   `<ENGINE_BINARY>.exe +set fs_game missionpack2`
 - FIGHT!
 
 ## To do
 - Finish FFA Arena
-- Update bot code to have an objective in games like Arena/Team Arena where there are no pickups
 - Some custom maps made specifically for this gamemode if time permits
-- Cvar ```removeitem``` to incorporate Green Armor
 
 
  ## Credits
