@@ -151,4 +151,4 @@ The build system included should be completely portable provided that you are on
  - **Kevin "79DieselRabbit" Worrel** for Frozen Colors map (named as mp2team1 -- we needed at least one amazing custom map supporting 1FCTF, etc)
  - **Hubster** for his famous Aerowalk conversion (named as mp2tourney1 -- green armor!)
  - **Dmitri "Dimmskii" Poterianski** (myself) for UI work and upscales, QL model conversions, coding, anything else I forgot to mention
- - **Id Software** for Almost Lost map, Beyond Reality II map, and everything else making all of this possible!
+ - **Id Software** for Almost Lost map, and everything else making all of this possible!
