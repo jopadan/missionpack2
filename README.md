@@ -27,7 +27,7 @@ Merged code from Kr3m's missionpack plus features together with my additional th
 ## New Cvars
 
 #### New in Ultimate Arena
-* ```g_gametype <0|9>``` : the gametype ints have changed since Q3 and Q3TA. The gametype values are:
+* ```g_gametype <0|10>``` : the gametype ints have changed since Q3 and Q3TA. The gametype values are:
 
   - ```0``` Free For All
   - ```1``` Tournament
@@ -35,10 +35,11 @@ Merged code from Kr3m's missionpack plus features together with my additional th
   - ```3``` Arena
   - ```4``` Team Deathmatch
   - ```5``` Team Arena
-  - ```6``` Capture the Flag
-  - ```7``` One Flag CTF
-  - ```8``` Overload
-  - ```9``` Harvester
+  - ```6``` FT
+  - ```7``` Capture the Flag
+  - ```8``` One Flag CTF
+  - ```9``` Overload
+  - ```10``` Harvester
 * ```g_nailBounce <0|1>``` : defaults to ```1```.  QL-Style nail bounce. A value of ```1``` is on; ```0``` means off.
 * ```g_arenaArmor <0|200>``` : allow to define the amount of armor at spawn
 * ```g_arenaHealth <0|200>``` : allow to define the amount of health at spawn
